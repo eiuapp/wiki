@@ -1,0 +1,16 @@
+created: 20210512125138725
+creator: omg
+modified: 20210512125228864
+modifier: omg
+tags: proxy cmd
+title: cmd 使用 http_proxy
+tmap.id: fe03d843-ebbd-4544-bb99-971394ca0053
+type: text/vnd.tiddlywiki
+
+! cmd 使用 http_proxy
+```
+set http_proxy=socks5://127.0.0.1:1080
+set https_proxy=socks5://127.0.0.1:1080
+
+curl google.com
+```

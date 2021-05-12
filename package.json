@@ -9,6 +9,7 @@
     "install:privateRepo": "node -e \"require('./scripts/installPrivateRepo')()\"",
     "uninstall:wikiServer": "node -e \"require('./scripts/installServer').uninstall()\"",
     "start:wikiServer": "node -e \"require('./scripts/startNodeJSWiki')()\"",
+    "start": "node -e \"require('./scripts/startNodeJSWiki')()\"",
     "build": "node -e \"require('./scripts/buildWiki')()\""
   },
   "dependencies": {
