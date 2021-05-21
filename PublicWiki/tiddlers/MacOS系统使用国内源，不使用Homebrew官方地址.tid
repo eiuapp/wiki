@@ -1,0 +1,39 @@
+created: 20210517173019719
+creator: omg
+modified: 20210517173309906
+modifier: omg
+tags: macos homebrew
+title: MacOS系统使用国内源，不使用Homebrew官方地址
+tmap.id: 909e68c4-160d-4711-b8bd-6411ada8f4c5
+type: text/vnd.tiddlywiki
+
+! MacOS系统使用国内源，不使用Homebrew官方地址
+
+```bash
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
+
+该地址提供多个国内源地址，安装非常简便，亲测有效。
+查检安装结果：
+
+```bash
+brew -v
+```
+
+如果能正确打印版本信息，则安装成功！
+
+!! error: LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+
+遇到
+
+```
+LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+```
+
+https://blog.csdn.net/weixin_43635647/article/details/104249968
+
+解决方法是
+
+```bash
+git clone git://mirrors.ustc.edu.cn/homebrew-core.git/ /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core --depth=1
+```

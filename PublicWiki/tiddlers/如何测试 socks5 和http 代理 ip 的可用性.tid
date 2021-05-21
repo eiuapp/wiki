@@ -1,0 +1,20 @@
+created: 20210518155547020
+creator: omg
+modified: 20210518155826988
+modifier: omg
+tags: proxy
+title: 如何测试 socks5 和http 代理 ip 的可用性
+tmap.id: 615b430d-fa3d-4f6c-8e37-2bf14f657c83
+type: text/vnd.tiddlywiki
+
+! 如何测试 socks5 和http 代理 ip 的可用性
+
+https://www.qg.net/doc/128.html
+
+```
+curl --socks5 168.168.168.168.6666 https://www.baidu.com/
+curl --socks5 127.0.0.1:1080 https://www.google.com/
+
+curl --connect-timeout 2 -x 168.168.168.168.8888 https://www.baidu.com/
+curl -x 127.0.0.1:1081 https://www.google.com/
+```
