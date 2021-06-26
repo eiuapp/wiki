@@ -1,0 +1,54 @@
+created: 20210622183531858
+creator: omg
+modified: 20210622185637388
+modifier: omg
+tags: python talib
+title: Ubuntu安装talib分析库
+tmap.id: 06c4eb89-31a7-4953-8c63-ab4f84f6ffec
+type: text/vnd.tiddlywiki
+
+! Ubuntu安装talib分析库
+
+```
+wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+tar -xzvf ta-lib-0.4.0-src.tar.gz
+cd ta-lib
+./configure --prefix=/usr
+make
+make install
+pip install Ta-Lib
+```
+
+* https://blog.csdn.net/hampeter/article/details/113799342
+
+!! （可忽略）一些其他尝试
+```
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+Collecting package metadata (repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - ta-lib
+
+Current channels:
+
+  - https://repo.anaconda.com/pkgs/main/linux-64
+  - https://repo.anaconda.com/pkgs/main/noarch
+  - https://repo.anaconda.com/pkgs/r/linux-64
+  - https://repo.anaconda.com/pkgs/r/noarch
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+
+
+(ht) ➜  51bitquant-dev-strategie git:(master) ✗ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+(ht) ➜  51bitquant-dev-strategie git:(master) ✗ conda config --set show_channel_urls yes
+(ht) ➜  51bitquant-dev-strategie git:(master) ✗ conda install -c quantopian ta-lib=0.4.9
+
+```
