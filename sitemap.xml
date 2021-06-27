@@ -7,12 +7,6 @@
 		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>https://wiki.onetwo.ren/#:Draft%2520of%2520&apos;新条目&apos;%2520by%2520omg</loc>
-		<lastmod>2021-06-19</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
 		<loc>https://wiki.onetwo.ren/#:HOME</loc>
 		<lastmod>2021-04-17</lastmod>
 		<changefreq>weekly</changefreq>
@@ -27,6 +21,12 @@
 	<url>
 		<loc>https://wiki.onetwo.ren/#:MacOS系统使用国内源，不使用Homebrew官方地址</loc>
 		<lastmod>2021-05-17</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://wiki.onetwo.ren/#:Python%2520获取小数位数</loc>
+		<lastmod>2021-06-26</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
@@ -79,6 +79,12 @@
 		<priority>0.5</priority>
 	</url>
 	<url>
+		<loc>https://wiki.onetwo.ren/#:shell程序控制(简化版本)</loc>
+		<lastmod>2021-06-26</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
 		<loc>https://wiki.onetwo.ren/#:vscode中golang保存时代码没有格式化</loc>
 		<lastmod>2021-04-27</lastmod>
 		<changefreq>monthly</changefreq>
@@ -99,6 +105,12 @@
 	<url>
 		<loc>https://wiki.onetwo.ren/#:如何测试%2520socks5%2520和http%2520代理%2520ip%2520的可用性</loc>
 		<lastmod>2021-05-18</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://wiki.onetwo.ren/#:安装HomeBrew%2520在%2520Mac%2520OS%2520遇到curl:%2520(35)%2520LibreSSL%2520SSL%2520in%2520connection%2520to%2520错误的解决</loc>
+		<lastmod>2021-06-26</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
