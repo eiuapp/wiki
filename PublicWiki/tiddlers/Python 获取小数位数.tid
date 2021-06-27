@@ -1,0 +1,32 @@
+created: 20210619154036526
+creator: omg
+modified: 20210626194511485
+modifier: omg
+tags: python
+title: Python 获取小数位数
+tmap.id: 0bc38a37-a6e8-4484-8627-55ca17119ab7
+type: text/vnd.tiddlywiki
+
+! Python 获取小数位数
+
+原文链接：https://blog.csdn.net/moxiao1995071310/article/details/108280503
+
+```python
+strr = '134.02'
+ 
+print(strr[strr.find('.') + 1:])
+decimal_digits = len(strr[strr.find('.') + 1:])
+print(decimal_digits)
+ 
+ 
+def decimal_digits(val: float):
+    val_str = str(val)
+    digits_location = val_str.find('.')
+    if digits_location:
+        return len(val_str[digits_location + 1:])
+ 
+ 
+if __name__ == '__main__':
+    dd = decimal_digits(23.112)
+    print(dd)
+```

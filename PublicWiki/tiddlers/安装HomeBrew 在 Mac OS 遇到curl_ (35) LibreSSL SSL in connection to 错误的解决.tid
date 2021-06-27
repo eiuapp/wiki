@@ -1,0 +1,24 @@
+created: 20210517170453411
+creator: omg
+modified: 20210626194401560
+modifier: omg
+tags: macos
+title: 安装HomeBrew 在 Mac OS 遇到curl: (35) LibreSSL SSL in connection to 错误的解决
+tmap.id: f35d7f31-ec8c-465d-a466-17bacddc344b
+type: text/vnd.tiddlywiki
+
+! 安装HomeBrew 在 Mac OS 遇到curl: (35) LibreSSL SSL in connection to 错误的解决
+
+!! 思路1 
+
+https://blog.csdn.net/weixin_43635647/article/details/104249968
+
+但是没有安装 ruby
+
+!! 思路2
+
+https://superuser.com/questions/1264498/homebrew-gives-ssl-error-ssl-error-syscall-on-home-network
+
+```
+brew reinstall curl
+```
