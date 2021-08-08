@@ -1,0 +1,19 @@
+created: 20210623091057478
+creator: zero
+modified: 20210629054359791
+modifier: zero
+tags: redis
+title: ubuntu重启redis服务
+tmap.id: 18a63e72-d788-4175-adea-63a30d807417
+type: text/vnd.tiddlywiki
+
+! ubuntu重启redis服务
+
+输入以下命令重启redis服务。
+
+```
+sudo service redis restart
+```
+
+!! 开放 6379 端口
+

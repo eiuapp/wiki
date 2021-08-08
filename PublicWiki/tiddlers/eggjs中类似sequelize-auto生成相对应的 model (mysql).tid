@@ -1,0 +1,31 @@
+created: 20210422033707154
+creator: zero
+modified: 20210422081650896
+modifier: zero
+tags: eggjs sequelize mysql
+title: eggjs中类似sequelize-auto生成相对应的 model (mysql)
+tmap.id: 90114b2d-b1b4-41f3-8c05-85b5acf11ad1
+type: text/vnd.tiddlywiki
+
+! eggjs中类似sequelize-auto生成相对应的 model (mysql) 
+!! [[eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践1]]
+
+使用 liuhuanhui/sequelize-auto 来实现 sequelize-auto 生成相对应的 model 
+
+* https://github.com/liuhuanhui/sequelize-auto
+* https://github.com/abiuDoIT/sequelize-auto
+
+没有成功。
+
+!! [[eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践2]]
+
+使用 lkspc/egg-sequelize-auto 来实现 sequelize-auto 生成相对应的 model 
+
+* https://github.com/lkspc/egg-sequelize-auto
+
+''本仓库4年未更新''
+
+!!（成功） [[eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践3]]
+
+使用 sequelize-auto 生成相对应的 model ，然后修改成 适应 eggjs 的调用方式。
+

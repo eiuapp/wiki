@@ -1,0 +1,71 @@
+created: 20210607032343011
+creator: zero
+modified: 20210607033443391
+modifier: zero
+tags: vnpy cta apikey
+title: VNPY- 启动后配置信息没有及时更新
+tmap.id: 7be932e3-fc05-454e-a195-759647a9bb39
+type: text/vnd.tiddlywiki
+
+! VNPY- 启动后配置信息没有及时更新
+
+!! 现象
+
+* .\vnpy-dev\vnpy\gateway\binances\binances_gateway.py
+
+```
+class BinancesGateway(BaseGateway):
+    """
+    VN Trader Gateway for Binance connection.
+    """
+
+    default_setting = {
+        "key": "OHW*******************************************************************dqk",
+        "secret": "daE*******************************************************************eb2",
+        "会话数": 3,
+        "服务器": ["TESTNET", "REAL"],
+        "合约模式": ["反向", "正向"],
+        "代理地址": "127.0.0.1",
+        "代理端口": 1081,
+    }
+```
+
+
+* 日志输出
+
+```
+data: {}
+response:{"code":-2015,"msg":"Invalid API-key, IP, or permissions for action, request ip: 45.32.119.61"}
+request : POST /fapi/v1/listenKey failed because 401: 
+headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'X-MBX-APIKEY': '38s*****************************************************w5b', 'Connection': 'close'}
+params: {}
+data: {}
+response:{"code":-2015,"msg":"Invalid API-key, IP, or permissions for action, request ip: 45.32.119.61"}
+```
+
+说明，系统，没有正确读取到 binances 的 api key 信息。
+
+这个时候，要查看，系统的读取信息文件
+
+C:\Users\Administrator\.vntrader\connect_binances.json
+
+```json
+{
+    "key": "38s*****************************************************w5b",
+    "secret": "Hw2****************************************************Pxv",
+    "会话数": 3,
+    "服务器": "REAL",
+    "合约模式": "正向",
+    "代理地址": "127.0.0.1",
+    "代理端口": 1081
+}
+```
+
+明白了。
+
+就是要，手工，再去修改，C:\Users\Administrator\.vntrader\connect_binances.json 文件中的 api key 信息。
+
+如果，正确读取了 api key 信息，则，会在 ui 界面中显示出 账户信息。
+
+这个也就意味着，我们在写代码的时候，并不需要，配置正确的 api key 信息，而，只需要，把 api key 信息，放在 .vntrader\connect_binances.json 文件中，就可以了。
+

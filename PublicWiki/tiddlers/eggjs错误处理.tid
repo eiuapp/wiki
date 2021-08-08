@@ -1,0 +1,55 @@
+created: 20210429034332657
+creator: zero
+modified: 20210506094148448
+modifier: zero
+tags: eggjs error
+title: eggjs错误处理
+tmap.id: 12737ba7-d75f-4159-bed9-04cee0aed315
+type: text/vnd.tiddlywiki
+
+! eggjs错误处理
+
+!! 位置
+
+* middleware/error_handler.js
+* middleware/error_handler_p2.js
+* extend/helper.js 中的 success, fail, failp 等函数
+
+!! controller 中使用
+
+!!! this.ctx.helper.failp
+
+```javascript
+    try {
+      const bulkInsertRtn = await ctx.service.staffProductAssignRate.bulkCreate(
+        staffProductAssignRates
+      );
+      ctx.status = 201;
+      ctx.body = bulkInsertRtn;
+    } catch (error) {
+      return this.ctx.helper.failp({ ctx, code: 1102, msg: error });
+    }
+```
+
+!! service 中使用
+
+!!! ctx.throw
+
+```javascript
+    if (sum !== 1.0) {
+      ctx.body = {
+        code: 1106,
+        message:
+          '产品占比合计必须100%',
+      };
+      ctx.throw(ctx.body.code, ctx.body.message);
+    }
+```
+
+!!! throw
+
+```javascript
+    if (sum !== 1.0) {
+      throw new Error("产品占比合计必须100%");
+    }
+```

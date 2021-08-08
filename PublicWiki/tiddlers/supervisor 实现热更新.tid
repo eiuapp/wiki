@@ -1,0 +1,50 @@
+created: 20210730023839661
+creator: zero
+modified: 20210730024157705
+modifier: zero
+tags: supervisor hotupdate
+title: supervisor 实现热更新
+tmap.id: 2d2a6e16-4942-4750-a75a-db1276981209
+type: text/vnd.tiddlywiki
+
+! supervisor 实现热更新
+
+当手工 kill 进程时，supervisor 可以根据配置，自动重新启动
+
+```
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ cat /etc/supervisor/conf.d/r.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:r] 
+command=/home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/r.log ; grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/bak/grid_r/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程
+autostart=false
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+autorestart=true            
+; autorestart=false            
+startretries=1
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/r-supervisor.log
+loglevel=info
+
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ sudo supervisorctl update
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ sudo supervisorctl start r
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ ps -ef | grep python
+root         634       1  0 Jul27 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root         852       1  0 Jul27 ?        00:00:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root      473372       1  3 Jul27 ?        02:11:00 /usr/bin/python3 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+ubuntu   2690172  473372 21 Jul29 ?        02:37:05 /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/h.log
+ubuntu   2891579  473372 28 10:36 ?        00:00:00 /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/r.log
+ubuntu   2891609 2829802  0 10:36 pts/0    00:00:00 grep --color=auto python
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ kill 2891579
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ ps -ef | grep python
+root         634       1  0 Jul27 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root         852       1  0 Jul27 ?        00:00:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root      473372       1  3 Jul27 ?        02:11:07 /usr/bin/python3 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+ubuntu   2690172  473372 21 Jul29 ?        02:37:13 /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/h.log
+ubuntu   2891887  473372  7 10:36 ?        00:00:00 /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/r.log
+ubuntu   2891989 2829802  0 10:36 pts/0    00:00:00 grep --color=auto python
+(base) ubuntu@VM-8-9-ubuntu:~/bak$ 
+```

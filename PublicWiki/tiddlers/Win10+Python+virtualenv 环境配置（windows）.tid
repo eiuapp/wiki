@@ -1,0 +1,49 @@
+created: 20210520082617628
+creator: zero
+modified: 20210520083745794
+modifier: zero
+tags: pyenv windows10
+title: Win10+Python+virtualenv 环境配置（windows）
+tmap.id: ecdb6b73-586f-4b71-91eb-e04aec4cda17
+type: text/vnd.tiddlywiki
+
+! Win10+Python+virtualenv 环境配置
+
+* https://blog.csdn.net/weixin_43982238/article/details/108289616
+* https://blog.csdn.net/FE_FlyFish/article/details/78341978
+
+!! 安装vitualenv
+
+```
+# 安装
+python -m pip install --user virtualenv
+# 在powershell中，这样安装虚拟环境会出错
+# 查看 virtualenv 版本
+python -m virtualenv --version
+# 正确的创建安装 虚拟环境 方式 virtualenv venv
+python -m virtualenv venv
+# 激活虚拟环境
+.\venv\Scripts\activate
+# 查看当前虚拟环境已安装的package
+pip list
+# 启动虚拟环境: 
+activate
+# 退出虚拟环境
+deactivate
+```
+
+!! 下载python组件: pip install 组件名
+
+* https://blog.csdn.net/FE_FlyFish/article/details/78341978
+
+查看安装包： pip list
+
+```
+Tips: 另外根据需要还可以安装virtualenvwrapper，virtualenvwrapper是virtualenv的扩展管理包，用于更方便管理虚拟环境，它可以做：
+
+将所有虚拟环境整合在一个目录下
+管理（新增，删除，复制）虚拟环境
+切换虚拟环境
+```
+
+ 

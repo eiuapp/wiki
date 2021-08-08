@@ -1,0 +1,58 @@
+created: 20210430091550569
+creator: zero
+modified: 20210430102934720
+modifier: zero
+tags: sequelize mysql
+title: mysql导出数据作为sequelize db:seed的种子数据
+tmap.id: e72ea100-d8d8-474b-a739-46107802a70e
+type: text/vnd.tiddlywiki
+
+! mysql导出数据作为sequelize db:seed的种子数据
+
+目标：快速生成sequelize种子数据
+
+!! mysql导出数据
+
+使用navicat等工具，导出数据。
+
+* 格式： JSON
+* 日期字段：分割符为-,  格式为：YMD
+
+!! 编写seeders种子数据文件
+
+把刚刚的JSON文件中的内容，放进来就可以了。
+
+形如：
+
+```javascript
+"use strict";
+
+module.exports = {
+  up: (queryInterface) => {
+    return queryInterface.bulkInsert("trustee_bank_info", [
+      {
+        trustee_bank_id: "1",
+        trustee_bank_name: "trustee_bank_name_post",
+        entry_date: "2021-4-30 17:56:02",
+        enable_status: "disabled",
+      },
+      {
+        trustee_bank_id: "2",
+        trustee_bank_name: "trustee_bank_name_1",
+        entry_date: "2021-4-30 17:56:01",
+        enable_status: "disabled",
+      },
+    ]);
+  },
+
+  down: (queryInterface) => {
+    return queryInterface.bulkDelete("trustee_bank_info", null, {});
+  },
+};
+```
+
+!! 运行生成种子数据命令
+
+```bash
+npx sequelize-cli db:seed:all
+```

@@ -1,0 +1,129 @@
+created: 20210519061626522
+creator: zero
+modified: 20210521023329959
+modifier: zero
+tags: windows7 newcomputer
+title: windows7 作为一台全新的开发机器
+tmap.id: d127dc88-2315-43f2-ab63-2ee7c7a24d5f
+type: text/vnd.tiddlywiki
+
+! windows7 作为一台全新的开发机器
+
+!! basic env
+
+# 腾讯安全管家
+# 软件管家
+## chrome 稳定版
+## git
+## vscode
+## 微信
+## QQ
+# 迅雷 https://www.xunlei.com/
+# 百度网盘。下载：v2rayn
+# chrome
+## login google account: andytsangok@gmail.com
+# chrome extensions
+## add chrome extensions [[chrome extensions]]
+## extension-manager
+
+```
+1. chrome open ''chrome://extensions/'' ok
+2. drag extension-manager.crx to this page
+```
+
+
+
+
+!! ssh-keygen
+
+```
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
+```
+
+add to github account setting keys
+
+
+!! github desktop
+
+
+!! chocolatey
+
+https://chocolatey.org/install
+
+```
+PS C:\Users\Administrator> Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+
+!! nvm & nodejs
+
+https://github.com/coreybutler/nvm-windows
+
+```
+nvm list
+nvm install v10.23.0
+node -v
+```
+
+!!! install npm packages
+
+```
+npm i -g cnpm
+```
+
+!! python
+
+!!! anaconda
+
+!!! pycharm
+
+
+!!! (废弃)pyenv
+
+* Installation 
+
+https://github.com/pyenv-win/pyenv-win
+
+
+```
+PS C:\Users\Administrator> choco install pyenv-win
+```
+
+!!! 其他方式安装，但是，不推荐。
+
+
+```
+git clone https://github.com/pyenv-win/pyenv-win.git "$HOME/.pyenv"
+```
+
+* Add PYENV and PYENV_HOME to your Environment Variables
+
+# https://www.jianshu.com/p/fe8991a7e14d
+
+[[pyenv添加环境变量]]
+
+!! cmder
+
+[[cmder 配置]]
+
+!! finalshell
+
+http://www.hostbuf.com/
+
+
+---
+!! wiki
+
+download wiki
+
+!! vnpy
+
+https://github.com/vnpy/vnpy
+
+!! binance
+
+https://www.binance.com/en/download
+
+!! telegram
+
+https://desktop.telegram.org/

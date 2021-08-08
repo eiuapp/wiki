@@ -1,0 +1,18 @@
+created: 20210422082818684
+creator: zero
+modified: 20210422082949700
+modifier: zero
+tags: eggjs sequelize gtd
+title: 使用eggjs和sequelize管理数据库
+tmap.id: b5a71bae-9968-45e4-99f1-720ece834520
+type: text/vnd.tiddlywiki
+
+! 使用eggjs和sequelize管理数据库
+
+https://blog.csdn.net/m0_37609187/article/details/115488920
+
+其中，下面几个方面未完成：
+
+* sync
+* unittest
+

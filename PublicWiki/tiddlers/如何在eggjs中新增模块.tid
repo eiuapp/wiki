@@ -1,0 +1,193 @@
+created: 20210426024129512
+creator: zero
+modified: 20210506015321703
+modifier: zero
+tags: eggjs
+title: 如何在eggjs中新增模块
+tmap.id: a2d69c95-7929-4e7f-ad3e-b411a618b8aa
+type: text/vnd.tiddlywiki
+
+! 如何在eggjs中新增模块
+
+主要是涉及下面3个模块：
+
+# database
+# app
+# test
+
+!! database
+!!! migration
+
+建表
+
+```bash
+NODE_ENV=development npx sequelize db:migrate
+NODE_ENV=test npx sequelize db:migrate
+# npx sequelize-cli db:migrate:undo:all   # 回滚所有
+# NODE_ENV=test npx sequelize-cli db:migrate:undo:all   # 回滚所有
+```
+
+!! app
+
+!!! model
+
+数据库表 转成 app/model.helper/{table}.js
+
+```bash
+sequelize-auto -o "./app/model.helper" -d mpf_dev_1 -h 192.168.168.137 -p 3307 -u *** -x *** -e mysql
+```
+
+!!! controller 
+
+编码
+
+!!!! function 注释
+
+在写 功能注释的时候，可以使用些小技巧
+
+```javascript
+  /**
+   * @summary 查询多个员工持仓
+   * @description 查询多个员工持仓
+   * @router get /staffHoldings
+   * @request query string limit limit值
+   * @request query string offset offset 偏移值
+   * @request query holding_id	string	持仓ID
+   * @request query staff_id	string	员工ID
+   * @request query staff_no	string	员工编号
+   * @request query trustee_bank_id	string	托管行序号
+   * @request query product_classname	string	产品类别名称
+   * @request query product_code	string	产品代码
+   * @request query holding_amount	number	总持仓份额
+   * @request query redeem_amount	number	总持仓份额
+   * @request query update_date	date	更新日期
+   * @response 200 baseResponse  返回结果。（ 对应 contract 里面的验证属性，下面会提到 。）
+   */
+
+  async index() {
+    const ctx = this.ctx;
+    const query = {
+      limit: ctx.helper.parseInt(ctx.query.limit),
+      offset: ctx.helper.parseInt(ctx.query.offset),
+    };
+    const body = ctx.request.body;
+    const likeKeywords = [
+      "staff_id",
+      "staff_no",
+      "product_id",
+      "product_code",
+      "product_assing_rate",
+      "create_date",
+      "enable_status",
+    ];
+    query.where = await this.ctx.service.tools.like({ body, likeKeywords });
+
+    ctx.body = await ctx.service.staffHolding.list(query);
+  }
+```
+上面，这一段中的 query 参数，如果，自己一个一个输入，会很烦人。
+可以：
+
+# 打开，navicat，设计表，复制出 “字段名，类型，注释”这3项，
+# 拷贝放入excel，把mysql类型替换成适当的js类型，调整次序，把类型放在第1位，也就是：类型，字段名，注释
+# 复制到 js 文件中，然后在前面 批量加上 * @request query 
+
+这样，就快速完成类似下面的内容了
+
+```javascript
+   * @request query holding_id	string	持仓ID
+   * @request query staff_id	string	员工ID
+   * @request query staff_no	string	员工编号
+   * @request query trustee_bank_id	string	托管行序号
+   * @request query product_classname	string	产品类别名称
+   * @request query product_code	string	产品代码
+   * @request query holding_amount	number	总持仓份额
+   * @request query redeem_amount	number	总持仓份额
+   * @request query update_date	date	更新日期
+```
+
+!!! service
+
+编码
+
+!! test
+
+!!! .setup.js
+
+设置，使用后删除
+
+```javascript
+"use strict";
+
+const { app } = require("egg-mock/bootstrap");
+const factories = require("./factories");
+
+before(() => {
+  // defined app.factory for build test data
+  factories(app);
+});
+
+afterEach(async () => {
+  // clear database after each test case
+  await Promise.all([
+    // 因为 ProductInfo.trustee_bank_id 引用于 TrusteeBankInfo.trustee_bank_id, 所以，要先删除 ProductInfo （写在 TrusteeBankInfo 前面）
+    app.model.ProductInfo.destroy({ truncate: { cascade: true }, force: true }),
+    // app.model.Post.destroy({ truncate: true, force: true }),
+    app.model.TrusteeBankInfo.destroy({
+      truncate: { cascade: true },
+      force: true,
+    }),
+  ]);
+});
+```
+!!! factories.js
+
+创建mock数据
+
+```javascript
+'use strict';
+
+const { factory } = require('factory-girl');
+
+module.exports = app => {
+  app.factory = factory;
+  factory.define('trustee_bank_info', app.model.TrusteeBankInfo, {
+    trustee_bank_name: factory.sequence('TrusteeBankInfo.trustee_bank_name', n => `trustee_bank_name_${n}`),
+    entry_date: new Date(),
+  });
+  factory.define('product_info', app.model.ProductInfo, {
+    product_name: factory.sequence('ProductInfo.product_name', n => `product_name_${n}`),
+    product_classname: factory.sequence('ProductInfo.product_classname', n => `product_classname_${n}`),
+    product_code: factory.sequence('ProductInfo.product_code', n => `product_code_${n}`),
+    trustee_bank_id: factory.assoc('trustee_bank_info', 'id'),
+    entry_date: new Date(),
+    enable_status: "disabled",
+  });
+};
+```
+
+!!! app/controller
+
+编码
+
+!!! app/service
+
+编码
+
+!!! run test
+
+```json
+  "scripts": {
+      "test-local": "EGG_SERVER_ENV=unittest egg-bin test",
+   }
+```
+
+运行：
+
+```bash
+npm run test-local test/app/controller/staff_info.test.js
+```
+
+
+
+

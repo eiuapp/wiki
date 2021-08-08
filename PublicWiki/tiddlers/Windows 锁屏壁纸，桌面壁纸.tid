@@ -1,0 +1,21 @@
+created: 20210522060400696
+creator: zero
+modified: 20210522060553388
+modifier: zero
+tags: windows10
+title: Windows 锁屏壁纸，桌面壁纸
+tmap.id: caaf5a78-4a45-4c24-9b8f-4cdb550ef61d
+type: text/vnd.tiddlywiki
+
+! Windows 锁屏壁纸，桌面壁纸
+* https://blog.csdn.net/qq_36709271/article/details/102985503
+
+```
+Windows 默认锁屏壁纸路径：C:\Windows\Web\Screen
+
+Windows 默认桌面壁纸路径：C:\Windows\Web\Wallpaper
+
+Windows图片内容缓存：C:\Users\Administrator\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
+
+Windows锁屏历史记录缓存文件路径：C:\ProgramData\Microsoft\Windows\SystemData（需要管理员权限）
+```

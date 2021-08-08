@@ -1,0 +1,30 @@
+created: 20210623014641801
+creator: zero
+modified: 20210623014931828
+modifier: zero
+tags: python mysql
+title: Python reload
+tmap.id: f9165763-40d2-41b6-93c3-ae9029931761
+type: text/vnd.tiddlywiki
+
+! Python reload
+
+!! python3.X
+
+```
+# from imp import reload
+from importlib import reload
+
+reload(sys)
+```
+
+!! from imp import reload deprecated
+
+```python
+>>> from imp import reload
+DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+```
+
+!! python 2.x
+ 
+直接使用

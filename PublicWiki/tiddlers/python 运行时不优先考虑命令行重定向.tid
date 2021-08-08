@@ -1,0 +1,49 @@
+created: 20210728083917735
+creator: zero
+modified: 20210728091038711
+modifier: zero
+tags: python log
+title: python 运行时不优先考虑命令行重定向
+tmap.id: 6141aa4a-a291-417d-ba5f-1fbae24219ac
+type: text/vnd.tiddlywiki
+
+! python 运行时不优先考虑命令行重定向
+
+!! 结论
+
+# 优先，使用 logging 模块
+# 其次，>> 重定向
+
+* https://www.cnblogs.com/clover-toeic/p/5491073.html
+
+
+!! 当程序运行多份时，日志难看 
+
+当使用 `nohup /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/grid.log 2>&1 &` 时，会在 `/home/ubuntu/logs/grid.log` 中输出 如下形式。
+
+```
+ time: 2021-07-28 16:38:29
+ time: 2021-07-28 16:38:29
+ time: 2021-07-28 16:38:29
+ time: 2021-07-28 16:38:29
+有止盈单；有加仓单有止盈单；有加仓单有止盈单；有加仓单
+加仓单 委托数量 = 4
+ continue
+
+加仓单 委托数量 = 4
+ continue
+有止盈单；有加仓单
+加仓单 委托数量 = 4
+ continue
+
+加仓单 委托数量 = 4
+ continue
+```
+
+为什么会这样？因为，启动了4次。4个独立进程在运行。
+
+!! >> 必须要 带上 -u 参数
+
+而且，如果，不带上 -u 参数，会导致，日志，不会及时输入到文件中。
+
+[[为何python程序的输出重定向到文件中会有延迟]]

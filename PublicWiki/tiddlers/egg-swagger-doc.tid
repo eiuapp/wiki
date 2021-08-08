@@ -1,0 +1,32 @@
+created: 20210420093348109
+creator: zero
+modified: 20210422083407424
+modifier: zero
+tags: eggjs swagger egg-swagger-doc
+title: egg-swagger-doc
+tmap.id: 6ab815ec-95cb-451d-8e0d-62560d60e7a2
+type: text/vnd.tiddlywiki
+
+! egg-swagger-doc
+
+https://github.com/Yanshijie-EL/egg-swagger-doc
+
+!! 比较好的使用方法：
+
+# https://github.com/zhangqijohn/egg-swagger-doc
+# 接口文档eggjs和swagger配合https://waitrebirth.top/2020/02/27/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3eggjs%E5%92%8Cswagger%E9%85%8D%E5%90%88/
+# Eggjs 搭配 Swagger 和 Sequelize 编写接口文档 上手教程 https://www.jianshu.com/p/a47a12f030cb
+
+!! 编写示例
+
+```javascript
+/**
+* @summary 更新
+* @description 更新信息
+* @router put /sys_user/partner/:id
+* @request path string id id
+* @request body createPartner *body
+* @request header string *Authorization token
+* @response 200 baseResponse 已更新id
+*/
+```

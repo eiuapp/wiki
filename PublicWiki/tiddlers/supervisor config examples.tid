@@ -1,0 +1,140 @@
+created: 20210728094818282
+creator: zero
+modified: 20210728102638182
+modifier: zero
+tags: python supervisor
+title: supervisor config examples
+tmap.id: def2d07e-7bff-40df-a9ff-a7908f6558b6
+type: text/vnd.tiddlywiki
+
+! supervisor config examples
+
+!! config 1
+
+```
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# cat grid.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:grid] 
+command=/home/ubuntu/grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程     
+autostart=false
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+; autorestart=true       
+autorestart=false            
+startretries=0
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/grid-supervisor.log
+loglevel=info
+
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# 
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# cat /home/ubuntu/grid.sh
+#!/bin/bash
+
+now=`date +%Y%m%d%H%M%S`
+echo "now: ${now}"
+
+echo $1
+if [ $1 == "run" ]; then
+        cd /home/ubuntu
+        cd grid
+        nohup /home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/grid.log 2>&1 &
+        echo "run end "
+fi
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# 
+
+```
+
+启动
+
+```
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl update
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl start grid
+grid: ERROR (spawn error)
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl stop grid
+grid: ERROR (not running)
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ 
+```
+
+结论：
+
+* sudo supervisorctl start 不正常
+* sudo supervisorctl stop 不正常
+* python app.py 正常运行
+* tail -f /home/ubuntu/logs/grid.log 正常运行
+
+
+!! config 2
+
+```
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ cat g.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:g] 
+command=/home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/g.log ; grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/grid/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+; autorestart=true            
+autostart=false
+autorestart=false            
+startretries=0
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/g-supervisor.log
+loglevel=info
+
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ 
+```
+
+启动
+
+```
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl update
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl start g
+g: started
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ sudo supervisorctl status g
+g                                RUNNING   pid 4078178, uptime 0:00:21
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ 
+```
+
+结论：
+
+* sudo supervisorctl start 正常
+* sudo supervisorctl stop 正常
+* python app.py 正常运行
+* tail -f /home/ubuntu/logs/g.log 不正常运行，无法查看到 g.log 中内容。
+ 
+
+!! config 3
+
+* 进程手工kill 后，可自动重启一次
+
+```
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ cat h.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:h] 
+command=/home/ubuntu/.ana/bin/python -u app.py >> /home/ubuntu/logs/g.log ; grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/grid/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程
+autostart=false
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+autorestart=true            
+; autorestart=false            
+startretries=1
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/g-supervisor.log
+loglevel=info
+
+(base) ubuntu@VM-8-9-ubuntu:/etc/supervisor/conf.d$ 
+```
+
+关键配置：
+
+* autostart=false
+* autorestart=true
+* startretries=1

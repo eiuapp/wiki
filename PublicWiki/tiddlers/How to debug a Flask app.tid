@@ -1,0 +1,36 @@
+created: 20210702064400238
+creator: zero
+modified: 20210702064702196
+modifier: zero
+tags: python flask
+title: How to debug a Flask app
+tmap.id: 52d948c6-8d41-4188-9d0c-45d948502e05
+type: text/vnd.tiddlywiki
+
+! How to debug a Flask app
+
+For Linux, Mac, Linux Subsystem for Windows, Git Bash on Windows, etc.:
+
+```
+export FLASK_APP=myapp
+export FLASK_ENV=development
+flask run
+```
+
+For Windows CMD, use set instead of export:
+
+```
+set FLASK_ENV=development
+
+```
+
+For PowerShell, use $env:
+
+```
+$env:FLASK_ENV = "development"
+```
+
+---
+```
+FLASK_APP=app.py FLASK_DEBUG=1 flask run
+```

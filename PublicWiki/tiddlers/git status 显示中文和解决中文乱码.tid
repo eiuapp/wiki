@@ -1,0 +1,16 @@
+created: 20210606013951192
+creator: zero
+modified: 20210606095050073
+modifier: zero
+tags: git
+title: git status 显示中文和解决中文乱码
+tmap.id: 0665561a-f43a-45a3-a679-1a394131d2a9
+type: text/vnd.tiddlywiki
+
+! git status 显示中文和解决中文乱码
+
+* https://blog.csdn.net/u012145252/article/details/81775362
+
+```
+git config --global core.quotepath false
+```

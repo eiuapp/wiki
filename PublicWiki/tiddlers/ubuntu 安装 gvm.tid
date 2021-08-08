@@ -1,0 +1,24 @@
+created: 20210427030840298
+creator: zero
+modified: 20210427031209234
+modifier: zero
+tags: gvm
+title: ubuntu 安装 gvm
+tmap.id: 9e379242-30e2-43f5-92bc-214dfa8a9275
+type: text/vnd.tiddlywiki
+
+! ubuntu 安装 gvm
+
+https://github.com/moovweb/gvm
+
+```bash
+zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+```
+
+
+添加提示内容至 ~/.zshrc
+
+```
+[[ -s "/root/.gvm/scripts/gvm" ]] && source "/root/.gvm/scripts/gvm"
+```

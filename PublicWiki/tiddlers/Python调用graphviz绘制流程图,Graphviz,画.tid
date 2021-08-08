@@ -1,0 +1,19 @@
+created: 20210701075426838
+creator: zero
+modified: 20210701075704676
+modifier: zero
+tags: python grrphviz
+title: Python调用graphviz绘制流程图,Graphviz,画
+tmap.id: 40837f81-4c93-43e2-a544-9ed9202f4e39
+type: text/vnd.tiddlywiki
+
+! Python调用graphviz绘制流程图,Graphviz,画
+
+* https://www.pythonf.cn/read/83967
+* https://www.jianshu.com/p/c9de69a28f8b
+
+!! 使用场景
+
+* 可以使用 python 的包 画
+* 可以调用 graphviz 原生写法画
+* 可以在Markdown文档中画

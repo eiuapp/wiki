@@ -1,0 +1,42 @@
+created: 20210423064557603
+creator: zero
+modified: 20210423070045981
+modifier: zero
+tags: eggjs
+title: Eggjs app.model.sync({ force: true })
+tmap.id: 87304e7b-4d67-4e42-9cbb-0e2e0060189e
+type: text/vnd.tiddlywiki
+
+! Eggjs 使用 app.model.sync({ force: true })
+
+https://www.bookstack.cn/read/egg-plugins-docs-cn/egg-sequelize.md
+
+我们强烈建议您使用 migrations 来创建或迁移数据库。
+
+下面的代码仅适合在开发环境中使用。
+
+!! 开发阶段
+https://juejin.cn/post/6844903608660525063
+
+如果是开发阶段，可以使用下面的方法自动执行：
+
+```javascript
+// {app_root}/app.js
+module.exports = app => {
+  if (app.config.env === "local") {
+    app.beforeStart(function*() {
+      yield app.model.sync({ force: true });
+    });
+  }
+};
+```
+
+!! 添加match, 只重建正则表达式匹配的表
+
+https://itbilu.com/nodejs/npm/V1PExztfb.html
+
+.sync({ force: true })会删除并重建表，这时我们可以添加match选项，只重建正则表达式匹配的表：
+
+```javascript
+sequelize.sync({ force: true, match: /_test$/ });
+```

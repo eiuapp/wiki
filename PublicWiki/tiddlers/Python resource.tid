@@ -1,0 +1,14 @@
+created: 20210629095550519
+creator: zero
+modified: 20210629095640982
+modifier: zero
+tags: python
+title: Python resource
+tmap.id: ad9e9377-a8b2-4361-bbcd-929506a6a780
+type: text/vnd.tiddlywiki
+
+! Python resource
+
+!! python3-cookbook
+
+* https://python3-cookbook.readthedocs.io/

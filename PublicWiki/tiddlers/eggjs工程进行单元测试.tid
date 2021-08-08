@@ -1,0 +1,79 @@
+created: 20210423055215544
+creator: zero
+modified: 20210423083455153
+modifier: zero
+tags: eggjs unittest
+title: eggjs工程进行单元测试
+tmap.id: 69e49958-aa1e-413d-bfc2-05ae0ce3e39b
+type: text/vnd.tiddlywiki
+
+! eggjs工程进行单元测试
+!! sequelize
+
+* https://eggjs.org/zh-cn/tutorials/sequelize.html
+* https://github.com/eggjs/examples/tree/master/sequelize
+
+举例：具体2个文件
+
+* {app_root}/test/.setup.js
+
+```javascript
+'use strict';
+
+const { app } = require('egg-mock/bootstrap');
+const factories = require('./factories');
+
+before(() => {
+  // defined app.factory for build test data
+  factories(app);
+});
+
+afterEach(async () => {
+  // clear database after each test case
+  await Promise.all([
+    app.model.TrusteeBankInfo.destroy({ truncate: { cascade: true }, force: true }),
+    app.model.Post.destroy({ truncate: true, force: true }),
+  ]);
+});
+```
+
+* {app_root}/test/factories.js
+
+```javascript
+'use strict';
+
+const { factory } = require('factory-girl');
+
+module.exports = app => {
+  app.factory = factory;
+  factory.define('trustee_bank_info', app.model.TrusteeBankInfo, {
+    trustee_bank_name: factory.sequence('TrusteeBankInfo.trustee_bank_name', n => `trustee_bank_name_${n}`),
+    entry_date: new Date(),
+  });
+};
+```
+
+* {app_root}/test/controller/trustee_bank_info.test.js
+
+```javascript
+"use strict";
+
+const { assert, app } = require("egg-mock/bootstrap");
+
+describe("test/app/controller/trustee_bank_info.test.js", () => {
+  describe("GET /trusteeBank", () => {
+    it("should work", async () => {
+      await app.factory.createMany("trustee_bank_info", 3);
+      const res = await app.httpRequest().get("/trusteeBank?trustee_bank_id=1");
+      assert(res.status === 200);
+      console.log(res.body);
+      assert(res.body.data.trustee_bank_id === 1);
+      assert(res.body.data.trustee_bank_name === "trustee_bank_name_1");
+      // assert(res.body.count === 3);
+      // assert(res.body.rows.length === 2);
+      // assert(res.body.rows[0].trustee_bank_name);
+      // assert(res.body.rows[0].entry_date);
+    });
+  }); 
+});
+```

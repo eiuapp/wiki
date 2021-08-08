@@ -1,0 +1,14 @@
+created: 20210617034153626
+creator: zero
+modified: 20210617034245396
+modifier: zero
+tags: python
+title: python 去掉项目所有 # 注释
+tmap.id: 7ec07949-2d0b-4342-8682-247f68978792
+type: text/vnd.tiddlywiki
+
+! python 去掉项目所有 # 注释
+
+pycharm
+
+通过快捷键ctrl+shift+R 进入 项目全局替换窗口，点击右上角 勾选正则，然后 搜索框输入 (#.*) 即可 ，然后点击 replace all 去掉所有注释

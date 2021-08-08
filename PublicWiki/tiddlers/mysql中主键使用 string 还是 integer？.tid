@@ -1,0 +1,32 @@
+created: 20210425035124055
+creator: zero
+modified: 20210425035502137
+modifier: zero
+tags: sql
+title: mysql中主键使用 string 还是 integer？
+tmap.id: fc7b6ba1-f23e-4f96-97ee-f63930855591
+type: text/vnd.tiddlywiki
+
+! mysql中主键使用 string 还是 integer？
+
+!! 依据项目大小
+
+# mini demo 项目：直接使用 integer
+# 长期项目，同时使用uuid和id，以空间换效率
+# 1000万以上用户的项目，直接定制
+
+!! 参考
+
+https://www.jianshu.com/p/2656f2ecac09
+
+!! 中型项目
+
+```txt
+解决方案
+
+<b>a、同时适用uuid和id，以空间换效率</b>
+使用自增id作为主键，以此来应对插入效率问题；采用uuid做逻辑id，拥有了逻辑主键的诸多好处，而且可以用来应对之后的水平分表。
+
+<b>b、先把数据写入redis，然后再写入关系型数据库</b>
+我们做过类似的处理，但不是UUID，是用redis产生id。因为我的程序需要高写入，所以先要生成内存中的缓存对象，然后再用异步程序进行处理。我不用UUID是因为会失去了时间顺序的排列，一些地方可以简单的根据id排序来得到时间序列。这在后端构造redis的zset时候有时候有很大的方便。
+```

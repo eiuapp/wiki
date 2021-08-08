@@ -1,0 +1,46 @@
+created: 20210528083618887
+creator: zero
+modified: 20210607095117832
+modifier: zero
+tags: commitizen git
+title: commitizen 新的工程
+tmap.id: 45a33ffe-4e4a-4bee-8d94-6b2c073d7b70
+type: text/vnd.tiddlywiki
+
+! commitizen 新的工程
+
+* https://github.com/commitizen/cz-cli
+
+添加一个基础的 package.json 文件
+
+```json
+{
+  "name": "a-project-name",
+  "userName": "a-user-name",
+  "version": "1.0.0",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+  },
+  "optionalDependencies": {
+    "node-linux": "0.1.12",
+    "node-mac-user": "0.1.10",
+    "node-windows": "1.0.0-beta.5"
+  }
+}
+```
+
+安装 commitizen
+
+```
+npm install commitizen -g
+npm install -g cz-conventional-changelog
+commitizen init cz-conventional-changelog --save-dev --save-exact
+```
+
+使用
+
+```
+cz
+```
+

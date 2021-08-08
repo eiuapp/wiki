@@ -1,0 +1,86 @@
+created: 20210806092724412
+creator: zero
+modified: 20210806092836115
+modifier: zero
+tags: windows10 pyqt
+title: windows10 安装 qt designer （命令行版本）
+tmap.id: 9c9a39e0-5b30-4701-ba13-45779758fc35
+type: text/vnd.tiddlywiki
+
+! windows10 安装 qt designer （命令行版本）
+
+```shell
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>pip install PyQt5-tools
+Collecting PyQt5-tools
+  Downloading pyqt5_tools-5.15.4.3.2-py3-none-any.whl (29 kB)
+Collecting pyqt5==5.15.4
+  Downloading PyQt5-5.15.4-cp36.cp37.cp38.cp39-none-win_amd64.whl (6.8 MB)
+     |████████████████████████████████| 6.8 MB 2.2 MB/s
+Collecting pyqt5-plugins<5.15.4.3,>=5.15.4.2.2
+  Downloading pyqt5_plugins-5.15.4.2.2-cp36-cp36m-win_amd64.whl (67 kB)
+     |████████████████████████████████| 67 kB 4.5 MB/s
+Collecting click
+  Using cached click-8.0.1-py3-none-any.whl (97 kB)
+Collecting python-dotenv
+  Downloading python_dotenv-0.19.0-py2.py3-none-any.whl (17 kB)
+Collecting PyQt5-sip<13,>=12.8
+  Downloading PyQt5_sip-12.9.0-cp36-cp36m-win_amd64.whl (62 kB)
+     |████████████████████████████████| 62 kB 423 kB/s
+Collecting PyQt5-Qt5>=5.15
+  Downloading PyQt5_Qt5-5.15.2-py3-none-win_amd64.whl (50.1 MB)
+     |████████████████████████████████| 50.1 MB 76 kB/s
+Collecting qt5-tools<5.15.2.2,>=5.15.2.1.2
+  Downloading qt5_tools-5.15.2.1.2-py3-none-any.whl (13 kB)
+Collecting click
+  Using cached click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting qt5-applications<5.15.2.3,>=5.15.2.2.2
+  Downloading qt5_applications-5.15.2.2.2-py3-none-win_amd64.whl (60.9 MB)
+     |████████████████████████████████| 60.9 MB 37 kB/s
+Installing collected packages: qt5-applications, PyQt5-sip, PyQt5-Qt5, click, qt5-tools, pyqt5, python-dotenv, pyqt5-plugins, PyQt5-tools
+  Attempting uninstall: pyqt5
+    Found existing installation: PyQt5 5.9.2
+    Uninstalling PyQt5-5.9.2:
+      Successfully uninstalled PyQt5-5.9.2
+ERROR: Could not install packages due to an OSError: [WinError 5] 拒绝访问。: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-uninstall-n0jj_cwl\\qt.pyd'
+Consider using the `--user` option or check the permissions.
+
+
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>pip install PyQt5-tools --user Administrator
+Collecting PyQt5-tools
+  Using cached pyqt5_tools-5.15.4.3.2-py3-none-any.whl (29 kB)
+Collecting Administrator
+  Downloading administrator-0.0.0-py3-none-any.whl (2.5 kB)
+Collecting pyqt5-plugins<5.15.4.3,>=5.15.4.2.2
+  Using cached pyqt5_plugins-5.15.4.2.2-cp36-cp36m-win_amd64.whl (67 kB)
+Requirement already satisfied: pyqt5==5.15.4 in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from PyQt5-tools) (5.15.4)
+Requirement already satisfied: click in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from PyQt5-tools) (7.1.2)
+Collecting python-dotenv
+  Using cached python_dotenv-0.19.0-py2.py3-none-any.whl (17 kB)
+Requirement already satisfied: PyQt5-Qt5>=5.15 in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from pyqt5==5.15.4->PyQt5-tools) (5.15.2)
+Requirement already satisfied: PyQt5-sip<13,>=12.8 in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from pyqt5==5.15.4->PyQt5-tools) (12.9.0)
+Requirement already satisfied: qt5-tools<5.15.2.2,>=5.15.2.1.2 in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from pyqt5-plugins<5.15.4.3,>=5.15.4.2.2->PyQt5-tools) (5.15.2.1.2)
+Requirement already satisfied: qt5-applications<5.15.2.3,>=5.15.2.2.2 in c:\users\administrator\anaconda3\envs\l36\lib\site-packages (from qt5-tools<5.15.2.2,>=5.15.2.1.2->pyqt5-plugins<5.15.4.3,>=5.15.4.2.2->PyQt5-tools) (5.15.2.2.
+2)
+Installing collected packages: python-dotenv, pyqt5-plugins, PyQt5-tools, Administrator
+  WARNING: The script dotenv.exe is installed in 'C:\Users\Administrator\AppData\Roaming\Python\Python36\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script pyqt5-tools.exe is installed in 'C:\Users\Administrator\AppData\Roaming\Python\Python36\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed Administrator-0.0.0 PyQt5-tools-5.15.4.3.2 pyqt5-plugins-5.15.4.2.2 python-dotenv-0.19.0
+
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>designer
+
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>where designer
+C:\Users\Administrator\anaconda3\Library\bin\designer.exe
+
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>
+```
+
+最重要的命令
+
+
+`pip install PyQt5-tools --user Administrator`
+
+!! ref
+
+* https://www.cnblogs.com/linyfeng/p/11216494.html

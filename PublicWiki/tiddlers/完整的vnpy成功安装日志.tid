@@ -1,0 +1,246 @@
+created: 20210521062531528
+creator: zero
+modified: 20210521062627821
+modifier: zero
+tags: vnpy
+title: 完整的vnpy成功安装日志
+tmap.id: b607a1d7-78de-4fe1-be00-e9cfa5d6cd24
+type: text/vnd.tiddlywiki
+
+! 完整的vnpy成功安装日志
+
+* 中间任何环节，不应该有报错信息
+
+```
+C:\Users\Administrator>cd /d E:\job\vnpy-dev
+
+E:\job\vnpy-dev>conda activate vnpy
+
+(vnpy) E:\job\vnpy-dev>conda env l
+
+(vnpy) E:\job\vnpy-dev>.\install.bat
+
+(vnpy) E:\job\vnpy-dev>python -m pip install --upgrade pip setuptools
+Requirement already satisfied: pip in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (21.1.1)
+Requirement already satisfied: setuptools in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (56.2.0)
+
+(vnpy) E:\job\vnpy-dev>python -m pip install https://pip.vnpy.com/colletion/TA_Lib-0.4.17-cp37-cp37m-win_amd64.whl
+Collecting TA-Lib==0.4.17
+  Using cached https://pip.vnpy.com/colletion/TA_Lib-0.4.17-cp37-cp37m-win_amd64.whl (684 kB)
+
+(vnpy) E:\job\vnpy-dev>python -m pip install https://pip.vnpy.com/colletion/quickfix-1.15.1-cp37-cp37m-win_amd64.whl
+Collecting quickfix==1.15.1
+  Using cached https://pip.vnpy.com/colletion/quickfix-1.15.1-cp37-cp37m-win_amd64.whl (2.2 MB)
+
+(vnpy) E:\job\vnpy-dev>python -m pip install https://pip.vnpy.com/colletion/ibapi-9.76.1.tar.gz
+Collecting https://pip.vnpy.com/colletion/ibapi-9.76.1.tar.gz
+  Using cached https://pip.vnpy.com/colletion/ibapi-9.76.1.tar.gz (55 kB)
+
+(vnpy) E:\job\vnpy-dev>python -m pip install -r requirements.txt
+Requirement already satisfied: six in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 1)) (1.16.0)
+Requirement already satisfied: wheel in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 2)) (0.36.2)
+Collecting tzlocal
+  Using cached tzlocal-2.1-py2.py3-none-any.whl (16 kB)
+Collecting PyQt5==5.14.1
+  Using cached PyQt5-5.14.1-5.14.1-cp35.cp36.cp37.cp38-none-win_amd64.whl (53.1 MB)
+Collecting pyqtgraph
+  Using cached pyqtgraph-0.12.1-py3-none-any.whl (939 kB)
+Requirement already satisfied: qdarkstyle in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 6)) (3.0.2)
+Requirement already satisfied: requests in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 7)) (2.25.1)
+Requirement already satisfied: websocket-client in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 8)) (1.0.0)
+Requirement already satisfied: peewee in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 9)) (3.14.4)
+Requirement already satisfied: pymysql in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 10)) (1.0.2)
+Collecting psycopg2
+  Using cached psycopg2-2.8.6-cp37-cp37m-win_amd64.whl (1.1 MB)
+Collecting mongoengine
+  Using cached mongoengine-0.23.1-py3-none-any.whl (107 kB)
+Requirement already satisfied: numpy in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 13)) (1.20.3)
+Requirement already satisfied: pandas in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 14)) (1.2.4)
+Requirement already satisfied: matplotlib in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 15)) (3.4.2)
+Requirement already satisfied: seaborn in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 16)) (0.11.1)
+Collecting PyCryptodome==3.9.9
+  Using cached pycryptodome-3.9.9-cp37-cp37m-win_amd64.whl (14.1 MB)
+Collecting futu-api
+  Using cached futu_api-5.3.1510-py3-none-any.whl
+Collecting tigeropen
+  Using cached tigeropen-1.2.1-py3-none-any.whl
+Requirement already satisfied: rqdatac in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 20)) (2.9.30)
+Requirement already satisfied: ta-lib in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 21)) (0.4.17)
+Requirement already satisfied: ibapi in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 22)) (9.76.1)
+Requirement already satisfied: deap in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 23)) (1.3.1)
+Requirement already satisfied: pyzmq in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 24)) (22.0.3)
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/wmi/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<pip._vendor.urllib3.connection.HTTPSConnection object at 0x000002016D552AC8>, 'Connection to pypi.org timed out. (connect timeout=15)')': /simple/wmi/
+Collecting wmi
+  Using cached WMI-1.5.1-py2.py3-none-any.whl (28 kB)
+Collecting QScintilla==2.11.4
+  Using cached QScintilla-2.11.4-1-cp35.cp36.cp37.cp38-none-win_amd64.whl (1.2 MB)
+Collecting plotly
+  Using cached plotly-4.14.3-py2.py3-none-any.whl (13.2 MB)
+Requirement already satisfied: quickfix in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from -r requirements.txt (line 28)) (1.15.1)
+Collecting trading-calendars
+  Using cached trading_calendars-2.1.1-py3-none-any.whl
+Collecting influxdb
+  Using cached influxdb-5.3.1-py2.py3-none-any.whl (77 kB)
+Collecting vnpy_ctp
+  Using cached vnpy_ctp-6.5.1.5-py3-none-any.whl
+Collecting vnpy_ctptest
+  Using cached vnpy_ctptest-6.5.1.3-py3-none-any.whl
+Collecting vnpy_okex
+  Using cached vnpy_okex-2021.4.21.5-py3-none-any.whl
+Requirement already satisfied: PyQt5-sip<13,>=12.7 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from PyQt5==5.14.1->-r requirements.txt (line 4)) (12.9.0)
+Requirement already satisfied: pytz in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from tzlocal->-r requirements.txt (line 3)) (2021.1)
+Requirement already satisfied: qtpy>=1.9 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from qdarkstyle->-r requirements.txt (line 6)) (1.9.0)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->-r requirements.txt (line 7)) (1.26.4)
+Requirement already satisfied: certifi>=2017.4.17 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->-r requirements.txt (line 7)) (2020.12.5)
+Requirement already satisfied: chardet<5,>=3.0.2 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->-r requirements.txt (line 7)) (4.0.0)
+Requirement already satisfied: idna<3,>=2.5 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->-r requirements.txt (line 7)) (2.10)
+Collecting pymongo<4.0,>=3.4
+  Using cached pymongo-3.11.4-cp37-cp37m-win_amd64.whl (382 kB)
+Requirement already satisfied: python-dateutil>=2.7.3 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from pandas->-r requirements.txt (line 14)) (2.8.1)
+Requirement already satisfied: kiwisolver>=1.0.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->-r requirements.txt (line 15)) (1.3.1)
+Requirement already satisfied: pyparsing>=2.2.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->-r requirements.txt (line 15)) (2.4.7)
+Requirement already satisfied: cycler>=0.10 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->-r requirements.txt (line 15)) (0.10.0)
+Requirement already satisfied: pillow>=6.2.0 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->-r requirements.txt (line 15)) (8.2.0)
+Requirement already satisfied: scipy>=1.0 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from seaborn->-r requirements.txt (line 16)) (1.6.3)
+Collecting protobuf==3.5.1
+  Using cached protobuf-3.5.1-py2.py3-none-any.whl (388 kB)
+Collecting simplejson
+  Using cached simplejson-3.17.2-cp37-cp37m-win_amd64.whl (73 kB)
+Requirement already satisfied: setuptools in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from protobuf==3.5.1->futu-api->-r requirements.txt (line 18)) (56.2.0)
+  Using cached simplejson-3.17.0-cp37-cp37m-win_amd64.whl (73 kB)
+Collecting pyasn1==0.4.2
+  Using cached pyasn1-0.4.2-py2.py3-none-any.whl (71 kB)
+Collecting rsa==4.0
+  Using cached rsa-4.0-py2.py3-none-any.whl (38 kB)
+Collecting pytz
+  Using cached pytz-2019.3-py2.py3-none-any.whl (509 kB)
+Collecting six
+  Using cached six-1.13.0-py2.py3-none-any.whl (10 kB)
+Collecting stomp.py==4.1.22
+  Using cached stomp.py-4.1.22-py2.py3-none-any.whl
+Collecting enum34==1.1.6
+  Using cached enum34-1.1.6-py3-none-any.whl (12 kB)
+Collecting delorean==1.0.0
+  Using cached Delorean-1.0.0-py3-none-any.whl
+Collecting pandas
+  Using cached pandas-0.25.3-cp37-cp37m-win_amd64.whl (9.2 MB)
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/babel/
+Collecting babel>=2.1.1
+  Using cached Babel-2.9.1-py2.py3-none-any.whl (8.8 MB)
+Collecting humanize>=0.5.1
+  Using cached humanize-3.5.0-py3-none-any.whl (73 kB)
+Collecting docopt>=0.6.2
+  Using cached docopt-0.6.2-py2.py3-none-any.whl
+Requirement already satisfied: python-rapidjson in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->-r requirements.txt (line 20)) (1.0)
+Requirement already satisfied: brotli in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->-r requirements.txt (line 20)) (1.0.9)
+Requirement already satisfied: msgpack>=0.5.2 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->-r requirements.txt (line 20)) (1.0.2)
+Requirement already satisfied: SQLAlchemy in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->-r requirements.txt (line 20)) (1.4.15)
+Collecting pywin32
+  Using cached pywin32-300-cp37-cp37m-win_amd64.whl (9.2 MB)
+Collecting retrying>=1.3.3
+  Using cached retrying-1.3.3-py3-none-any.whl
+Collecting toolz
+  Using cached toolz-0.11.1-py3-none-any.whl (55 kB)
+Requirement already satisfied: importlib-metadata in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy_ctp->-r requirements.txt (line 31)) (4.0.1)
+Collecting vnpy-rest
+  Using cached vnpy_rest-1.0.0-py3-none-any.whl
+Collecting vnpy-websocket
+  Using cached vnpy_websocket-1.0.0-py3-none-any.whl
+Requirement already satisfied: zipp>=0.5 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from importlib-metadata->vnpy_ctp->-r requirements.txt (line 31)) (3.4.1)
+Requirement already satisfied: typing-extensions>=3.6.4 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from importlib-metadata->vnpy_ctp->-r requirements.txt (line 31)) (3.10.0.0)
+Requirement already satisfied: greenlet!=0.4.17 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from SQLAlchemy->rqdatac->-r requirements.txt (line 20)) (1.1.0)
+Collecting aiohttp==3.7.4
+  Using cached aiohttp-3.7.4-cp37-cp37m-win_amd64.whl (630 kB)
+Collecting yarl<2.0,>=1.0
+  Using cached yarl-1.6.3-cp37-cp37m-win_amd64.whl (124 kB)
+Collecting chardet<5,>=3.0.2
+  Using cached chardet-3.0.4-py2.py3-none-any.whl (133 kB)
+Collecting multidict<7.0,>=4.5
+  Using cached multidict-5.1.0-cp37-cp37m-win_amd64.whl (48 kB)
+Collecting attrs>=17.3.0
+  Using cached attrs-21.2.0-py2.py3-none-any.whl (53 kB)
+Collecting async-timeout<4.0,>=3.0
+  Using cached async_timeout-3.0.1-py3-none-any.whl (8.2 kB)
+Installing collected packages: multidict, yarl, six, pytz, chardet, attrs, async-timeout, tzlocal, pyasn1, humanize, docopt, babel, aiohttp, vnpy-websocket, vnpy-rest, toolz, stomp.py, simplejson, rsa, retrying, pywin32, PyQt5, pymongo, PyCryptodome, protobuf, pandas, enum34, delorean, wmi, vnpy-okex, vnpy-ctptest, vnpy-ctp, trading-calendars, tigeropen, QScintilla, pyqtgraph, psycopg2, plotly, mongoengine, influxdb, futu-api
+  Attempting uninstall: six
+    Found existing installation: six 1.16.0
+    Uninstalling six-1.16.0:
+      Successfully uninstalled six-1.16.0
+  Attempting uninstall: pytz
+    Found existing installation: pytz 2021.1
+    Uninstalling pytz-2021.1:
+      Successfully uninstalled pytz-2021.1
+  Attempting uninstall: chardet
+    Found existing installation: chardet 4.0.0
+    Uninstalling chardet-4.0.0:
+      Successfully uninstalled chardet-4.0.0
+  Attempting uninstall: PyQt5
+    Found existing installation: PyQt5 5.15.4
+    Uninstalling PyQt5-5.15.4:
+      Successfully uninstalled PyQt5-5.15.4
+  Attempting uninstall: pandas
+    Found existing installation: pandas 1.2.4
+    Uninstalling pandas-1.2.4:
+      Successfully uninstalled pandas-1.2.4
+  Attempting uninstall: QScintilla
+    Found existing installation: QScintilla 2.12.1
+    Uninstalling QScintilla-2.12.1:
+      Successfully uninstalled QScintilla-2.12.1
+Successfully installed PyCryptodome-3.9.9 PyQt5-5.14.1 QScintilla-2.11.4 aiohttp-3.7.4 async-timeout-3.0.1 attrs-21.2.0 babel-2.9.1 chardet-3.0.4 delorean-1.0.0 docopt-0.6.2 enum34-1.1.6 futu-api-5.3.1510 humanize-3.5.0 influxdb-5.3.1 mongoengine-0.23.1 multidict-5.1.0 pandas-0.25.3 plotly-4.14.3 protobuf-3.5.1 psycopg2-2.8.6 pyasn1-0.4.2 pymongo-3.11.4 pyqtgraph-0.12.1 pytz-2019.3 pywin32-300 retrying-1.3.3 rsa-4.0 simplejson-3.17.0 six-1.13.0 stomp.py-4.1.22 tigeropen-1.2.1 toolz-0.11.1 trading-calendars-2.1.1 tzlocal-2.1 vnpy-ctp-6.5.1.5 vnpy-ctptest-6.5.1.3 vnpy-okex-2021.4.21.5 vnpy-rest-1.0.0 vnpy-websocket-1.0.0 wmi-1.5.1 yarl-1.6.3
+
+(vnpy) E:\job\vnpy-dev>python -m pip install .
+Processing e:\job\vnpy-dev
+  DEPRECATION: A future pip version will change local packages to be built in-place without first copying to a temporary directory. We recommend you use --use-feature=in-tree-build to test your packages with this new behavior before it becomes the default.
+   pip 21.3 will remove support for this functionality. You can find discussion regarding this at https://github.com/pypa/pip/issues/7555.
+Requirement already satisfied: PyQt5 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (5.14.1)
+Requirement already satisfied: qdarkstyle in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (3.0.2)
+Requirement already satisfied: requests in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (2.25.1)
+Requirement already satisfied: websocket-client in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (1.0.0)
+Requirement already satisfied: peewee in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (3.14.4)
+Requirement already satisfied: numpy in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (1.20.3)
+Requirement already satisfied: pandas in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (0.25.3)
+Requirement already satisfied: matplotlib in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (3.4.2)
+Requirement already satisfied: seaborn in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (0.11.1)
+Requirement already satisfied: rqdatac in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (2.9.30)
+Requirement already satisfied: ta-lib in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (0.4.17)
+Requirement already satisfied: deap in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (1.3.1)
+Requirement already satisfied: pyzmq in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (22.0.3)
+Requirement already satisfied: QScintilla in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from vnpy==2.3.0) (2.11.4)
+Requirement already satisfied: kiwisolver>=1.0.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->vnpy==2.3.0) (1.3.1)
+Requirement already satisfied: python-dateutil>=2.7 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->vnpy==2.3.0) (2.8.1)
+Requirement already satisfied: cycler>=0.10 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->vnpy==2.3.0) (0.10.0)
+Requirement already satisfied: pillow>=6.2.0 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->vnpy==2.3.0) (8.2.0)
+Requirement already satisfied: pyparsing>=2.2.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from matplotlib->vnpy==2.3.0) (2.4.7)
+Requirement already satisfied: six in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from cycler>=0.10->matplotlib->vnpy==2.3.0) (1.13.0)
+Requirement already satisfied: pytz>=2017.2 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from pandas->vnpy==2.3.0) (2019.3)
+Requirement already satisfied: PyQt5-sip<13,>=12.7 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from PyQt5->vnpy==2.3.0) (12.9.0)
+Requirement already satisfied: qtpy>=1.9 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from qdarkstyle->vnpy==2.3.0) (1.9.0)
+Requirement already satisfied: idna<3,>=2.5 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->vnpy==2.3.0) (2.10)
+Requirement already satisfied: certifi>=2017.4.17 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->vnpy==2.3.0) (2020.12.5)
+Requirement already satisfied: chardet<5,>=3.0.2 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->vnpy==2.3.0) (3.0.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from requests->vnpy==2.3.0) (1.26.4)
+Requirement already satisfied: pymysql in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->vnpy==2.3.0) (1.0.2)
+Requirement already satisfied: SQLAlchemy in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->vnpy==2.3.0) (1.4.15)
+Requirement already satisfied: brotli in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->vnpy==2.3.0) (1.0.9)
+Requirement already satisfied: python-rapidjson in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->vnpy==2.3.0) (1.0)
+Requirement already satisfied: msgpack>=0.5.2 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from rqdatac->vnpy==2.3.0) (1.0.2)
+Requirement already satisfied: scipy>=1.0 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from seaborn->vnpy==2.3.0) (1.6.3)
+Requirement already satisfied: greenlet!=0.4.17 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from SQLAlchemy->rqdatac->vnpy==2.3.0) (1.1.0)
+Requirement already satisfied: importlib-metadata in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from SQLAlchemy->rqdatac->vnpy==2.3.0) (4.0.1)
+Requirement already satisfied: typing-extensions>=3.6.4 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from importlib-metadata->SQLAlchemy->rqdatac->vnpy==2.3.0) (3.10.0.0)
+Requirement already satisfied: zipp>=0.5 in c:\programdata\anaconda3\envs\vnpy\lib\site-packages (from importlib-metadata->SQLAlchemy->rqdatac->vnpy==2.3.0) (3.4.1)
+Building wheels for collected packages: vnpy
+  Building wheel for vnpy (setup.py) ... done
+  Created wheel for vnpy: filename=vnpy-2.3.0-py3-none-any.whl size=81092101 sha256=a0ae506d6a9ae64d5b8ffccb24f658cec141881d38101277883f4b8800c6fc99
+  Stored in directory: c:\users\administrator\appdata\local\pip\cache\wheels\47\06\0e\a61e131e71c082434a2d08da88937648ebd28e9375c6e84321
+Successfully built vnpy
+Installing collected packages: vnpy
+  Attempting uninstall: vnpy
+    Found existing installation: vnpy 2.3.0
+    Uninstalling vnpy-2.3.0:
+      Successfully uninstalled vnpy-2.3.0
+Successfully installed vnpy-2.3.0
+
+(vnpy) E:\job\vnpy-dev>
+```

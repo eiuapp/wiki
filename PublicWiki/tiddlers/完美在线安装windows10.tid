@@ -1,0 +1,58 @@
+created: 20210520070944703
+creator: zero
+modified: 20210520091329074
+modifier: zero
+tags: windows10
+title: 完美在线安装windows10
+tmap.id: dae8b8e9-b5e9-4fb6-bb87-c2e2b33174f2
+type: text/vnd.tiddlywiki
+
+! 完美在线安装windows10
+
+!! 1. 安装windows10 
+
+韩博士装机大师
+
+!! 2. 激活 windows10
+
+HEU_KMS_Activator_v22.3.0
+
+选择 数字激活，数字许可证激活。这样就完成了激活 windows10 .
+
+!! 3. 如何删除Windows10系统的多余开机引导项
+
+https://jingyan.baidu.com/article/e5c39bf5e3dd2f39d76033a9.html
+
+在运行对话框中输入： msconfig，选择引导，选中，删除。
+
+!! 4. 调整分区
+
+百度搜索“分享者”，
+
+https://www.sharerw.com/
+
+搜索 “傲梅”
+
+https://www.sharerw.com/search.php?q=%E5%82%B2%E6%A2%85
+
+傲梅分区助手 v9.2.0 技术员版 绿化激活版
+
+https://www.sharerw.com/a/jingyan/200.html
+
+点，蓝奏云
+
+https://sharerw.lanzoui.com/b004fccwb
+
+选择 “PAssist_TechDemo_v9.2_中文完整绿色版.7z”
+
+https://sharerw.lanzoui.com/i1TWRodp18b
+
+下载。
+
+解压后，放置于 
+
+C:\Program Files (x86)\PAssist_TechDemo_v9.2_2021.04.21_中文完整绿色版\AOMEI Partition Assistant
+
+双击  PartAssist.exe
+
+然后，选择你需要的操作吧。比如：调整分区。

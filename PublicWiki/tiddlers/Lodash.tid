@@ -1,0 +1,16 @@
+created: 20210415090814080
+creator: zero
+modified: 20210415090950400
+modifier: zero
+tags: lodash
+title: Lodash
+tmap.id: 88e5387e-4a58-4a47-b704-434fb76b1040
+type: text/vnd.tiddlywiki
+
+! Lodash
+!! Merge Array of Objects by Property using Lodash
+
+```
+const _ = require("lodash");
+const unionBy = _.unionBy(arr1, arr2, "id");
+```

@@ -1,0 +1,17 @@
+created: 20210426094832531
+creator: zero
+modified: 20210427025417831
+modifier: zero
+tags: orgmode tiddlywiki
+title: org to tiddlywiki
+tmap.id: 9ba2082f-7081-4827-ad91-1c7f5d18931d
+type: text/vnd.tiddlywiki
+
+! org to tiddlywiki 
+
+https://github.com/search?q=emacs+tiddlywiki&ref=opensearch
+
+得到
+
+* https://github.com/whacked/tiddlywiki-org
+* https://github.com/dfeich/org8-wikiexporters

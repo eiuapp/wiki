@@ -1,0 +1,45 @@
+created: 20210420093038675
+creator: zero
+modified: 20210420093526302
+modifier: zero
+tags: eggjs swagger egg-swagger-doc
+title: eggjs schema to contract
+tmap.id: 3dfb0478-0e83-4737-9eac-38f6db7ab1f3
+type: text/vnd.tiddlywiki
+
+! eggjs schema to contract
+
+当使用 egg-swagger-doc 时，需要编写 contract。那么我们就可以，把，schema中的内容，转成 contract 中的字段约束。
+
+!! 做的处理
+
+```txt
+替换：  allowNull: false, => required: true,
+替换：  type: INTEGER.UNSIGNED, => type: "integer",
+替换：  comment: => description:
+替换：  type: DATE => type: "string",
+替换：  type: "TIMESTAMP", => type: "string",
+
+正则替换：  type: STRING.* => type: "string",
+正则替换：  type: DECIMAL.* => type: "number",
+删除：  references:
+```
+
+!!! 疑问：
+
+要不要 _替换： defaultValue: => example:_
+
+!!! 使用 sed
+
+```bash
+sed -i "s/allowNull: false,/required: true,/g" ./*.js
+sed -i "s/type: INTEGER.UNSIGNED,/type: \"integer\",/g" ./*.js
+sed -i "s/comment:/description:/g" ./*.js
+sed -i "s/type: DATE,/type: \"string\",/g" ./*.js
+sed -i "s/type: \"TIMESTAMP\",/type: \"string\",/g" ./*.js
+```
+
+不能使用 sed 批处理的，则，手工替换吧。
+
+
+

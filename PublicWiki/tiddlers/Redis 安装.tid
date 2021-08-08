@@ -1,0 +1,12 @@
+created: 20210623084848148
+creator: zero
+modified: 20210623084918321
+modifier: zero
+tags: redis
+title: Redis 安装
+tmap.id: 162541fa-6b6b-41b8-b32c-83b7cc39d1c5
+type: text/vnd.tiddlywiki
+
+! Redis 安装
+!! Windows 下安装
+* https://www.runoob.com/redis/redis-install.html

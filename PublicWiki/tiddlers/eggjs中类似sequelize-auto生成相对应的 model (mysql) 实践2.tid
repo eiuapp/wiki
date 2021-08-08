@@ -1,0 +1,84 @@
+created: 20210422064023789
+creator: zero
+modified: 20210422075812515
+modifier: zero
+tags: eggjs sequelize mysql
+title: eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践2
+tmap.id: f397166f-dad5-45c9-a0b7-4db21948892c
+type: text/vnd.tiddlywiki
+
+! eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践2
+
+使用 lkspc/egg-sequelize-auto 来实现 sequelize-auto 生成相对应的 model 
+
+* https://github.com/lkspc/egg-sequelize-auto
+
+''本仓库4年未更新''
+
+!! 效果
+
+https://blog.csdn.net/zhangshuanlai/article/details/106060952
+
+[img[https://img-blog.csdnimg.cn/20200511193600123.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nc2h1YW5sYWk=,size_16,color_FFFFFF,t_70]]
+
+```javascript
+/* indent size: 2 */
+
+module.exports = (app) => {
+  const DataTypes = app.Sequelize;
+  const Model = app.model.define(
+    "staff_info",
+    { 
+      staff_id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: "staff_info",
+          key: "staff_id",
+        },
+      },
+      staff_no: {
+        type: DataTypes.STRING(64),
+        allowNull: true,
+      },  
+    },
+    {
+      tableName: "staff_info",
+    }
+  );
+
+  Model.associate = function () {};
+  return Model;
+};
+
+```
+
+!! (失败) 实践 egg-sequelize-auto生成相对应的 model 
+
+https://github.com/lkspc/egg-sequelize-auto
+
+https://www.jianshu.com/p/a47a12f030cb
+
+```bash
+npm install egg-sequelize-auto --save-dev // 对照数据库自动生成相应的 models 减少了对数据库进行增删改查时的 sql 语句的编写。
+```
+
+去package.json文件加命令
+
+```json
+"scripts": {
+    "dev": "egg-bin dev --port 7007",
+    "dbload": "egg-sequelize-auto -o ./app/model -h localhost -p 3344 -d database -u username -x password",
+  },
+```
+
+然后直接运行 npm run dbload ，就会生成相对应的 model 了。
+
+但是，我的实践中，出现了报错
+
+```bash
+$ egg-sequelize-auto -o ./app/model -h 192.168.168.158 -p 5432 -d ******-u ******-x ******
+/usr/bin/env: ‘node\r’: No such file or directory
+```
+
+然后，回过神一看，我卡，https://github.com/lkspc/egg-sequelize-auto 已有4年没更新了。看来是废了。

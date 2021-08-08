@@ -1,0 +1,18 @@
+created: 20210525094640438
+creator: zero
+modified: 20210525094735048
+modifier: zero
+tags: software
+title: 如何彻底卸载360？
+tmap.id: e3f5f5d5-473c-4431-8b9f-633ef6196a0b
+type: text/vnd.tiddlywiki
+
+! 如何彻底卸载360？
+
+* https://www.zhihu.com/question/267445531
+
+```
+1.首先打开360的安装目录，默认为C:\Program Files (x86)\360\360Safe
+
+2.找到一个叫uninst.exe的程序
+```

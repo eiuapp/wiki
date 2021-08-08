@@ -1,0 +1,17 @@
+created: 20210730012203052
+creator: zero
+modified: 20210730012346459
+modifier: zero
+tags: ssh
+title: Connection closed by foreign host
+tmap.id: b4201801-ba6b-4155-bfb3-55509d0678ca
+type: text/vnd.tiddlywiki
+
+! Connection closed by foreign host
+
+* https://blog.csdn.net/qlzw1990/article/details/117018277
+
+解决方法：
+
+* 用 连接工具（如：putty）重新连了一次，再打开 xshell 就行了。
+* 重新开启一个新的ssh连接。

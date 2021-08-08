@@ -1,0 +1,16 @@
+created: 20210429034333367
+creator: zero
+modified: 20210506075911008
+modifier: zero
+tags: postman
+title: POSTMAN POST方式传入纯数组
+tmap.id: 274b0e4a-b3f3-4424-a89f-6ea4395c410c
+type: text/vnd.tiddlywiki
+
+! POSTMAN POST方式传入纯数组
+
+Body选择raw->JSON格式
+
+!! ref
+
+https://www.jianshu.com/p/6aa43f5524e6

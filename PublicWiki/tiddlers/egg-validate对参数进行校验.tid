@@ -1,0 +1,96 @@
+created: 20210426085206801
+creator: zero
+modified: 20210426085904226
+modifier: zero
+tags: eggjs
+title: egg-validate对参数进行校验
+tmap.id: 7f741b34-5bcd-4d50-969d-b7c5cb33f8cb
+type: text/vnd.tiddlywiki
+
+! egg-validate对参数进行校验
+
+!! 文档
+
+# https://github.com/eggjs/egg-validate
+# https://github.com/node-modules/parameter
+
+!! 示例
+
+```javascript
+    const rule = {
+      assign_id: "string",
+      staff_id: "string?",
+      staff_no: "string?",
+      product_id: "string?",
+      product_code: "string?",
+      product_assing_rate: {
+        required: false,
+        type: "number",
+        min: 0,
+        max: 1,
+      }, // 'number?'
+      create_date: "datetime?", // 'string',
+      enable_status: {
+        type: "enum",
+        values: ["disabled", "enabled"],
+        required: false,
+      },
+    };
+    ctx.validate(rule);
+```
+
+!! datetime 类型，在 unittest 时，怎么办？
+
+在写 test 时，封装一个 newDate 方法至 {app_root}/test/tools.js 中
+
+```javascript
+'use strict'
+
+const moment = require("moment");
+const timeFormat = "YYYY-MM-DD HH:mm:ss";
+const newDate = function () {
+  return moment(new Date()).format(timeFormat);
+}
+
+module.exports.newDate = newDate;
+```
+
+test 文件（如：{app_root}/test/app/controller/staff_product_assign_rate.test.js）引用后，使用
+
+```javascript
+"use strict";
+
+const newDate = require("../../tools").newDate;
+const { assert, app } = require("egg-mock/bootstrap");
+
+describe("test/app/controller/staff_product_assign_rate.test.js", () => {
+  describe("POST /staffProductAssignRate", () => {
+    it("should work", async () => {
+      app.mockCsrf();
+      const staff_info = await app.factory.create("staff_info");
+      const product_info = await app.factory.create("product_info");
+      let res = await app
+        .httpRequest()
+        .post("/staffProductAssignRate")
+        .send({
+          staff_id: "" + staff_info.staff_id,
+          staff_no: "staff_no" + "_post",
+          product_id: "" + product_info.product_id,
+          product_code: "product_code" + "_post",
+          product_assing_rate: 0.22,
+          create_date: newDate(), //new Date(),
+          enable_status: "disabled",
+        });
+      assert(res.status === 201);
+      assert(res.body.staff_id);
+
+      res = await app
+        .httpRequest()
+        .get(`/staffProductAssignRate?assign_id=${res.body.assign_id}`);
+      assert(res.status === 200);
+      assert(res.body.staff_no === "staff_no" + "_post");
+    });
+  });
+
+});
+```

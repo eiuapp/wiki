@@ -1,0 +1,32 @@
+created: 20210806093215761
+creator: zero
+modified: 20210806093455090
+modifier: zero
+tags: windows10 python pip
+title: pip 安装时提示 `--user` option
+tmap.id: dbde8a39-8f0b-453b-84e6-40ee3e931591
+type: text/vnd.tiddlywiki
+
+! pip 安装时提示 `--user` option
+
+!! error: Consider using the `--user` option or check the permissions.
+
+
+```shell
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>pip install PyQt5-tools
+
+Installing collected packages: qt5-applications, PyQt5-sip, PyQt5-Qt5, click, qt5-tools, pyqt5, python-dotenv, pyqt5-plugins, PyQt5-tools
+  Attempting uninstall: pyqt5
+    Found existing installation: PyQt5 5.9.2
+    Uninstalling PyQt5-5.9.2:
+      Successfully uninstalled PyQt5-5.9.2
+ERROR: Could not install packages due to an OSError: [WinError 5] 拒绝访问。: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-uninstall-n0jj_cwl\\qt.pyd'
+Consider using the `--user` option or check the permissions.
+
+
+(l36) E:\liweiguo\代码资料\对敲程序代码\traderitem1>pip install PyQt5-tools --user Administrator
+```
+
+最重要的命令
+
+`pip install PyQt5-tools --user Administrator`

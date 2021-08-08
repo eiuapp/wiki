@@ -1,0 +1,15 @@
+created: 20210430091549759
+creator: zero
+modified: 20210430102606935
+modifier: zero
+tags: sequelize sql
+title: 快速生成sequelize种子数据
+tmap.id: d79510ee-3df9-4cd6-aee2-f1df5c342cbe
+type: text/vnd.tiddlywiki
+
+! 快速生成sequelize种子数据
+!! 利用 unittest 的 factory-girl 生成在测试时候的种子数据，然后直接导入至 dev 库
+
+!! mysql导出数据作为sequelize db:seed的种子数据
+
+[[mysql导出数据作为sequelize db:seed的种子数据]]

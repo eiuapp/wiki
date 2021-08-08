@@ -1,0 +1,16 @@
+created: 20210728072628941
+creator: zero
+modified: 20210728072657973
+modifier: zero
+tags: websocket
+title: WebSocket断开原因分析
+tmap.id: e239127c-b788-4265-bdbe-b91506b1239a
+type: text/vnd.tiddlywiki
+
+! WebSocket断开原因分析
+ 
+
+!! 关闭状态码表
+ 
+* https://segmentfault.com/a/1190000014582485
+

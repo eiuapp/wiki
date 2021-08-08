@@ -1,0 +1,43 @@
+created: 20210728091156120
+creator: zero
+modified: 20210728091435331
+modifier: zero
+tags: python supervisor
+title: supervisor 如何让程序启动时只运行一次
+tmap.id: 4b9cfe87-c7a6-4f10-a863-a74dcfbe0050
+type: text/vnd.tiddlywiki
+
+! supervisor 如何让程序启动时只运行一次
+
+直接看示例：
+
+```
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# cat grid.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:grid] 
+command=/home/ubuntu/grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程     
+autostart=false
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+; autorestart=true       
+autorestart=false            
+startretries=0
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/grid-supervisor.log
+loglevel=info
+
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# 
+```
+
+解释：
+
+* autostart 配置为True， supervisor 启动时，任务跟随启动
+* autorestart 配置为True， 进程不存在时会自动重启， 默认重启3次，想修改重启次数，可以配置startretries， 设置最多重启的次数
+* startretries 设置最多重启的次数。设置成0，就是，不需要再次重启。
+
+!! ref
+
+* https://zhuanlan.zhihu.com/p/264111843

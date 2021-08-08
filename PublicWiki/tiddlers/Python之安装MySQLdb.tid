@@ -1,0 +1,35 @@
+created: 20210622120051954
+creator: zero
+modified: 20210622120309829
+modifier: zero
+tags: python mysql
+title: Python之安装MySQLdb
+tmap.id: 2b2ef9f7-5944-4708-963b-1125812d4c7a
+type: text/vnd.tiddlywiki
+
+! Python之安装MySQLdb
+
+* https://blog.csdn.net/weixin_42840933/article/details/85274313
+
+如果是python 2.x版本的，在命令行输入执行：pip install MySQLdb即可安装成功
+
+!! python3.X安装过程
+
+网页下载安装包：https://pypi.org/project/mysqlclient/#files
+
+我是python3.7.1的版本，所以选择网页中：`mysqlclient-1.3.14-cp37-cp37m-win_amd64 .whl`，带有37字样的包。
+
+从cmd命令行中进入下载文件夹，执行下面命令
+`pip install mysqlclient-1.3.14-cp37-cp37m-win_amd64.whl`
+
+出现：Sucessfully installed mysqlclient-1.3.14说明安装成功。
+
+验证安装是否成功，执行以下命令
+
+```
+python
+import MySQLdb
+```
+
+可以导入MySQLdb模块，没有报错。
+注意：要按照MySQLdb这样写，要区分其大小写。

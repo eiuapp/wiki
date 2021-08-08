@@ -1,0 +1,132 @@
+created: 20210422064734753
+creator: zero
+modified: 20210422081953436
+modifier: zero
+tags: eggjs sequelize mysql
+title: eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践3
+tmap.id: 6350e6f1-3edf-4f2a-9d7e-dbe7b738ae69
+type: text/vnd.tiddlywiki
+
+! eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践3
+
+使用 sequelize-auto 生成相对应的 model ，然后修改成 适应 eggjs 的调用方式。
+
+
+下面是具体实践步骤。
+
+!! sequelize-auto 导出至文件夹 model.helper.mysql
+
+导出至文件夹名称，随意自定义，在 app/model/table.js 会使用到。我这里是： model.helper.mysql
+
+```bash
+sequelize-auto -o "./app/model.helper.mysql" -d database1 -h ip1 -p 3306 -u *** -x *** -e mysql
+```
+
+./app/model.helper.mysql 会有database中所有表对应的文件，并且，外加一个 init-models.js 文件。
+
+我这里就只弄一个表trustee_bank_info 哈。
+
+我来看一下具体内容
+
+* ./app/model.helper.mysql/init-models.js
+
+```javascript
+var DataTypes = require("sequelize").DataTypes;
+var _trustee_bank_info = require("./trustee_bank_info");
+
+function initModels(sequelize) {
+  var trustee_bank_info = _trustee_bank_info(sequelize, DataTypes);
+
+  return {
+    trustee_bank_info,
+  };
+}
+module.exports = initModels;
+module.exports.initModels = initModels;
+module.exports.default = initModels;
+```
+
+* ./app/model.helper.mysql/trustee_bank_info.js
+
+```javascript
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('trustee_bank_info', {
+    trustee_bank_id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      comment: "托管行序号"
+    },
+    trustee_bank_name: {
+      type: DataTypes.STRING(64),
+      allowNull: true,
+      comment: "托管行名称"
+    },
+    entry_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "引入日期"
+    },
+    enable_status: {
+      type: DataTypes.STRING(32),
+      allowNull: true,
+      defaultValue: "0",
+      comment: "状态：0->无效；1->有效"
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "创建时间"
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "修改时间"
+    }
+  }, {
+    sequelize,
+    tableName: 'trustee_bank_info',
+    timestamps: false,
+    indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "trustee_bank_id" },
+        ]
+      },
+    ]
+  });
+};
+```
+
+!! 编写 ./app/model/trustee_bank_info.js 文件
+
+要使得，sequelize-auto 的导出，支持 eggjs，那么，就是把 eggjs 中的 app.model 与 sequelize 关联就可以了。
+
+```javascript
+/* indent size: 2 */
+const initModels = require("../model.helper.mysql/init-models.js");
+
+module.exports = (app) => {
+  const sequelize = app.model;
+  const initModelsRst = initModels(sequelize);
+  const Model = initModelsRst.trustee_bank_info;
+
+  // 这里可以填写一些自定义方法。对 Model的基础方法之外的补充方法，如 findByStatus。
+
+  return Model;
+};
+```
+
+成功了。
+
+!! 思考
+
+将来，如果 dba 改变了 mysql 表结构，开发人员，也不用担心。只需要再 sequelize-auto 一次至 model.helper.mysql 文件夹中，就可以了。把开发与dba解耦。 
+

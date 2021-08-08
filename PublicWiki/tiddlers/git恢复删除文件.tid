@@ -1,0 +1,15 @@
+created: 20210426085207843
+creator: zero
+modified: 20210426095226417
+modifier: zero
+tags: git
+title: git恢复删除文件
+tmap.id: 7a38b818-f132-4bd7-af31-64b4b1d66055
+type: text/vnd.tiddlywiki
+
+! git恢复删除文件
+
+* 要查看删除的文件： git ls-files --deleted
+* 恢复则需要重新checkout： git checkout -- <deleted_file>  文件夹或文件均可
+* 多个文件同时操作可以使用xargs:   git ls-fies -d | xargs git checkout --
+

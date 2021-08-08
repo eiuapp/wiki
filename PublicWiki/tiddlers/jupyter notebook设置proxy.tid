@@ -1,0 +1,52 @@
+created: 20210605145208626
+creator: zero
+modified: 20210605145652372
+modifier: zero
+tags: python jupyter
+title: jupyter notebook设置proxy
+tmap.id: e55ada69-dc76-4e83-beb4-add081a51c96
+type: text/vnd.tiddlywiki
+
+! jupyter notebook设置proxy
+!! 方法1：临时修改
+
+
+在终端进行设置，再在该终端上启动jupyter，起来的notebook即可走代理。
+
+```
+set HTTP_PROXY=http://127.0.0.1:1080
+set HTTPS_PROXY=http://127.0.0.1:1080
+```
+
+更通用的方法
+
+```
+set HTTP_PROXY=http://<user>:<password>@<proxy server>:<proxy port>
+set HTTPS_PROXY=http://<user>:<password>@<proxy server>:<proxy port>
+```
+
+清除代理
+
+终端关闭或者重启，代理设置失效，再启动jupyter notebook就没有代理了。
+
+也可以在设置代理时，额外设置某些域名/IP不走代理服务器（逗号分隔）：
+
+```
+set NO_PROXY="*.aaa.com,*.bbb.com"
+```
+
+!! 方法2：在配置文件中修改
+
+配置文件在username/.jupyter文件中（windows下）
+如果没有要先生成 ：
+
+```
+jupyter notebook --generate-config
+```
+
+在该文件中添加上面的配置即可
+
+!! ref
+
+
+* https://blog.csdn.net/dpengwang/article/details/106900170

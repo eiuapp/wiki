@@ -1,0 +1,19 @@
+created: 20210518081436282
+creator: zero
+modified: 20210518081507291
+modifier: zero
+tags: markdown org
+title: markdown to org
+tmap.id: b09fb811-c4f0-40a4-88cb-722a77fdc06f
+type: text/vnd.tiddlywiki
+
+
+```bash
+#!/bin/bash
+
+for file in `ls *.md`  
+do   
+echo ${file};
+  pandoc -f markdown -t org -o ${file%.*}.org ${file}
+done
+```

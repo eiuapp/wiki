@@ -1,0 +1,12 @@
+created: 20210529041654092
+creator: zero
+modified: 20210621081513773
+modifier: zero
+tags: vim
+title: vim删除到行尾
+tmap.id: 405a47a3-125f-47b8-8a30-c0a2f1a53c48
+type: text/vnd.tiddlywiki
+
+! vim删除到行尾
+
+`d$`

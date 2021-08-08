@@ -1,0 +1,21 @@
+created: 20210415063911085
+creator: zero
+modified: 20210415064020945
+modifier: zero
+tags: git
+title: git errors
+tmap.id: c5df63a8-0187-4fbd-ba96-93c4f14ea8d4
+type: text/vnd.tiddlywiki
+
+! git errors
+
+!! Couldn't find remote ref master
+
+```bash
+$ git pull origin master
+fatal: Couldn't find remote ref master
+fatal: The remote end hung up unexpectedly
+```
+
+表示未找到 master 分支。
+

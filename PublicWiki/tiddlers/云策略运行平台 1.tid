@@ -1,0 +1,23 @@
+created: 20210802071519458
+creator: zero
+modified: 20210802071526194
+modifier: zero
+tags: trade todo
+title: 云策略运行平台 1
+tmap.id: 273161f2-960d-4ed5-80cb-c265abd1e3c3
+type: text/vnd.tiddlywiki
+
+! 云策略运行平台
+
+实现，多交易所，多账户，多策略，多策略参数的运行平台
+
+* 使用 fastapi 做 http 服务
+* post 参数：
+** 交易所 
+** 账户信息
+** 策略名称
+** 策略参数
+
+!! ref
+
+* https://github.com/nengshen/ns-strategies-admin-dev

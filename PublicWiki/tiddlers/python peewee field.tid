@@ -1,0 +1,22 @@
+created: 20210620060106553
+creator: zero
+modified: 20210620060355273
+modifier: zero
+tags: python peewee
+title: python peewee field
+tmap.id: 3007c744-7269-4433-b0f2-41fe6116b948
+type: text/vnd.tiddlywiki
+
+! python peewee field
+
+!! FloatField
+
+* 
+https://www.vnpy.com/forum/topic/2296-zai-bardatazhong-jia-ru-dang-qian-cheng-jiao-zong-jin-e-+mysqlzhong-zeng-jia-ci-zi-duan-de-yi-xie-zhu-yi-shi-xiang
+
+查阅了peewee的文档，得知peewee的FloatField相当于MySQL的Real。MySQL中的Real一般是Float类型，在64位电脑上不设置长度、小数位，默认的Float精度只能到6位数。
+
+所以，鉴于大于6位数挺常见的，正常情况，不要使用 FloatField, 改了Field类型为DoubleField()
+
+如：
+所以将database_sql.py建表时的volume、turnover、open_interest改了Field类型为DoubleField()

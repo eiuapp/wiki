@@ -1,0 +1,16 @@
+created: 20210607015502588
+creator: zero
+modified: 20210610015944877
+modifier: zero
+tags: vscode python
+title: vscode python plugins
+tmap.id: 7c3295d6-7333-4001-be35-7210facf4193
+type: text/vnd.tiddlywiki
+
+! vscode python plugins
+
+* python
+* Python Extension Pack 智能提示
+* Visual Studio IntelliCode 智能补全
+* pylance
+* magicpython

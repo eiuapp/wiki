@@ -1,0 +1,61 @@
+created: 20210727131438853
+creator: zero
+modified: 20210728094610503
+modifier: zero
+tags: python supervisor
+title: python 使用 supervisor
+tmap.id: 9c148c7b-fb2b-4d94-b882-a0b455821710
+type: text/vnd.tiddlywiki
+
+! python 使用 supervisor
+
+!! env
+
+* ubuntu: 20.04
+* 
+
+!! install supervisor
+
+```shell
+sudo apt install supervisor
+```
+
+!! config supervisor
+
+```shell
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# vi grid.conf 
+(base) root@VM-8-9-ubuntu:/etc/supervisor/conf.d# cat grid.conf 
+; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
+[program:grid] 
+command=/home/ubuntu/grid.sh run ; python app.py 
+;numprocs=1                 ; 默认为1
+;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x
+directory=/home/ubuntu/ ; 执行 command 之前，先切换到工作目录
+user=ubuntu                 ; 使用 ubuntu 用户来启动该进程
+; 程序崩溃时自动重启，重启次数是有限制的，默认为3次
+autorestart=true            
+redirect_stderr=true        ; 重定向输出的日志
+stdout_logfile=/home/ubuntu/logs/grid-supervisor.log
+loglevel=info
+```
+
+!! supervisorctl 
+
+```shell
+sudo supervisorctl reload  # 更新配置，根据最新的配置启动程序，会启动已经运行的程序
+sudo supervisorctl update  # 更新配置，重启配置有变化的进程，不会重启那些配置没有变化
+sudo supervisorctl status grid
+sudo supervisorctl start grid
+sudo supervisorctl stop grid
+sudo supervisorctl restart grid
+```
+
+!! ref
+
+* https://zhuanlan.zhihu.com/p/264111843
+* https://www.cnblogs.com/liuhaidon/p/12217153.html
+* https://juejin.cn/post/6844904133305040910
+
+more
+
+* https://www.jianshu.com/p/12507cb6e764

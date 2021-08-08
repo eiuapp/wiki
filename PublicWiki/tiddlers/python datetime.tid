@@ -1,0 +1,126 @@
+created: 20210529074651618
+creator: zero
+modified: 20210618093339266
+modifier: zero
+tags: python
+title: python datetime
+tmap.id: 8374c83b-34ea-4930-83f8-a98c721a0781
+type: text/vnd.tiddlywiki
+
+! python datetime
+
+```
+import datetime
+data[4] = '20100304'
+data[5] = '082835'
+dt=datetime.datetime.strptime(data[4]+data[5],'%Y%m%d%H%M%S')
+print(dt)
+# 2010-03-04 08:28:35
+```
+!! python3.7获取系统时间字符串yyyyMMddhhmmss
+
+```
+from datetime import datetime
+now = datetime.now()
+print(str(now))
+n = str(now)[:19]
+print(n)
+print(datetime.now().__str__())
+target = datetime.now().strftime("%Y%m%d%H%M%S")
+print(target)
+```
+
+!! datetime.datetime 转 时间戳
+
+* https://blog.csdn.net/weixin_43790276/article/details/90674297
+
+```
+# datetime对象转换成时间字符串
+datetime_str = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
+print(datetime_str)
+ 
+# datetime对象转换成时间戳
+datetime_stamp = datetime.timestamp(datetime.now())
+print(datetime_stamp)
+```
+
+!! 获得当前小时数
+
+```
+import datetime
+datetime.datetime.now().hour
+```
+
+!! error: TypeError: can't subtract offset-naive and offset-aware datetimes
+
+造成这种现象的原因，大多是因为，一个使用了时区，而另一个没有使用时区。
+
+```
+import pytz
+CHINA_TZ = pytz.timezone("Asia/Shanghai")
+
+def generate_datetime(timestamp: float) -> datetime:
+    """"""
+    dt = datetime.fromtimestamp(timestamp / 1000)
+    dt = CHINA_TZ.localize(dt)
+    return dt
+```
+
+now = datetime.now()
+
+变成同样的方式，如下：
+
+generate_datetime(datetime.now().timestamp() * 1000)
+
+构造出来，就可以了。
+
+!! 利用datetime模块计算时间差
+
+```
+>>>import datetime
+>>>starttime = datetime.datetime.now()
+#long running
+>>>endtime = datetime.datetime.now()
+>>>print (endtime - starttime).seconds
+```
+上例演示了计算运行时间的例子，以秒进行显示。
+
+!! 获取指定日期的后（前）一（n）天
+
+```
+>>> import datetime #导入日期时间模块
+>>> today = datetime.date.today() #获得今天的日期
+>>> print today #输出今天日期
+2014-01-04 
+>>> yesterday = today - datetime.timedelta(days=1) #用今天日期减掉时间差，参数为1天，获得昨天的日期
+>>> print yesterday
+2014-01-03 
+>>> tomorrow = today + datetime.timedelta(days=1) #用今天日期加上时间差，参数为1天，获得明天的日期
+>>> print tomorrow
+2014-01-05 
+```
+
+* https://blog.csdn.net/evillist/article/details/50522505
+
+!! python 时间戳转为字符串
+
+* https://blog.csdn.net/lanyang123456/article/details/76338653
+
+方法1
+
+```
+import datetime
+import time
+
+stamp = int(time.time())
+print datetime.datetime.fromtimestamp(stamp)
+2017-07-29 16:08:32
+```
+
+方法2
+
+```
+import time
+time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp))
+'2017-07-29 16:08'
+```

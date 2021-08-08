@@ -1,0 +1,91 @@
+created: 20210518074307157
+creator: zero
+modified: 20210521060447590
+modifier: zero
+tags: software APrivateContent
+title: windows曾经安装过的软件
+tmap.id: cf2b34f0-4ecd-48cc-94b8-aef114d86cd2
+type: text/vnd.tiddlywiki
+
+! windows曾经安装过的软件
+
+```
+$ ls
+Another Redis Desktop Manager
+TiddlyGit-Setup-0.3.4
+Graphviz
+4kvideodownloader_4.9.3.msi
+Anaconda2-2019.03-Linux-x86_64.sh*
+Anaconda2-2019.03-Windows-x86_64.exe*
+Anaconda3-2019.03-Linux-x86_64.sh*
+Anaconda3-2019.03-Windows-x86_64.exe*
+Anaconda3-2019.10-Windows-x86_64.exe*
+AutoHotkey_1.1.30.03_setup.exe*
+AxureRP-Setup.exe*
+BearyChat-x64.exe*
+Bypass_1.13.84.zip
+Bypass_1.13.86.zip
+ChromeSetup.exe*
+CommonPermission-master.zip
+EasyConnectInstaller.exe*
+FiddlerSetup_5.0.20192.25091.exe*
+FlashRepairToolInstaller.exe*
+Git-2.21.0-64-bit.exe*
+GitHubDesktopSetup.exe*
+GtPlayerSetup64yt.exe*
+HQ_Collector_V320.rar
+Hyper-3.0.2-mac.zip
+MobaXterm_Portable_v11.1.zip
+Mockplus_Setup_v3.6.0.3.exe*
+Navicat15_43925.zip
+PostmanCanary-win64-7.1.1-canary01-Setup.exe*
+ReimageRepair.exe*
+Snipaste-1.16.2-x64.zip
+SystemKeeperInst_4e455cf0.exe*
+VirtualBox-6.0.4-128413-Win.exe*
+WebStorm-2019.1.3.exe*
+Xftp-6.0.0115p.exe*
+Xshell-6.0.0118_yy.exe*
+Xshell-6.0.0121.exe*
+Xshell-6.0.0121p.exe*
+Xshell-6.0.0125p.exe*
+audacity-win-2.3.3.exe*
+chat-admin-web-dev.zip
+chromedriver_win32.zip
+cmder.7z
+cms.net-master.zip
+edms.net-master.zip
+emacs-26.2.tar.gz
+emacs-26.3.tar.xz
+emacspeak-50.0.tar.bz2
+emacspeak-50.0.tar.gz
+emacspeak_voxin_install-49.0-6.tar.gz
+espeak-1.48.15.zip
+gawk-4.2.0.tar.gz
+geth-windows-amd64-1.9.8-d62e9b28.exe*
+gitlab-v11.9.4-zh.tar.gz
+glibc-2.21.tar.gz
+hugo_0.55.6_Linux-64bit.tar.gz
+hugo_0.58.3.tar.gz
+hugo_extended_0.58.3.tar.gz
+hyper-Setup-3.0.2.exe*
+hyper_3.0.2_amd64.deb
+jdk-11.0.3_linux-x64_bin.tar.gz
+navicat150_premium_cs_x86.exe*
+navicat150_premium_en_x64.exe*
+nginx-release-1.17.0.tar.gz
+node-v10.15.3-linux-x64.tar.xz
+pgadmin4-4.16-x86.exe*
+privoxy_3.0.28.zip
+putty-64bit-0.71-installer.msi
+python-master.zip
+redis-5.0.4.tar.gz
+runz-1.2.2.tar.gz
+setup_1843911723.exe*
+studio-3t-robo-3t-windows-double-pack/
+studio-3t-robo-3t-windows-double-pack.zip
+vcxsrv-64.1.20.1.4.installer.exe*
+virtualbox-Win-latest.exe*
+wget-1.20.3-win64.zip
+
+```

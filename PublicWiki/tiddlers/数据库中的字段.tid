@@ -1,0 +1,24 @@
+created: 20210429034122778
+creator: zero
+modified: 20210429034319145
+modifier: zero
+tags: sql
+title: 数据库中的字段
+tmap.id: 5d617faa-7368-473c-99c0-ffeb390d2474
+type: text/vnd.tiddlywiki
+
+! 数据库中的字段
+
+!! 数据库中表示状态值的字段
+
+[[数据库中表示状态值的字段]]
+
+
+!! 命名
+
+# 小写
+# 下划线
+
+!! 规则
+
+# 尽可能使用 string，而不是 enum

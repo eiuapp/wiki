@@ -1,0 +1,13 @@
+created: 20210520083942317
+creator: zero
+modified: 20210520084005717
+modifier: zero
+tags: pyenv windows10
+title: pyenv在windows10选择更换一个下载镜像源
+tmap.id: d5994291-736f-4dd9-805e-ff5b9c92538d
+type: text/vnd.tiddlywiki
+
+! 选择更换一个下载镜像源，这里我用了淘宝镜像源
+
+* https://bbs.huaweicloud.com/blogs/153545
+

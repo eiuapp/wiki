@@ -1,0 +1,55 @@
+created: 20210730092250869
+creator: zero
+modified: 20210730092810218
+modifier: zero
+tags: python vscode
+title: vscode 中 python debug 使用 anaconda 环境
+tmap.id: ca3e1e55-1c3e-4c64-b24e-a3a1b40d8ee0
+type: text/vnd.tiddlywiki
+
+! vscode 中 python debug 使用 anaconda 环境
+
+!! 新建立 .vscode/launch.json 文件
+
+```shell
+mkdir -p .vscode
+touch settings.json
+touch launch.json
+```
+
+其中 launch.json 内容如下：
+
+```json
+{
+    "version": "0.2.0",
+    
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "python": "/home/ubuntu/.ana/bin/python",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+其中 settings.json 内容如下：
+
+```json
+{
+    "python.pythonPath": "~/.ana/bin/python"
+}
+```
+
+最重要的配置是：
+
+```
+"python": "/home/ubuntu/.ana/bin/python",
+```
+
+!! ref
+
+* https://code.visualstudio.com/docs/python/debugging#_python

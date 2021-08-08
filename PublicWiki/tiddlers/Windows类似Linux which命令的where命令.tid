@@ -1,0 +1,28 @@
+created: 20210806092955025
+creator: zero
+modified: 20210806093054236
+modifier: zero
+tags: windows10
+title: Windows类似Linux which命令的where命令
+tmap.id: 0a641818-c827-4a74-88c1-00cc57146453
+type: text/vnd.tiddlywiki
+
+! Windows类似Linux which命令的where命令
+
+* https://blog.csdn.net/allway2/article/details/93379312
+
+Windows 类似Linux which命令的where命令
+
+Linux
+
+```
+# which java
+/usr/lib/jvm/java-1.8.0-openjdk/bin/java
+```
+
+windows 
+
+```
+C:\Users\Administrator>where java
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe
+```

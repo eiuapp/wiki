@@ -1,0 +1,14 @@
+created: 20210421055519969
+creator: zero
+modified: 20210421055803404
+modifier: zero
+tags: vscode gtd
+title: vscode编辑javascript无法保存时格式化
+tmap.id: 15380ec9-66c8-40bc-8f41-95fc73340eeb
+type: text/vnd.tiddlywiki
+
+! vscode编辑javascript无法保存时格式化
+
+!! 原来是禁用了 prettier 插件导致的
+
+!! 提问：那么，如何在 禁用了 prettier 插件后，还能使用其他的插件，使得 编辑javascript 后保存时格式化呢？

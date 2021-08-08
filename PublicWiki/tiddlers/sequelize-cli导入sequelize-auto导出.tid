@@ -1,0 +1,234 @@
+created: 20210422093822296
+creator: zero
+modified: 20210422103027334
+modifier: zero
+tags: sequelize sql
+title: sequelize-cli导入sequelize-auto导出
+tmap.id: 30965547-83e8-438e-883e-591da302874d
+type: text/vnd.tiddlywiki
+
+! sequelize-cli导入sequelize-auto导出
+
+!! sequelize-cli 导入
+
+在 migration-instance/migrations/20200416055303-init-trustee_bank_info.js 中写如下内容： 
+
+
+```javascript
+'use strict'
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    /*
+      Add altering commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
+    */
+
+    const { STRING, INTEGER, DATE, ENUM } = Sequelize
+
+    return queryInterface.createTable(
+      'trustee_bank_info',
+      {
+        trustee_bank_id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: INTEGER.UNSIGNED,
+          validate: {
+            isInt: true,
+          },
+          comment: '托管行序号',
+        },
+        trustee_bank_name: {
+          type: STRING(64),
+          comment: '托管行名称',
+        },
+        entry_date: {
+          type: DATE,
+          comment: '引入日期',
+        },
+        enable_status: {
+          type: STRING(32),
+          defaultValue: 'disabled',
+          comment: '启用状态：disabled->无效；enabled->有效',
+        },
+        created_at: {
+          type: 'TIMESTAMP',
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+          allowNull: false,
+          comment: '创建时间',
+        },
+        updated_at: {
+          type: 'TIMESTAMP',
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+          allowNull: false,
+          comment: '修改时间',
+        },
+      },
+      {
+        comment: '托管行信息表',
+        tableName: 'trustee_bank_info',
+        timestamps: false, //去除createAt updateAt,
+        underscored: true, // 使用下划线
+        freezeTableName: true, //使用自定义表名
+        // 实例对应的表名
+        tableName: 'staff_product_assign_rate',
+        // 如果需要sequelize帮你维护createdAt,updatedAt和deletedAt必须先启用timestamps功能
+        // 将createdAt对应到数据库的created_at字段
+        createdAt: 'created_at',
+        // 将updatedAt对应到数据库的updated_at字段
+        updatedAt: 'updated_at',
+        //And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+        deletedAt: false, //'deleted_at',
+        //删除数据时不删除数据，而是更新deleteAt字段 如果需要设置为true，则上面的deleteAt字段不能为false，也就是说必须启用
+        paranoid: false,
+      }
+    )
+  },
+
+  down: queryInterface => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.dropTable('users');
+    */
+    return queryInterface.dropTable('trustee_bank_info')
+  },
+}
+
+```
+
+导入
+
+```bash
+npx sequelize-cli db:migrate
+```
+
+则在 database 中生成 trustee_bank_info 表。
+
+!! sequelize-auto导出
+
+```bash
+ubuntu@utuntu:~/anyi/anyi-server$ sequelize-auto -o "./app/model.helper" -d db1 -h ip1 -p 3307 -u user1 -x password1 -e mysql
+```
+在 ./app/model.helper 文件夹中 生成 init-models.js 和 trustee_bank_info.js 两个文件。
+
+其中 trustee_bank_info.js 内容如下
+
+```javascript
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('trustee_bank_info', {
+    trustee_bank_id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      comment: "托管行序号"
+    },
+    trustee_bank_name: {
+      type: DataTypes.STRING(64),
+      allowNull: true,
+      comment: "托管行名称"
+    },
+    entry_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "引入日期"
+    },
+    enable_status: {
+      type: DataTypes.STRING(32),
+      allowNull: true,
+      defaultValue: "disabled",
+      comment: "启用状态：disabled->无效；enabled->有效"
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "创建时间"
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "修改时间"
+    }
+  }, {
+    sequelize,
+    tableName: 'trustee_bank_info',
+    timestamps: false,
+    indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "trustee_bank_id" },
+        ]
+      },
+    ]
+  });
+};
+```
+!! 小小遗憾。缺少comment等信息
+
+经过上面过程，基本上来说，是很完美的，但是有小小遗憾
+
+导入前的，下面内容，没有在导出后生成。
+
+```javascript
+    comment: '托管行信息表',
+    underscored: true, // 使用下划线
+    freezeTableName: true, //使用自定义表名
+    // 如果需要sequelize帮你维护createdAt,updatedAt和deletedAt必须先启用timestamps功能
+    // 将createdAt对应到数据库的created_at字段
+    createdAt: 'created_at',
+    // 将updatedAt对应到数据库的updated_at字段
+    updatedAt: 'updated_at',
+    //And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+    deletedAt: false, //'deleted_at',
+    //删除数据时不删除数据，而是更新deleteAt字段 如果需要设置为true，则上面的deleteAt字段不能为false，也就是说必须启用
+    paranoid: false,
+```
+
+也就是说，这些内容，需要手工完成哟。
+
+!!! 为什么要完成 comment 等的信息？
+
+因为，如果没有 comment 等信息，后续，使用 [[DBCHM数据库文档生成工具]] (或其他数据库文档生成工具） 导出成 docx, pdf 时，也就没有中文表名等信息，比较难看。
+
+!!! 如何快速补充 comment 信息
+
+复制 migration-instance/migrations/20200416055303-init-trustee_bank_info.js 中
+
+```javascript
+        comment: '托管行信息表',
+        tableName: 'trustee_bank_info',
+        timestamps: false, //去除createAt updateAt,
+        underscored: true, // 使用下划线
+        freezeTableName: true, //使用自定义表名
+        // 实例对应的表名
+        tableName: 'staff_product_assign_rate',
+        // 如果需要sequelize帮你维护createdAt,updatedAt和deletedAt必须先启用timestamps功能
+        // 将createdAt对应到数据库的created_at字段
+        createdAt: 'created_at',
+        // 将updatedAt对应到数据库的updated_at字段
+        updatedAt: 'updated_at',
+        //And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+        deletedAt: false, //'deleted_at',
+        //删除数据时不删除数据，而是更新deleteAt字段 如果需要设置为true，则上面的deleteAt字段不能为false，也就是说必须启用
+        paranoid: false,
+```
+
+替换  ./app/model.helper/trustee_bank_info.js 中
+
+```javascript
+    tableName: 'trustee_bank_info',
+    timestamps: false,
+```

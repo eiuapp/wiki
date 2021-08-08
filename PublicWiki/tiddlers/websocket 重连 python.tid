@@ -1,0 +1,39 @@
+created: 20210728071748981
+creator: zero
+modified: 20210728072626131
+modifier: zero
+tags: python websocket
+title: websocket 重连 python
+tmap.id: c14d83d5-33ef-49c7-b532-0694d43bc4b9
+type: text/vnd.tiddlywiki
+
+! websocket 重连 python
+ 
+
+!! 方式1 while True
+ 
+* https://github.com/Lawouach/WebSocket-for-Python/issues/237#issuecomment-450099825
+
+```python
+count = 0
+while True: 
+    try: 
+        ws = WSClient('xxx') 
+        print("Start contenting...") 
+        ws.connect() 
+        ws.run_forever() 
+    except KeyboardInterrupt: 
+        ws.close() 
+        break 
+    except Exception as e: 
+        count += 1 
+        print(e, "Try again %s times..." % count) 
+        continue
+```
+
+!! 方式2
+
+* https://www.codenong.com/cs105605631/
+
+没尝试
+

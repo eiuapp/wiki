@@ -1,0 +1,110 @@
+created: 20210604112425789
+creator: zero
+modified: 20210604113332480
+modifier: zero
+tags: vnpy
+title: vnpy 如何 生成 4 小时 k 线
+tmap.id: 8f86c820-c636-4a29-9bdb-67b75f23cc57
+type: text/vnd.tiddlywiki
+
+! vnpy 如何 生成 4 小时 k 线
+
+!! 问题：
+
+当在 策略中，使用
+
+```
+    def __init__(self, cta_engine, strategy_name, vt_symbol, setting):
+        """"""
+        super().__init__(cta_engine, strategy_name, vt_symbol, setting)
+        self.bg240 = BarGenerator(self.on_bar, 4, self.on_240min_bar, Interval.HOUR)
+        self.am240 = ArrayManager()
+```
+
+来使用4小时数据时。会出现，时间段，取值，不准确。
+
+请问：合成４小时ｂａｒ的时候，为什么开始时间，是　１，５，９，１３，１７，
+而不是　０，４，８，１２，１６这样子
+
+
+!! 找到要修改的文件位置
+
+# 搜索： Interval.HOUR
+# 搜索： update_bar_hour_window
+
+!! 修改
+
+在 \vnpy\trader\utility.py 中，修改 def on_hour_bar 
+
+# 加入，实现在整除的时候，重新开始计数。
+
+```
+            if not (bar.datetime.hour + 1) % self.window:
+                # print(" on_hour_bar: not bar.datetime.hour % self.window：", " bar.datetime.hour ",  bar.datetime.hour, " self.window: ", self.window)
+                self.interval_count = 0
+```
+
+# 调整
+
+```
+            if not (self.interval_count) % self.window:
+                # self.interval_count = 0
+                self.on_window_bar(self.window_bar)
+                self.window_bar = None
+            self.interval_count += 1
+```
+
+!! 完整 on_hour_bar 如下
+```
+class BarGenerator:
+    def on_hour_bar(self, bar: BarData) -> None:
+        """"""
+        if self.window == 1:
+            self.on_window_bar(bar)
+        else:
+            if not self.window_bar:
+                self.window_bar = BarData(
+                    symbol=bar.symbol,
+                    exchange=bar.exchange,
+                    datetime=bar.datetime,
+                    gateway_name=bar.gateway_name,
+                    open_price=bar.open_price,
+                    high_price=bar.high_price,
+                    low_price=bar.low_price
+                )
+            else:
+                self.window_bar.high_price = max(
+                    self.window_bar.high_price,
+                    bar.high_price
+                )
+                self.window_bar.low_price = min(
+                    self.window_bar.low_price,
+                    bar.low_price
+                )
+
+            if not (bar.datetime.hour + 1) % self.window:
+                # print(" on_hour_bar: not bar.datetime.hour % self.window：", " bar.datetime.hour ",  bar.datetime.hour, " self.window: ", self.window)
+                self.interval_count = 0
+            self.window_bar.close_price = bar.close_price
+            self.window_bar.volume += int(bar.volume)
+            self.window_bar.open_interest = bar.open_interest
+
+            # if not (bar.datetime.hour + 1) % self.window:
+            if not (self.interval_count) % self.window:
+                # self.interval_count = 0
+                self.on_window_bar(self.window_bar)
+                self.window_bar = None
+            self.interval_count += 1
+```
+# vnpy\app\cta_strategy\base.py line60
+
+
+    Interval.HOUR: timedelta(hours=1),
+
+---
+
+!! 其他人
+
+# 对1m合成1h的网友解读
+
+https://www.jianshu.com/p/98846a083cb4

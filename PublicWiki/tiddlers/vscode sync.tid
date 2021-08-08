@@ -1,0 +1,19 @@
+created: 20210520035548238
+creator: zero
+modified: 20210520041924082
+modifier: zero
+tags: vscode
+title: vscode sync
+tmap.id: 9f7fcb49-590d-4494-a92e-53f9f3dce847
+type: text/vnd.tiddlywiki
+
+! vscode sync
+
+!! 方式1：shanalikhan/code-settings-sync
+
+* https://github.com/shanalikhan/code-settings-sync
+
+如何配置，直接看：
+
+* https://www.cnblogs.com/kenz520/p/7416836.html
+* https://www.jianshu.com/p/a08219737291

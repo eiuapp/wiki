@@ -1,0 +1,36 @@
+created: 20210623090708684
+creator: zero
+modified: 20210623090810129
+modifier: zero
+tags: mysql
+title: ubuntu重启mysql服务
+tmap.id: 91bd29af-2a33-465a-85aa-2287f49ca843
+type: text/vnd.tiddlywiki
+
+! ubuntu重启mysql服务
+
+输入以下命令重启mysql服务。
+
+```
+sudo service mysql restart #重启mysql服务
+```
+
+相关命令：
+
+#启动mysql服务
+
+```
+sudo service mysql start
+
+safe_mysql&
+```
+
+#停止mysql服务 
+
+```
+sudo service mysql stop 
+
+/etc/inint.d/mysql stop 
+
+mysqladmin shutdown 
+```

@@ -1,0 +1,20 @@
+created: 20210426024236406
+creator: zero
+modified: 20210426103830179
+modifier: zero
+tags: javascript
+title: 利用moment把当前时间格式化为YYYY-MM-DD HH:mm:ss
+tmap.id: d3d09db6-f484-4659-8df9-e9dd48013fd3
+type: text/vnd.tiddlywiki
+
+! 利用moment把当前时间格式化为YYYY-MM-DD HH:mm:ss
+
+https://blog.csdn.net/qmz18778391913/article/details/110079757
+
+```javascript
+import moment from 'moment';
+
+const timeFormat = 'YYYY-MM-DD HH:mm:ss';
+const currentTime = moment(new Date()).format(timeFormat);
+console.log('currentTime ：', currentTime )
+```

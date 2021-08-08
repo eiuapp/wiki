@@ -1,0 +1,27 @@
+created: 20210623090826432
+creator: zero
+modified: 20210623091046773
+modifier: zero
+tags: redis
+title: Redis error
+tmap.id: 68ba53e8-8075-42d3-9e2e-b040450f58cf
+type: text/vnd.tiddlywiki
+
+! Redis error
+
+!! ERR Client sent AUTH, but no password is set
+
+异常是, redis没有设置密码, 结果, 你拿密码去登陆
+
+先连接redis , 然后通过 config set requirepass 设置密码。
+
+```
+$ redis-cli.exe -h 127.0.0.1 -p 6379
+> config get requirepass
+> config set requirepass test123
+> config get requirepass
+> auth test123
+> config get requirepass
+```
+
+

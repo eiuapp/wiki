@@ -1,0 +1,83 @@
+created: 20210520075407456
+creator: zero
+modified: 20210520082614916
+modifier: zero
+tags: pyenv windows10
+title: pyenv virtualenv使用（windows）
+tmap.id: 297ea580-d23a-449e-b5d6-9a8902c724de
+type: text/vnd.tiddlywiki
+
+! Win10 安装配置 pyenv & virtualenv
+
+* pyenv 用于管理多个版本的python
+
+* virtualenv 用于管理虚拟环境
+
+---
+
+!! （最佳）方式1
+
+# [[如何使用pyenv在windows10安装多个python版本环境]]
+
+# [[Win10+Python+virtualenv 环境配置]]
+---
+
+!! error: vnpy 影响 pyenv 使用
+
+当在按照  [[如何使用pyenv在windows10安装多个python版本环境]]  操作之前，就安装了 vnpy 时，会由于 环境变量/系统变量/path，优先使用 `C:\vnstudio\Scripts;C:\vnstudio\;` , 则导致，一直使用的是 vnpy 的 python 。
+
+解决：
+
+`%PYENV%\bin;%PYENV%\shims;` 放置在前，即：
+
+`%PYENV%\bin;%PYENV%\shims;C:\vnstudio\Scripts;C:\vnstudio\;`
+
+
+---
+
+以下内容，不推荐，看看就好
+
+!! 安装pyenv
+
+安装环境变量时，设置对应的bin路径
+
+* https://blog.csdn.net/weixin_43982238/article/details/108289616
+
+
+```
+# 默认就安装在当前路径的.pyenv下，然后还需要设置环境变量
+pip install pyenv-win 
+# 列出可以安装的python版本
+pyenv install --list
+# 安装指定python版本
+pyenv install 3.8.2 -v
+# 设置特定python版本影响范围为全局
+pyenv global 3.8.2
+# 一定要rehash一下
+pyenv rehash
+# 查看已经安装好的python版本
+pyenv versions
+```
+
+!! pyenv virtualenv 安装
+
+* https://blog.csdn.net/weixin_43982238/article/details/108289616
+
+!!! 安装vitualenv
+
+```
+# 安装
+python -m pip install --user virtualenv
+# 在powershell中，这样安装虚拟环境会出错
+# virtualenv venv
+# 正确的安装虚拟环境方式
+python -m virtualenv venv
+# 激活虚拟环境
+.\venv\Scripts\activate
+# 查看当前虚拟环境已安装的package
+pip list
+# 退出虚拟环境
+deactivate
+```
+
+ 

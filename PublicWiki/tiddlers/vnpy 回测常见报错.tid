@@ -1,0 +1,29 @@
+created: 20210526094009682
+creator: zero
+modified: 20210601085659521
+modifier: zero
+tags: vnpy
+title: vnpy 回测常见报错
+tmap.id: f09b9602-e21e-4d1c-ab4e-3768ea82a3e9
+type: text/vnd.tiddlywiki
+
+! vnpy 回测常见报错
+
+!! error: self.settings[class_name] 没选择 回测策略
+
+```
+C:\Users\Administrator\anaconda3\envs\vnpy\python.exe C:/z/job-relate/vnpy-dev/examples/vn_trader/run-binance.py
+Traceback (most recent call last):
+  File "C:\z\job-relate\vnpy-dev\vnpy\app\cta_backtester\ui\widget.py", line 360, in start_backtesting
+    old_setting = self.settings[class_name]
+KeyError: ''
+```
+
+!! vnpy self.pos 不及时更新
+
+解决：手工加减 self.pos
+
+```
+self.buy(price, 1)
+self.pos += 1
+```

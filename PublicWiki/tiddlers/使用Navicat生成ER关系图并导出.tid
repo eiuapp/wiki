@@ -1,0 +1,15 @@
+created: 20210419084241564
+creator: zero
+modified: 20210419084547716
+modifier: zero
+tags: navicat sql
+title: 使用Navicat生成ER关系图并导出
+tmap.id: 1e4971fa-a5ba-454b-a777-01114f5fe984
+type: text/vnd.tiddlywiki
+
+! 使用Navicat生成ER关系图并导出
+
+https://blog.csdn.net/xu1227233860/article/details/78278393
+
+在 schema 处（如 postgresql 是 public ），逆向数据库到模型，会自动弹出个 窗口，然后，点击，文件，另存为。
+

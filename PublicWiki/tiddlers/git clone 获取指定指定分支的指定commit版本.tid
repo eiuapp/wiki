@@ -1,0 +1,15 @@
+created: 20210415072113125
+creator: zero
+modified: 20210415072204451
+modifier: zero
+tags: git
+title: git clone 获取指定指定分支的指定commit版本
+tmap.id: d8e2233c-370c-4b72-a278-793cb94b3220
+type: text/vnd.tiddlywiki
+
+
+```bash
+git clone [git-url] -b [branch-name]
+
+git reset --hard [commit-number]
+```

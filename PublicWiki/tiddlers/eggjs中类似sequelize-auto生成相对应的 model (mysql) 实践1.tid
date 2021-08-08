@@ -1,0 +1,178 @@
+created: 20210422035730143
+creator: zero
+modified: 20210422064005841
+modifier: zero
+tags: eggjs sequelize mysql
+title: eggjs中类似sequelize-auto生成相对应的 model (mysql) 实践1
+tmap.id: efe27b04-40d5-4664-87f2-157295d4d684
+type: text/vnd.tiddlywiki
+
+! eggjs中类似sequelize-auto生成相对应的 model (mysql) 
+!! 使用 liuhuanhui/sequelize-auto 来实现 sequelize-auto 生成相对应的 model 
+
+* https://github.com/liuhuanhui/sequelize-auto
+* https://github.com/abiuDoIT/sequelize-auto
+
+没有成功。
+
+!!! 导出前准备工作
+
+!!!! Error: Please install mysql package manually
+
+```bash
+ubuntu@utuntu:~/anyi/anyi-server$ egg-sequelize-ts-auto -o "./app/model" -d mpf_dev_1 -h 192.168.168.137 -p 3307 -u *** -x *** --dialect mysql -g model
+/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/egg-sequelize-ts-auto/node_modules/_sequelize@3.35.1@sequelize/lib/dialects/mysql/connection-manager.js:24
+      throw new Error('Please install mysql package manually');
+      ^
+
+Error: Please install mysql package manually
+```
+
+要安装 mysql 包. 
+
+''注意''：
+
+如果 安装egg-sequelize-ts-auto时，使用了 -g，那么安装 mysql 也要 -g. 
+
+npm install ''-g'' egg-sequelize-ts-auto，则这里也要 npm i ''-g'' mysql
+
+!!!! update server version
+
+因为使用了 5.6.25，而 sequelize 的 mysql 版本
+
+https://github.com/sequelize/sequelize/blob/main/ENGINE.md
+
+最低要求是 5.7 ，所以，要升级 mysql 版本。
+
+!!!! SequelizeConnectionError: consider upgrading MySQL client
+
+```bash
+{ SequelizeConnectionError: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client
+    at Handshake.<anonymous> (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/egg-sequelize-ts-auto/node_modules/_sequelize@3.35.1@sequelize/lib/dialects/mysql/connection-manager.js:95:20)
+    at Handshake.<anonymous> (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/Connection.js:526:10)
+    at Handshake._callback (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/Connection.js:488:16)
+    at Handshake.Sequence.end (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Handshake.ErrorPacket (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/sequences/Handshake.js:125:8)
+    at Protocol._parsePacket (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/Parser.js:433:10)
+    at Parser.write (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/Parser.js:43:10)
+    at Protocol.write (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/Connection.js:88:28)
+    at Socket.<anonymous> (/home/ubuntu/.nvm/versions/node/v10.15.3/lib/node_modules/mysql/lib/Connection.js:526:10)
+    at Socket.emit (events.js:189:13)
+    at addChunk (_stream_readable.js:284:12)
+    at readableAddChunk (_stream_readable.js:265:11)
+    at Socket.Readable.push (_stream_readable.js:220:10)
+    at TCP.onStreamRead [as onread] (internal/stream_base_commons.js:94:17)
+  name: 'SequelizeConnectionError',
+  message:
+   'ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client',
+```
+
+https://waylau.com/node.js-mysql-client-does-not-support-authentication-protocol/
+
+出错原因:
+
+导致这个错误的原因是，目前，最新的mysql模块并未完全支持MySQL 8的“caching_sha2_password”加密方式，而“caching_sha2_password”在MySQL 8中是默认的加密方式。因此，下面的方式命令是默认已经使用了“caching_sha2_password”加密方式，该账号、密码无法在mysql模块中使用。
+
+```mysql
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+Query OK, 0 rows affected (0.12 sec)
+```
+
+解决方法:
+
+解决方法是从新修改用户root的密码，并指定mysql模块能够支持的加密方式：
+
+```mysql
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+Query OK, 0 rows affected (0.12 sec)
+```
+
+上述语句，显示指定了使用“mysql_native_password”的加密方式。这种方式是在mysql模块能够支持。
+
+!!! egg-sequelize-ts-auto 导出后的示例
+
+下面给出一个 egg-sequelize-ts-auto 导出后的示例
+
+```javascript
+/* jshint indent: 2 */
+
+module.exports = function (app) {
+  return app.model.define('trustee_bank_info', {
+    'trustee_bank_id': {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    'trustee_bank_name': {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    'entry_date': {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    'enable_status': {
+      type: DataTypes.STRING(32),
+      allowNull: true,
+      defaultValue: '0'
+    },
+    'created_at': {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    'updated_at': {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    }
+  }, {
+    tableName: 'trustee_bank_info'
+  });
+};
+```
+
+!!! egg-sequelize-ts-auto 命令执行后，发现几个问题：
+
+# eggjs 不识别 DataTypes。报错："ERROR 18680 nodejs.ReferenceError: DataTypes is not defined"
+# 没有 类似于sequelize-auto导出一个 init-model.js 中外键关系(hasMany, belongsTo)。
+
+!!!! 关于 eggjs 不识别 DataTypes
+
+经过
+https://github.com/lkspc/egg-sequelize-auto
+启发， 可以添加
+
+
+```javascript
+  const DataTypes = app.Sequelize;
+  const sequelize = app.Sequelize;
+```
+
+像下面这样:
+
+```javascript
+/* jshint indent: 2 */
+
+module.exports = function (app) {
+  const DataTypes = app.Sequelize;
+  const sequelize = app.Sequelize;
+  return app.model.define(
+    "combination_product_list",
+    {
+      combination_id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+```
+
+!!!! 外键关系(hasMany, belongsTo)
+
+这个可以尝试使用 sequelize-auto 导出的 init-models.js 中的内容，复制出来。
+
+未继续尝试

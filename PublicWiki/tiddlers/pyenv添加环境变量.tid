@@ -1,0 +1,34 @@
+created: 20210519062756097
+creator: zero
+modified: 20210519063051999
+modifier: zero
+tags: pyenv
+title: pyenv添加环境变量
+tmap.id: 899f92e7-4553-46e2-9450-72d94c513f3a
+type: text/vnd.tiddlywiki
+
+! pyenv添加环境变量
+
+https://www.jianshu.com/p/fe8991a7e14d 
+
+把PYENV添加到系统变量。注意不是用户变量。
+
+```
+变量名：PYENV
+变量值：C:\Users\Administrator\.pyenv\pyenv-win 这里填写你的
+pyenv路径
+```
+
+path添加
+把下面的两个路径，添加到PATH变量里面即可。可以添加到用户变量的PATH。
+
+```
+%PYENV%\bin
+%PYENV%\shims
+```
+
+步骤五：测试
+
+```
+pyenv --version
+```

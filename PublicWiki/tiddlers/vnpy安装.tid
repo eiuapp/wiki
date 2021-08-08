@@ -1,0 +1,147 @@
+created: 20210521030852566
+creator: zero
+modified: 20210521064815871
+modifier: zero
+tags: vnpy
+title: vnpy安装
+tmap.id: 7c8f7f72-cf96-4aca-afdf-02cb76455ab9
+type: text/vnd.tiddlywiki
+
+! vnpy安装
+
+* https://github.com/vnpy/vnpy
+* https://github.com/vnpy/vnpy/blob/master/docs/install.md
+
+最重要的，还是，看官方文档。
+这里只是记录，文档中，省略的步骤。
+
+!! Pre: 安装 Microsoft Visual C++ 14.0 编译套件
+
+[[安装 Microsoft Visual C++ 14.0 编译套件]]
+
+
+---
+
+!! 安装
+
+```
+C:\Users\Administrator>conda create -n vnpy python=3.7
+
+C:\Users\Administrator>cd /d E:\job\vnpy-dev
+
+E:\job\vnpy-dev>conda activate vnpy
+
+(vnpy) E:\job\vnpy-dev>.\install.bat
+```
+
+[[完整的vnpy成功安装日志]]
+
+---
+
+!! error: anaconda 未正确使用
+
+如果，anaconda 没有安装在本用户目录下，会导致，启动后，无权限访问。
+
+[[anaconda 没有安装在本用户目录下，会导致，启动后，无权限访问]]
+
+---
+!! error: ta-lib
+
+首先，单独安装，看下是报什么错误
+
+```
+(vnpy37) E:\job\vnpy-dev>
+(vnpy37) E:\job\vnpy-dev>pip install ta-lib --no-cache-dir
+Collecting ta-lib
+  Downloading TA-Lib-0.4.20.tar.gz (266 kB)
+     |████████████████████████████████| 266 kB 819 kB/s
+Requirement already satisfied: numpy in c:\programdata\anaconda3\envs\vnpy37\lib\site-packages (from ta-lib) (1.20.3)
+Building wheels for collected packages: ta-lib
+  Building wheel for ta-lib (setup.py) ... error
+  ERROR: Command errored out with exit status 1:
+   command: 'C:\ProgramData\Anaconda3\envs\vnpy37\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69ddcd82009b4fad9f461464cf649930\\setu
+p.py'"'"'; __file__='"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69ddcd82009b4fad9f461464cf649930\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"
+', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' bdist_wheel -d 'C:\Users\ADMINI~1\AppData\Local\Temp\pip-wheel-syzyh31k'
+       cwd: C:\Users\ADMINI~1\AppData\Local\Temp\pip-install-nscumo9y\ta-lib_69ddcd82009b4fad9f461464cf649930\
+  Complete output (20 lines):
+  C:\Users\ADMINI~1\AppData\Local\Temp\pip-install-nscumo9y\ta-lib_69ddcd82009b4fad9f461464cf649930\setup.py:75: UserWarning: Cannot find ta-lib library, installation may fail.
+    warnings.warn('Cannot find ta-lib library, installation may fail.')
+  running bdist_wheel
+  running build
+  running build_py
+  creating build
+  creating build\lib.win-amd64-3.7
+  creating build\lib.win-amd64-3.7\talib
+  copying talib\abstract.py -> build\lib.win-amd64-3.7\talib
+  copying talib\deprecated.py -> build\lib.win-amd64-3.7\talib
+  copying talib\stream.py -> build\lib.win-amd64-3.7\talib
+  copying talib\test_abstract.py -> build\lib.win-amd64-3.7\talib
+  copying talib\test_data.py -> build\lib.win-amd64-3.7\talib
+  copying talib\test_func.py -> build\lib.win-amd64-3.7\talib
+  copying talib\test_pandas.py -> build\lib.win-amd64-3.7\talib
+  copying talib\test_stream.py -> build\lib.win-amd64-3.7\talib
+  copying talib\__init__.py -> build\lib.win-amd64-3.7\talib
+  running build_ext
+  building 'talib._ta_lib' extension
+  error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+  ----------------------------------------
+  ERROR: Failed building wheel for ta-lib
+  Running setup.py clean for ta-lib
+Failed to build ta-lib
+Installing collected packages: ta-lib
+    Running setup.py install for ta-lib ... error
+    ERROR: Command errored out with exit status 1:
+     command: 'C:\ProgramData\Anaconda3\envs\vnpy37\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69ddcd82009b4fad9f461464cf649930\\se
+tup.py'"'"'; __file__='"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69ddcd82009b4fad9f461464cf649930\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"
+'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\ADMINI~1\AppData\Local\Temp\pip-record-5g4jw3ly\install-record.txt' --single-version-externally-managed --compile --install-heade
+rs 'C:\ProgramData\Anaconda3\envs\vnpy37\Include\ta-lib'
+         cwd: C:\Users\ADMINI~1\AppData\Local\Temp\pip-install-nscumo9y\ta-lib_69ddcd82009b4fad9f461464cf649930\
+    Complete output (20 lines):
+    C:\Users\ADMINI~1\AppData\Local\Temp\pip-install-nscumo9y\ta-lib_69ddcd82009b4fad9f461464cf649930\setup.py:75: UserWarning: Cannot find ta-lib library, installation may fail.
+      warnings.warn('Cannot find ta-lib library, installation may fail.')
+    running install
+    running build
+    running build_py
+    creating build
+    creating build\lib.win-amd64-3.7
+    creating build\lib.win-amd64-3.7\talib
+    copying talib\abstract.py -> build\lib.win-amd64-3.7\talib
+    copying talib\deprecated.py -> build\lib.win-amd64-3.7\talib
+    copying talib\stream.py -> build\lib.win-amd64-3.7\talib
+    copying talib\test_abstract.py -> build\lib.win-amd64-3.7\talib
+    copying talib\test_data.py -> build\lib.win-amd64-3.7\talib
+    copying talib\test_func.py -> build\lib.win-amd64-3.7\talib
+    copying talib\test_pandas.py -> build\lib.win-amd64-3.7\talib
+    copying talib\test_stream.py -> build\lib.win-amd64-3.7\talib
+    copying talib\__init__.py -> build\lib.win-amd64-3.7\talib
+    running build_ext
+    building 'talib._ta_lib' extension
+    error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+    ----------------------------------------
+ERROR: Command errored out with exit status 1: 'C:\ProgramData\Anaconda3\envs\vnpy37\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69d
+dcd82009b4fad9f461464cf649930\\setup.py'"'"'; __file__='"'"'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\pip-install-nscumo9y\\ta-lib_69ddcd82009b4fad9f461464cf649930\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);
+code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\ADMINI~1\AppData\Local\Temp\pip-record-5g4jw3ly\install-record.txt' --single-version-externally-
+managed --compile --install-headers 'C:\ProgramData\Anaconda3\envs\vnpy37\Include\ta-lib' Check the logs for full command output.
+
+(vnpy37) E:\job\vnpy-dev>
+```
+
+这个，就根据提示，就是，报：Microsoft Visual C++ 14.0 or greater is required. 
+
+* https://blog.csdn.net/luansj/article/details/106748491
+* https://blog.csdn.net/programmingBear/article/details/105330674
+
+那就直接，安装一个“ TA_Lib-0.4.20-cp37-cp37m-win_amd64.whl ” 吧。
+
+```
+pip install TA_Lib-0.4.20-cp37-cp37m-win_amd64.whl
+```
+
+然后，继续安装 “pip install -r requirement.txt"
+
+Requirement already satisfied: ta-lib in c:\programdata\anaconda3\envs\vnpy37\lib\site-packages (from -r requirements.txt (line 21)) (0.4.20)
+
+但是后续，又因为其他安装包，导致，再次提示，Microsoft Visual C++ 14.0 or greater is required. 
+
+* https://www.twle.cn/t/280
+

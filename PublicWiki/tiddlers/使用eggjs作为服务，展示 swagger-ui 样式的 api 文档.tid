@@ -1,0 +1,14 @@
+created: 20210420103433359
+creator: zero
+modified: 20210420103534482
+modifier: zero
+tags: eggjs swagger
+title: 使用eggjs作为服务，展示 swagger-ui 样式的 api 文档
+tmap.id: 4a37f339-53cd-49ee-8c5d-905736284e3a
+type: text/vnd.tiddlywiki
+
+! 使用eggjs作为服务，展示 swagger-ui 样式的 api 文档
+
+!! egg项目使用swagger编辑api接口文档
+
+https://www.pianshen.com/article/3947428770/

@@ -1,0 +1,37 @@
+created: 20210421065426094
+creator: zero
+modified: 20210421070022000
+modifier: zero
+tags: javascript
+title: javascript中同时支持两种search
+tmap.id: a20e19d5-f127-4a03-9abd-393e02951eda
+type: text/vnd.tiddlywiki
+
+! javascript中同时支持两种search
+使得请求参数支持同时两种search:
+
+1)["2021-04-07 00:00:00","2021-05-13 23:59:59"]
+2).yyyy-MM-dd
+
+参数示例：
+
+search: {"sms_created_time":["2021-04-07 00:00:00","2021-05-13 23:59:59"]}
+search: {"sms_created_time": "2021-04-07" }
+
+```javascript
+if (_.isArray(sms_created_time)) {
+  const startDate = sms_created_time[0];
+  const endDate = sms_created_time[1];
+  where.sms_created_time = {
+    [app.Sequelize.Op.gt]: startDate,
+    [app.Sequelize.Op.lt]: endDate,
+  };
+} else {
+  const dateObj = ctx.helper.getCurrentDays(new Date(sms_created_time));
+  const { startDate, endDate } = dateObj;
+  where.sms_created_time = {
+    [app.Sequelize.Op.gt]: startDate,
+    [app.Sequelize.Op.lt]: endDate,
+  };
+}
+```

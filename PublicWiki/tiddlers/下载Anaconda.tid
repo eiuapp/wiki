@@ -1,0 +1,36 @@
+created: 20210520070943208
+creator: zero
+modified: 20210521013534197
+modifier: zero
+tags: anaconda python
+title: 下载Anaconda
+tmap.id: d1a03855-e687-41b3-8e73-c964dc986caf
+type: text/vnd.tiddlywiki
+
+! 下载Anaconda
+
+!! 清华源
+
+https://mirrors.bfsu.edu.cn/anaconda/archive/?C=M&O=D
+
+然后下载了，也由于网络问题，而下载失败。
+
+!!! 使用 迅雷
+
+
+!! 境外服务器
+
+https://www.anaconda.com/products/individual
+
+找到下载链接
+https://repo.anaconda.com/archive/Anaconda3-2021.05-Windows-x86_64.exe
+
+
+```bash
+curl -o Anaconda3-2021.05-Windows-x86_64.exe https://repo.anaconda.com/archive/Anaconda3-2021.05-Windows-x86_64.exe
+```
+
+然后(scp)下载至本地。
+
+
+

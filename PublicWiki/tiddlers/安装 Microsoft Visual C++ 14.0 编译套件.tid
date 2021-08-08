@@ -1,0 +1,49 @@
+created: 20210521050356560
+creator: zero
+modified: 20210521060226510
+modifier: zero
+tags: windows10
+title: 安装 Microsoft Visual C++ 14.0 编译套件
+tmap.id: 7cdec222-dfee-48ad-94d8-7d8551b4cf27
+type: text/vnd.tiddlywiki
+
+
+! 安装 Microsoft Visual C++ 14.0 编译套件
+
+* https://www.twle.cn/t/280
+
+```
+打开网站 https://visualstudio.microsoft.com/zh-hans/downloads/
+
+拉到下面的 「 全部展开 」 和 「 全部折叠 」，点击 「 全部打开 」
+
+
+
+然后下拉找到 「 Visual Studio 2017 生成工具 」 点击右边的 「 下载 」，就会开始下载 vs_buildtools_xxx_xxx.exe
+
+
+
+双击下载完成后的 vs_buildtools_xxx_xxx.exe ，如果是 Window 8/10 以上版本，那么点击 「 仍然安装 」
+
+这时候会进行一些必要的下载
+
+
+
+进入安装组件选择界面，然后勾选 「 Visual C++ 生成工具 」，其它选项你自己看是否需要
+
+
+
+然后点击右下角的 「 安装 」 ，注意确认硬盘大小是否足够
+
+
+
+接下来就是漫长的等待下载的过程了
+
+
+
+下载完毕后，就会要求重启，那就重启，重启就安装完毕了
+
+接下来就可以使用 pip 安装一些用 C++ 写的一些第三方模块了
+
+例如 wordcloud 这个 Tag 标签云模块
+```

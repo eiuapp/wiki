@@ -1,0 +1,36 @@
+created: 20210425035532509
+creator: zero
+modified: 20210426103907053
+modifier: zero
+tags: restful
+title: 理解POST和PUT的区别
+tmap.id: 9160f2c1-9c95-4626-9e31-abd9dfe65045
+type: text/vnd.tiddlywiki
+
+! 理解POST和PUT的区别
+
+!! 原则
+
+如果该更新对应的URI多次调用的结果一致，则PUT。否则，用 POST。
+
+!! 应用场景
+
+```txt
+当需要以更新的形式来修改某一具体资源的时候，如何判断用PUT还是POST呢？
+
+很简单，如果该更新对应的URI多次调用的结果一致，则PUT
+
+比如更新某个blog文章，因为该文章具有单一的具体URI，所以每次更新提交相同的内容，结果都一致
+
+/blog/{document_id}/update
+
+在每次更新提交相同的内容，最终的结果不一致的时候，用POST
+
+举个很常见的例子，一个接口的功能是将当前余额减一个值，每次提交指定该值为100，接口如下
+
+/amount/deduction
+
+调用一次，你的余额-100，调用两次，余额-200
+
+这个时候就用POST
+```

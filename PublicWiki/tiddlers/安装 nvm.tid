@@ -1,0 +1,26 @@
+created: 20210426094831735
+creator: zero
+modified: 20210427031143202
+modifier: zero
+tags: nvm
+title: 安装 nvm
+tmap.id: 4ab6848b-30cc-4acd-bfd6-6e36025abdbf
+type: text/vnd.tiddlywiki
+
+! 安装 nvm
+
+https://github.com/nvm-sh/nvm#installing-and-updating
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | zsh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+添加提示内容至 ~/.zshrc
+
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+

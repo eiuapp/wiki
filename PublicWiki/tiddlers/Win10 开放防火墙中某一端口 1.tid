@@ -1,0 +1,35 @@
+created: 20210625040124600
+creator: zero
+modified: 20210629054413405
+modifier: zero
+tags: windows10
+title: Win10 开放防火墙中某一端口 1
+tmap.id: ada59f88-fbe5-496b-af2e-caef5fa96e8b
+type: text/vnd.tiddlywiki
+
+! Win10 开放防火墙中某一端口
+
+```
+1 环境
+Windows 10
+
+2 配置过程
+2.1 打开控制面板
+win+R
+control #输入
+2.2 选择windows 防火墙
+2.3 点击左侧的“高级设置”选项
+2.4 设置入站规则
+点击“新建规则”，点选“端口”，单击 “下一步”
+
+注意：入站规则是指别人电脑访问自己电脑；出站规则实质自己电脑访问别人电脑
+
+2.5 选择相应的协议
+例如：添加8080端口，选择TCP；特定本地端口处输入8080；
+
+2.6 选择“允许连接”，点击“下一步”；
+2.7 勾选“域”，“专用”，“公司”，点击“下一步”
+2.8 输入端口名称，点“完成”即可
+```
+
+* https://blog.csdn.net/nihaize0520/article/details/80714108

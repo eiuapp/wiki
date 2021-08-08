@@ -1,0 +1,45 @@
+created: 20210427031806719
+creator: zero
+modified: 20210427034710917
+modifier: zero
+tags: gcc
+title: apt install gcc 报错
+tmap.id: e648f58b-83f6-4220-8f0e-c5790b6ccbf3
+type: text/vnd.tiddlywiki
+
+! apt install gcc 报错
+
+```bash
+➜  sudo apt install gcc 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libcap2-bin libpam-cap
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  cpp cpp-7 gcc-7 gcc-7-base libasan4 libatomic1 libc-dev-bin libc6-dev libcc1-0 libcilkrts5 libgcc-7-dev libgomp1 libisl19 libitm1 liblsan0 libmpc3 libmpx2 libquadmath0 libtsan0 libubsan0 linux-libc-dev
+  manpages-dev
+Suggested packages:
+  cpp-doc gcc-7-locales gcc-multilib autoconf automake libtool flex gdb gcc-doc gcc-7-multilib gcc-7-doc libgcc1-dbg libgomp1-dbg libitm1-dbg libatomic1-dbg libasan4-dbg liblsan0-dbg libtsan0-dbg libubsan0-dbg
+  libcilkrts5-dbg libmpx2-dbg libquadmath0-dbg glibc-doc
+The following NEW packages will be installed:
+  cpp cpp-7 gcc gcc-7 gcc-7-base libasan4 libatomic1 libc-dev-bin libc6-dev libcc1-0 libcilkrts5 libgcc-7-dev libgomp1 libisl19 libitm1 liblsan0 libmpc3 libmpx2 libquadmath0 libtsan0 libubsan0 linux-libc-dev
+  manpages-dev
+0 upgraded, 23 newly installed, 0 to remove and 72 not upgraded.
+Need to get 993 kB/28.1 MB of archives.
+After this operation, 102 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Ign:1 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 linux-libc-dev amd64 4.15.0-140.144
+Err:1 http://security.ubuntu.com/ubuntu bionic-updates/main amd64 linux-libc-dev amd64 4.15.0-140.144
+  404  Not Found [IP: 2001:67c:1360:8001::24 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_4.15.0-140.144_amd64.deb  404  Not Found [IP: 2001:67c:1360:8001::24 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+
+```
+
+基础包，没有安装不了的事情，原来是忘记更新了。
+
+```bash
+sudo apt-get update
+```

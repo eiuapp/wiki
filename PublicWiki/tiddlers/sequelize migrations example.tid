@@ -1,0 +1,113 @@
+created: 20210416080104902
+creator: zero
+modified: 20210416080155412
+modifier: zero
+tags: sequelize
+title: sequelize migrations example
+tmap.id: d1e6f709-53f7-4603-ad12-47f53a60a950
+type: text/vnd.tiddlywiki
+
+
+
+```javascript
+"use strict";
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    /*
+      Add altering commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
+    */
+
+    const { STRING, INTEGER, DATE, ENUM } = Sequelize;
+
+    return queryInterface.createTable(
+      "staff_info",
+      {
+        staff_id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: INTEGER.UNSIGNED,
+          validate: {
+            isInt: true,
+          },
+        },
+        staff_no: {
+          type: STRING(64),
+          comment: "员工编号",
+        },
+        entry_date: {
+          type: DATE,
+          allowNull: false,
+          comment: "入职日期",
+        },
+        staff_status: {
+          type: STRING(20),
+          defaultValue: 0,
+          allowNull: false,
+          comment: "员工状态：0->未删除；1->已删除",
+        },
+        description: {
+          type: STRING(500),
+          comment: "其他",
+        },
+        staff_pwd: {
+          type: STRING(64),
+          allowNull: false,
+          comment: "登录密码",
+        },
+        init_pwd_status: {
+          type: STRING(32),
+          defaultValue: "0",
+          allowNull: false,
+          comment: "初始密码状态：0->未修改密码；1->已重置密码",
+        },
+        created_at: {
+          type: "TIMESTAMP",
+          defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+          allowNull: false,
+          comment: "创建时间",
+        },
+        updated_at: {
+          type: "TIMESTAMP",
+          defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+          allowNull: false,
+          comment: "修改时间",
+        },
+      },
+      {
+        comment: "员工信息表",
+        tableName: "staff_info",
+        timestamps: false, //去除createAt updateAt
+        freezeTableName: true, //使用自定义表名
+        // 实例对应的表名
+        tableName: "staff_product_assign_rate",
+        // 如果需要sequelize帮你维护createdAt,updatedAt和deletedAt必须先启用timestamps功能
+        // 将createdAt对应到数据库的created_at字段
+        createdAt: "created_at",
+        // 将updatedAt对应到数据库的updated_at字段
+        updatedAt: "updated_at",
+        //And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+        deletedAt: false, //'deleted_at',
+        //删除数据时不删除数据，而是更新deleteAt字段 如果需要设置为true，则上面的deleteAt字段不能为false，也就是说必须启用
+        paranoid: false,
+      }
+    );
+  },
+
+  down: (queryInterface) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.dropTable('users');
+    */
+    return queryInterface.dropTable("staff_info");
+  },
+};
+```

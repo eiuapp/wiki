@@ -1,0 +1,15 @@
+created: 20210416080228708
+creator: zero
+modified: 20210416080340837
+modifier: zero
+tags: sequelize
+title: sequelize migrations
+tmap.id: a38ee105-aec6-4c1c-921c-0ff35e6f8e1e
+type: text/vnd.tiddlywiki
+
+
+https://demopark.github.io/sequelize-docs-Zh-CN/other-topics/migrations.html
+
+!! example
+
+[[sequelize migrations example]]

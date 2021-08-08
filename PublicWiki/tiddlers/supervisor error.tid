@@ -1,0 +1,34 @@
+created: 20210727131932082
+creator: zero
+modified: 20210727132625032
+modifier: zero
+tags: python supervisor
+title: supervisor error
+tmap.id: 64ce17ee-21d3-4540-8cb9-ffe4048429b5
+type: text/vnd.tiddlywiki
+
+! supervisor error
+
+!! supervisor错误：ERROR (spawn error)
+
+* https://blog.csdn.net/sinat_21302587/article/details/76836283
+
+# 第1步 supervisorctl status
+
+```
+root@VM-8-9-ubuntu:~# supervisorctl status
+grid                             FATAL     Exited too quickly (process log may have details)
+root@VM-8-9-ubuntu:~# 
+```
+
+# 第2步 查看 supervisor 对应的 program 的日志文件
+
+```
+cat /etc/supervisor/conf.d/grid.conf | grep stdout_logfile
+cat the_log_file
+```
+
+
+# 第3步 使用supervisorctl tail program_name stderr命令查看错误信息
+
+* https://blog.csdn.net/cckavin/article/details/103023335

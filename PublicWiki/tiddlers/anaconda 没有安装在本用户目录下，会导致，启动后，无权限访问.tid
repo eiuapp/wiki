@@ -1,0 +1,116 @@
+created: 20210521064621322
+creator: zero
+modified: 20210521064755718
+modifier: zero
+tags: anaconda
+title: anaconda 没有安装在本用户目录下，会导致，启动后，无权限访问
+tmap.id: a5b8483f-111e-4c85-b613-22412eb4eb65
+type: text/vnd.tiddlywiki
+
+! anaconda 没有安装在本用户目录下，会导致，启动后，无权限访问
+
+一次无法访问的日志
+
+```
+C:\ProgramData\Anaconda3\envs\vnpy\python.exe E:/job/vnpy-dev/examples/vn_trader/run-binance.py
+[2021-05-21T14:38:02.604903]: Unhandled RestClient Error:<class 'requests.exceptions.ProxyError'>
+request:request : GET /api/v1/time error because terminated: 
+headers: None
+params: None
+data: None
+response:
+
+Exception trace: 
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 170, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\connection.py", line 96, in create_connection
+    raise err
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 696, in urlopen
+    self._prepare_proxy(conn)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 964, in _prepare_proxy
+    conn.connect()
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 182, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.binance.com', port=443): Max retries exceeded with url: /api/v1/time (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\job\vnpy-dev\vnpy\api\rest\rest_client.py", line 262, in _process_request
+    proxies=self.proxies,
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\adapters.py", line 510, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.binance.com', port=443): Max retries exceeded with url: /api/v1/time (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')))
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 170, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\connection.py", line 96, in create_connection
+    raise err
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 696, in urlopen
+    self._prepare_proxy(conn)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 964, in _prepare_proxy
+    conn.connect()
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connection.py", line 182, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\urllib3\util\retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.binance.com', port=443): Max retries exceeded with url: /api/v1/time (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\job\vnpy-dev\vnpy\api\rest\rest_client.py", line 262, in _process_request
+    proxies=self.proxies,
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\ProgramData\Anaconda3\envs\vnpy\lib\site-packages\requests\adapters.py", line 510, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.binance.com', port=443): Max retries exceeded with url: /api/v1/time (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000022EA52FBF88>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')))
+
+Process finished with exit code -1073741819 (0xC0000005)
+```

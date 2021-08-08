@@ -1,0 +1,29 @@
+created: 20210728084936546
+creator: zero
+modified: 20210728085034371
+modifier: zero
+tags: python log
+title: 为何python程序的输出重定向到文件中会有延迟
+tmap.id: 91200f47-52e5-42ea-96f4-7bcc9e4e5c7c
+type: text/vnd.tiddlywiki
+
+! 为何python程序的输出重定向到文件中会有延迟
+
+* https://blog.csdn.net/weixin_41712499/article/details/102976706
+
+```
+要即时写入文件，不想要延迟怎么办？
+
+1. python的print()函数有个参数叫"flush"，将它设为True，程序运行到该条输出内容时就会将缓存区的内容写出一次。即
+
+print("HERE!!!", flush=True)
+
+2. 命令行运行py文件的时候，加上一个命令行参数"-u"。即
+
+python -u xxx.py args1 >> out/xxx.log
+
+3. 你在哪里想让缓存区的内容输出，就在哪里加上这句话：
+
+sys.stdout.flush() 
+```
+ 

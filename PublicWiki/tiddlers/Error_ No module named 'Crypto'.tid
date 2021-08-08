@@ -1,0 +1,31 @@
+created: 20210805032322997
+creator: zero
+modified: 20210805032450013
+modifier: zero
+tags: python
+title: Error: No module named 'Crypto'
+tmap.id: 00142b05-bac9-49b8-838f-8c54f5c466ff
+type: text/vnd.tiddlywiki
+
+! Error: No module named 'Crypto'
+
+* https://blog.csdn.net/luckyyu1111/article/details/84145648
+
+!! env
+
+* python: 3.6.11
+
+!! python3.7下使用from Crypto.Cipher import AES时发生错误：ModuleNotFoundError: No module named ‘Crypto’
+
+解决方法
+
+```
+1.可以安装pycrypto
+在cmd中输入pip install pycrypto
+2.可以安装pycryptodome,这是pycrypto的替代方案
+pip install pycryptodome
+3.有可能是库的名称需要改，将crypto改为Crypto
+```
+
+我的尝试：`pip install pycryptodome`
+

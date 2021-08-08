@@ -1,0 +1,40 @@
+created: 20210531073204219
+creator: zero
+modified: 20210615074134204
+modifier: zero
+tags: pycharm python
+title: pycharm 快捷键
+tmap.id: 5832a571-bac4-4ee1-ba49-69bb9e3eadf4
+type: text/vnd.tiddlywiki
+
+! pycharm 快捷键
+
+!! pycharm 常用快捷键
+
+* https://www.cnblogs.com/polly-ling/p/9617519.html
+
+!! PyCharm中批量查找及替换
+ 
+--------------   windows电脑 ---------------
+
+* Ctrl + R 替换
+
+* Ctrl + Shift + F 全局查找
+
+* Ctrl + Shift + R 全局替换
+
+--------------   MAC电脑 ---------------
+
+* command + F 全局查找
+
+* command + R 全局替换
+
+
+!! pycharm折叠代码快捷键
+
+```
+所有代码折叠： ctrl + alt + -
+所有代码展开：ctrl + alt + +
+折叠某一点：ctrl + -
+展开某一层：ctrl + +
+```

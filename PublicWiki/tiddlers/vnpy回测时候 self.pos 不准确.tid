@@ -1,0 +1,36 @@
+created: 20210528103405639
+creator: zero
+modified: 20210528104045293
+modifier: zero
+tags: vnpy
+title: vnpy回测时候 self.pos 不准确
+tmap.id: f2936a2b-c6dc-4ca0-b50a-fcb3af95af6e
+type: text/vnd.tiddlywiki
+
+! vnpy回测时候 self.pos 不准确
+
+
+!! self.pos 不能及时更新
+
+场景：
+
+* 周期：1m
+* 策略：
+** 只有空仓的时候，才开仓
+
+但是，当，连续两根1m kbar，都发出了 做空卖出 信号时，会连续下单。
+
+
+```python
+on_bar(self, bar):
+    if self.pos == 0 
+        self.sell(sell_price, 1)
+```
+
+这样的代码无效。
+
+要使用一个新变量 empty_pos = True 来保证。
+
+* 开仓的时候，判断 if empty_pos == True, 且，开仓后，使得 empty_pos = False
+* 平仓的时候，判断 if empty_pos == False, 且，平仓后，使得 empty_pos = True
+

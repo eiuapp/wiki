@@ -1,0 +1,17 @@
+created: 20210521032054540
+creator: zero
+modified: 20210521032510464
+modifier: zero
+tags: anaconda python
+title: how-can-i-rename-a-conda-environment
+tmap.id: b685a5aa-9e91-4f66-bc9c-af2efd3e33a9
+type: text/vnd.tiddlywiki
+
+! how-can-i-rename-a-conda-environment
+
+* https://stackoverflow.com/questions/42231764/how-can-i-rename-a-conda-environment
+
+```
+conda create --name new_name --clone old_name
+conda remove --name old_name --all # or its alias: `conda env remove --name old_name`
+```

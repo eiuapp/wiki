@@ -1,0 +1,22 @@
+created: 20210624064856624
+creator: zero
+modified: 20210624065139796
+modifier: zero
+tags: admin
+title: 管理后台项目
+tmap.id: 5547b5fb-636d-4683-b4a4-e620635d1706
+type: text/vnd.tiddlywiki
+
+! admin
+
+几个接触过的管理后台项目
+
+!! golang
+
+* https://github.com/flipped-aurora/gin-vue-admin
+
+!! python
+
+* https://github.com/CoderCharm/fastapi-mysql-generator
+
+* https://github.com/tiangolo/full-stack-fastapi-postgresql

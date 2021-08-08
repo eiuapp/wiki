@@ -1,0 +1,30 @@
+created: 20210422030852024
+creator: zero
+modified: 20210422031043956
+modifier: zero
+tags: mysql
+title: mysql 创建 db, user
+tmap.id: bc6bb7b0-8c60-4eec-a150-233257eacda2
+type: text/vnd.tiddlywiki
+
+! mysql 创建 db, user
+
+!! mysql 5.7 创建 db, user
+
+```mysql
+CREATE DATABASE IF NOT EXISTS db1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+create user 'user1'@'%' IDENTIFIED BY '';
+set password for user1@'%'=password('password1');
+grant all on db1.* to user1@'%' identified by 'password1' with grant option;
+flush privileges;
+```
+
+!! mysql 5.8 创建 db, user
+
+```mysql
+CREATE DATABASE IF NOT EXISTS db1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+create user 'user1'@'%' IDENTIFIED BY '';
+Alter user 'user1'@'%' identified by 'password1';
+grant all on db1.* to user1@'%'  with grant option;
+flush privileges;
+```

@@ -1,0 +1,12 @@
+created: 20210420093618028
+creator: zero
+modified: 20210420093735282
+modifier: zero
+tags: swagger yapi
+title: swagger自动生成js调用代码
+tmap.id: c7429572-f170-4277-8b2a-471b27386bbf
+type: text/vnd.tiddlywiki
+
+! swagger自动生成js调用代码
+
+https://github.com/hellosean1025/yapi-gen-js-code

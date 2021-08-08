@@ -1,0 +1,20 @@
+created: 20210420094823088
+creator: zero
+modified: 20210422034151497
+modifier: zero
+tags: sequelize javascript
+title: sequelize-auto生成相对应的 model
+tmap.id: 6a8bae76-4052-482e-bde4-5328dad44b51
+type: text/vnd.tiddlywiki
+
+! sequelize-auto生成相对应的 model 
+!! sequelize-auto生成相对应的 model 
+
+https://github.com/sequelize/sequelize-auto
+
+```bash
+sequelize-auto -o "./app/model" -d *** -h 192.168.168.158 -p 5432 -u *** -x *** -e postgres
+```
+
+成功生成相对应的 model 至"./app/model"中。
+

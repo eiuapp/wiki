@@ -1,0 +1,25 @@
+created: 20210526040230163
+creator: zero
+modified: 20210526040420519
+modifier: zero
+tags: vnpy
+title: 修改vnpy回测的默认开始时间
+tmap.id: 0ab99ec1-6c2c-45dc-9ff7-d16ba2486820
+type: text/vnd.tiddlywiki
+
+! 修改vnpy回测的默认开始时间
+
+`\vnpy-dev\vnpy\app\cta_backtester\ui\widget.py`
+
+```python
+        self.start_date_edit = QtWidgets.QDateEdit(
+            QtCore.QDate(
+                # start_dt.year,
+                # start_dt.month,
+                # start_dt.day
+                2021,
+                5,
+                25
+            )
+        )
+```

@@ -1,0 +1,136 @@
+created: 20210507092135672
+creator: zero
+modified: 20210514101348447
+modifier: zero
+tags: factory-girl
+title: factory.js未设置primary key导致的删除报错
+tmap.id: 01b33cae-d2b5-45c5-884c-5b0f7082fe2b
+type: text/vnd.tiddlywiki
+
+
+factory.js
+
+
+```bash
+factory.define("product_info", app.model.ProductInfo, {
+    // product_id: "string",
+    // product_id: factory.sequence(
+    //   "ProductInfo.product_id",
+    //   (n) => `${n}`
+    // ),
+    product_name: factory.sequence(
+      "ProductInfo.product_name",
+      (n) => `product_name_${n}`
+    ),
+    product_classname: factory.sequence(
+      "ProductInfo.product_classname",
+      (n) => `product_classname_${n}`
+    ),
+    product_code: factory.sequence(
+      "ProductInfo.product_code",
+      (n) => `product_code_${n}`
+    ),
+    trustee_bank_id: factory.assoc("trustee_bank_info", "id"),
+    entry_date: new Date(),
+    enable_status: "disabled",
+  });
+  factory.define("staff_holding", app.model.StaffHolding, {
+    // holding_id: "string",
+    staff_id: factory.assoc("staff_info", "staff_id"),
+    staff_no: factory.sequence(
+      "StaffHolding.staff_no",
+      (n) => "staff_no" + `_${n}`
+    ),
+    trustee_bank_id: factory.assoc("trustee_bank_info", "trustee_bank_id"),
+    product_classname: factory.sequence(
+      "StaffHolding.product_classname",
+      (n) => `product_classname_${n}`
+    ),
+    product_id: factory.assoc("product_info", "product_id"),
+    product_code: factory.sequence(
+      "StaffHolding.product_code",
+      (n) => "product_code" + `_${n}`
+    ),
+    holding_amount: factory.sequence("StaffHolding.holding_amount", (n) =>
+      Math.random().toFixed(4)
+    ),
+    redeem_amount: factory.sequence("StaffHolding.redeem_amount", (n) =>
+      Math.random().toFixed(4)
+    ),
+    update_date: newDate(),
+  });
+
+```
+
+运行 npm run test-local 
+
+```bash
+ubuntu@utuntu:~/anyi/anyi-server$ npm run test-local test/app/controller/staff_holding.test.js
+1) test/app/controller/staff_holding.test.js
+       GET /staffHoldings
+         should work:
+     SequelizeDatabaseError: Field 'product_id' doesn't have a default value
+      at Query.formatError (node_modules/_sequelize@5.22.4@sequelize/lib/dialects/mysql/query.js:244:16)
+      at Execute.handler [as onResult] (node_modules/_sequelize@5.22.4@sequelize/lib/dialects/mysql/query.js:51:23)
+      at Execute.execute (node_modules/_mysql2@1.7.0@mysql2/lib/commands/command.js:30:14)
+      at Connection.handlePacket (node_modules/_mysql2@1.7.0@mysql2/lib/connection.js:408:32)
+      at PacketParser.Connection.packetParser.p [as onPacket] (node_modules/_mysql2@1.7.0@mysql2/lib/connection.js:70:12)
+      at PacketParser.executeStart (node_modules/_mysql2@1.7.0@mysql2/lib/packet_parser.js:75:16)
+      at Socket.Connection.stream.on.data (node_modules/_mysql2@1.7.0@mysql2/lib/connection.js:77:25)
+      at addChunk (_stream_readable.js:284:12)
+      at readableAddChunk (_stream_readable.js:265:11)
+      at Socket.Readable.push (_stream_readable.js:220:10)
+      at TCP.onStreamRead [as onread] (internal/stream_base_commons.js:94:17)
+      [use `--full-trace` to display the full stack trace]
+
+
+
+{ Error: /home/ubuntu/anyi/anyi-server/node_modules/_mocha@6.2.3@mocha/bin/_mocha --timeout=60000,--exit,--require=/home/ubuntu/anyi/anyi-server/node_modules/_egg-bin@4.15.0@egg-bin/lib/mocha-clean.js,--require=/home/ubuntu/anyi/anyi-server/node_modules/_co-mocha@1.2.2@co-mocha/lib/co-mocha.js,--require=/home/ubuntu/anyi/anyi-server/node_modules/_intelli-espower-loader@1.1.0@intelli-espower-loader/intelli-espower-loader.js,/home/ubuntu/anyi/anyi-server/test/.setup.js,test/app/controller/staff_holding.test.js exit with code 1
+    at ChildProcess.proc.once.code (/home/ubuntu/anyi/anyi-server/node_modules/_common-bin@2.9.0@common-bin/lib/helper.js:56:21)
+    at Object.onceWrapper (events.js:277:13)
+    at ChildProcess.emit (events.js:189:13)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:248:12) code: 1 }
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! anyi-server@1.0.0 test-local: `EGG_SERVER_ENV=unittest egg-bin test "test/app/controller/staff_holding.test.js"`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the anyi-server@1.0.0 test-local script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/ubuntu/.npm/_logs/2021-05-07T09_18_23_145Z-debug.log
+ubuntu@utuntu:~/anyi/anyi-server$ npm run test-local test/app/controller/staff_holding.test.js
+```
+
+https://stackoverflow.com/questions/25865104/field-id-doesnt-have-a-default-value/42941784
+
+execute SQL query 
+
+```
+SET GLOBAL sql_mode='';
+```
+
+得到：
+
+```bash
+  1) test/app/controller/staff_holding.test.js
+       GET /staffHoldings
+         should work:
+     SequelizeForeignKeyConstraintError: Cannot add or update a child row: a foreign key constraint fails (`mpf_test_1`.`staff_holding`, CONSTRAINT `staff_holding_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_info` (`product_id`))
+```
+
+往上面看一下，sql语句：
+
+```
+2021-05-07 18:06:58,802 INFO 7105 [egg-sequelize](4ms) Executed (default): INSERT INTO `product_info` (`product_id`,`product_name`,`product_classname`,`product_code`,`trustee_bank_id`,`entry_date`,`enable_status`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+2021-05-07 18:06:58,806 INFO 7105 [egg-sequelize](2ms) Executed (default): INSERT INTO `staff_holding` (`holding_id`,`staff_id`,`staff_no`,`trustee_bank_id`,`product_classname`,`product_code`,`holding_amount`,`redeem_amount`,`update_date`,`created_at`,`updated_at`) VALUES (DEFAULT,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+```
+
+发现， INSERT INTO `staff_holding` 都没有出现：product_id ，这个是为什么？
+
+* 更新 {{app_root}}/app/model.helpers/table.js
+* 更新 factory.js 中的所有 primary key
+
+
+

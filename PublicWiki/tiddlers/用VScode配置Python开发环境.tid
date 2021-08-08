@@ -1,0 +1,55 @@
+created: 20210520041925262
+creator: zero
+modified: 20210520235151499
+modifier: zero
+tags: vscode python
+title: 用VScode配置Python开发环境
+tmap.id: 61e7f7af-b49d-4ef1-bcfa-e5ab526329a6
+type: text/vnd.tiddlywiki
+
+! 用VScode配置Python开发环境
+
+!! vscode 插件
+
+* python
+
+!! 来自网友的几个step
+
+* https://www.cnblogs.com/aryapei/p/12603814.html
+
+```
+Step1. 编辑测试代码
+
+1）command+o 打开一个空文件夹作为工作目录（我的是workspace\se2020\hw3）
+
+2）在工作目录下command+n 新建hello.py如下
+
+
+Step2. 运行测试代码
+
+1）在hello.py任意位置右键，选择“在终端中运行python文件”
+
+2）可以看到，hello.py在我们之前设置好的anaconda环境下成功运行
+
+至此已经可以成功运行简单的python程序，如果想进一步进行自定义设置，可以通过修改settings.json和launch.json对运行环境和调试步骤进行个性化设置：
+
+
+Step3. 自定义扩展 settings.json
+
+1）command+shift+p 输入 preferences: open user settings 打开用户设置
+
+2）在 用户-扩展-python-settings.json 可以配置自己的python路径和pylint等
+
+Step4. 自定义调试文件launch.json
+
+1) debug-运行和调试-添加配置，选择python文件
+
+2）在hw3文件夹下自动生成launch.json文件, 默认内容如下，可以根据情况进行自定义修改
+
+3）在debug中选择“Python：当前文件”即可以通过此自定义配置进行调试
+```
+
+
+!! 代码格式化工具yapf
+
+在VSCode中按下快捷键Alt+Shift+F即可自动格式化代码

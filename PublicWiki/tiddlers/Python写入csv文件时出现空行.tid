@@ -1,0 +1,26 @@
+created: 20210601085253594
+creator: zero
+modified: 20210601085519055
+modifier: zero
+tags: python csv
+title: Python写入csv文件时出现空行
+tmap.id: 40a25bc3-979b-499a-87fb-d56d83754d94
+type: text/vnd.tiddlywiki
+
+! Python写入csv文件时出现空行
+
+* https://blog.csdn.net/fwj_ntu/article/details/87622834
+
+在 open 函数中加入 newline 参数。
+
+
+```
+import csv
+def write_csv_swallowed_bar_array(data_lists, file_write_path):
+    '''
+    把 swallowed_bar_array 写入 csv
+    '''
+    with open(file_write_path, "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(["datetime", "open_price", "high_price", "low_price", "close_price", "volume"])
+```

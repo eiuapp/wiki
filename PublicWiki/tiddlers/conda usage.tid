@@ -1,0 +1,35 @@
+created: 20210521032515700
+creator: zero
+modified: 20210521034722634
+modifier: zero
+tags: anaconda python
+title: conda usage
+tmap.id: 4c2a6da8-e76c-4a14-a275-a49a6a95c506
+type: text/vnd.tiddlywiki
+
+! conda usage
+
+!! create
+
+```
+conda create -n study python=3.7
+```
+
+!! activate
+
+```
+conda activate study
+```
+
+如果有时候出错，则 activate study 尝试一下
+
+!! deactivate
+
+```
+deactivate
+```
+
+!! rename env
+
+[[how-can-i-rename-a-conda-environment]]
+

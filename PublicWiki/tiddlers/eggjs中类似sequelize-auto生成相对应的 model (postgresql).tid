@@ -1,0 +1,17 @@
+created: 20210422022540544
+creator: zero
+modified: 20210422083243533
+modifier: zero
+tags: eggjs sequelize postgresql
+title: eggjs中类似sequelize-auto生成相对应的 model (postgresql)
+tmap.id: 13978a75-b47f-40a6-bf06-49f2dd996644
+type: text/vnd.tiddlywiki
+
+! eggjs中类似sequelize-auto生成相对应的 model (postgresql)
+!! (失败) liuhuanhui/sequelize-auto 来实现 sequelize-auto生成相对应的 model 
+
+* https://github.com/liuhuanhui/sequelize-auto
+* https://bbs.huaweicloud.com/blogs/256339
+
+没有成功。
+

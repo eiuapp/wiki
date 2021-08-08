@@ -1,0 +1,31 @@
+created: 20210611022640901
+creator: zero
+modified: 20210611063212569
+modifier: zero
+tags: vscode
+title: vscode plugins
+tmap.id: 7d21498c-a1b3-4a88-8afd-e896285413f0
+type: text/vnd.tiddlywiki
+
+! vscode plugins
+
+!! 翻译
+
+* https://blog.csdn.net/qq_21567385/article/details/106775038
+
+目标
+
+* 有给变量自动翻译为英语的功能
+* 要能划词翻译，从而看懂别人的代码和注释
+* 自己代码的注释也要能中译英
+* 插件不能快捷键冲突
+
+插件
+
+* translate 
+* var-translate 目前好像，不存在了
+* Vscode Google Translate 
+* Comment Translate
+!! python
+
+[[vscode python plugins]]

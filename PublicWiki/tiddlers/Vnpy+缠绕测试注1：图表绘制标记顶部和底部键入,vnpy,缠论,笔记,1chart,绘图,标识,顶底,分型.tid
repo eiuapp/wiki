@@ -1,0 +1,38 @@
+created: 20210529041659451
+creator: zero
+modified: 20210531073352452
+modifier: zero
+tags: vnpy gtd
+title: Vnpy+缠绕测试注1：图表绘制标记顶部和底部键入,vnpy,缠论,笔记,1chart,绘图,标识,顶底,分型
+tmap.id: 9ea5ac41-c737-4ded-8b7d-46eba295c3d2
+type: text/vnd.tiddlywiki
+
+! Vnpy+缠绕测试注1：图表绘制标记顶部和底部键入,vnpy,缠论,笔记,1chart,绘图,标识,顶底,分型
+
+* https://www.pythonf.cn/read/63017
+
+学习笔记
+
+---
+
+快速索引
+
+* 加载数据
+* 数据加载过程和调用关系
+* 辨别顶底分型并在K线图中进行标识
+
+---
+!! 环境
+
+在 vnpy package 的安装位置中，加入下面文件或修改
+
+比如，我的vnpy安装在 `conda env vnpy` 下
+
+```
+C:\Users\Administrator\anaconda3\envs\vnpy\Lib\site-packages\vnpy
+```
+---
+
+步骤
+
+!! 

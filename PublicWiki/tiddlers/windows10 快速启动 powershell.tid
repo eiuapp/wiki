@@ -1,0 +1,19 @@
+created: 20210607025029117
+creator: zero
+modified: 20210607025227227
+modifier: zero
+tags: windows10 powershell
+title: windows10 快速启动 powershell
+tmap.id: 36525604-c186-43a1-91de-ebbcee9a177e
+type: text/vnd.tiddlywiki
+
+! windows10 快速启动 powershell
+
+!! 方法1
+
+shift + 右键，选择 “在此处打开 powershell 窗口"
+
+!! 方法2
+
+在 文件夹 的导航栏，选中，输入 powershell
+

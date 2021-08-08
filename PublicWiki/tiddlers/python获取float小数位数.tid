@@ -1,0 +1,21 @@
+created: 20210702101402432
+creator: zero
+modified: 20210702101547729
+modifier: zero
+tags: python
+title: python获取float小数位数
+tmap.id: f60d9076-5db6-4d1f-a8d3-20553a98f4b9
+type: text/vnd.tiddlywiki
+
+! python获取float小数位数
+
+```
+    def decimal_digits(val: float) -> int:
+        """获取float小数位数"""
+        val_str = str(val)
+        digits_location = val_str.find('.')
+        if digits_location:
+            return len(val_str[digits_location + 1:])
+```
+
+decimal_digits(2.0054) 返回 4

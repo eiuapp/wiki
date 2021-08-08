@@ -1,0 +1,47 @@
+created: 20210427104117034
+creator: zero
+modified: 20210429034105246
+modifier: zero
+tags: sql
+title: 数据库中表示状态值的字段
+tmap.id: 62cf7556-c438-4bc2-b37c-09f2eb7e167d
+type: text/vnd.tiddlywiki
+
+! 数据库中表示状态值的字段
+!! defaultValue
+
+状态值，不要使用 0，1，2，3 这样无意义的值。
+而应该使用 
+
+状态：havenot->未申请；applied->申请中；pending->处理中; resolved->已处理; rejected->已否决
+
+举例：
+
+```javascript
+    subscribe_status: {
+      type: DataTypes.STRING(32),
+      allowNull: true,
+      defaultValue: "havenot",
+      comment: "申购状态。状态：havenot->未申请；applied->申请中；pending->处理中; resolved->已处理; rejected->已否决"
+    },
+```
+
+!! type
+
+```
+type: DataTypes.STRING(32),
+```
+
+ 而不是使用 DataTypes.ENUM
+
+```
+type: DataTypes.ENUM({
+  values: ["applied", "pending", "resolved", "rejected"],
+})
+```
+
+是因为：
+
+# ENUM，在新增选项时，不方便，需要删除表，再添加，不友好。
+# 不利于切换sql。比如：mysql 切换至 postgresql
+

@@ -1,0 +1,66 @@
+created: 20210806095524034
+creator: zero
+modified: 20210806103224434
+modifier: zero
+tags: windows10 pyqt
+title: PyQt入门教程 PyQt5开发环境搭建和配置
+tmap.id: 3ee9fc22-d30a-4486-8313-44f9fa243672
+type: text/vnd.tiddlywiki
+
+! PyQt入门教程 PyQt5开发环境搭建和配置
+
+* https://www.cnblogs.com/linyfeng/p/11216494.html 
+ 
+!! PyQt5工具安装
+（1）使用pip工具安装PyQt5工具。执行pip install PyQt5
+（2）安装Qt Designer图形界面开发工具。执行pip install PyQt5-tools
+
+工具安装完成后的路径在..\Python\Python37-32\Lib\site-packages
+（3）环境变量配置。将PyQt5-tools的安装目录添加到系统环境变量path。添加路径：我的电脑 -> 属性->高级->系统设置->高级->单击环境变量。在系统变量path添加PyQt5-tools完整路径。如下图所示：
+ （4）打开cmd窗口，执行designer。其实也可以将designer.exe设置快捷家到桌面。
+
+!! PyCharm配置Qt Designer
+  PyCharm是开发Python程序主流常用的IDE。为方便调用Qt Designer实现界面开发和编译相应完成，可以在PyCharm配置Qt Designer和PyUIC。
+
+ （1）配置Qt Designer。PyCharm -> 菜单File -> Settings -> Tools -> External Tools -> +号，进行添加。 参数配置说明：
+
+  Name：Qt Designer。方便记忆。实际可以任意取值。
+
+  Program：designer.exe程序绝对路径。根据实际安装路径填写。
+
+  Parameters：$FileDir$\$FileName$。固定取值。
+
+  Working directory: $FileDir$。固定取值。
+
+（2）配置PyUIC。该工具是用于将Qt Designer工具开发完成的.ui文件转化为.py文件。配置打开路径同Qt Designer。参数配置说明：
+
+  Name：PyUIC。方便记忆。实际可以任意取值。
+
+  Program：python.exe程序绝对路径。根据实际安装路径填写。
+
+  Parameters：-m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py。固定取值。
+
+  Working directory: $FileDir$。固定取值。
+
+（3）测试Qt Designer和PyUIC配置是否成功。打开路径：菜单栏Tools -> External Tools ->Qt Designer/PyUIC
+
+点击Qt Designer，打开Designer程序主界面如下。将左侧Widget Box中Push button空间拖到主界面，双击空间修改名称为test。另存为名称work.ui。默认后缀就是.ui。
+
+打开PyUIC，自动完成work.ui文件的转换。生成文件名为work.ui。
+
+文件转换成功后，可以在project目录中查看。如下
+
+配置成功。完成
+
+!! 命令行打开designer和转换.ui文件
+
+  除了集成到Pycharm工具使用，也可以采用命令行方式打开designer和通过命令转换.ui文件为.py文件，我个人习惯使用这种方法。方法如下： 
+
+（1）设置designer为桌面快捷方式。designer路径在${python安装目录}/Lib/site-packages/pyqt5_tools/designer.exe
+
+  （2）假设designer.exe开发完成的界面文件为work.ui。切换到work.ui目录并执行如下命令转换：
+
+        pyuic5  -o work.py work.ui
+
+小结
+  学习完本文课程，就可以完成PyQt5工具安装和配置。为PyQt5开发界面迈出了最重要的一步。下一节就可以开始通过Qt Designer工具实现界面开发了。

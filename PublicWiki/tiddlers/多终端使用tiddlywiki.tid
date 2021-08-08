@@ -1,0 +1,14 @@
+created: 20210604112516002
+creator: zero
+modified: 20210605120826042
+modifier: zero
+tags: tiddlywiki
+title: 多终端使用tiddlywiki
+tmap.id: a2dea231-5df5-4fef-aba7-c5920a474fcb
+type: text/vnd.tiddlywiki
+
+! 多终端使用tiddlywiki
+
+!! tiddlywiki有更新时，需要重启
+
+当在 公司 wiki 有 git push, 则，在家时，需要先 git pull，然后，重启 npm run start. 否则，会出现更新与同步问题。

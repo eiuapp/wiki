@@ -1,0 +1,84 @@
+created: 20210423080001022
+creator: zero
+modified: 20210426065213823
+modifier: zero
+tags: sequelize
+title: Nodejs sequelize how to truncate a foreign key referenced table
+tmap.id: 9f787c5f-cbfc-4057-bd0f-795d479473d0
+type: text/vnd.tiddlywiki
+
+! Nodejs sequelize how to truncate a foreign key referenced table
+
+Sequelize删除表。但是此表，有另一个的外键约束。
+
+!! 报错信息
+
+```txt
+SequelizeDatabaseError: Cannot truncate a table referenced in a foreign key constraint (`mpf_test_1`.`product_info`, CONSTRAINT `product_info_ibfk_1`)
+```
+
+意思是：希望truncate（删除）一个表，但是，这个表，是`mpf_test_1`.`product_info`表的外键。受外键约束，无法删除。
+
+!! 解决
+
+* https://stackoverflow.com/questions/22938375/nodejs-sequelize-how-to-truncate-a-foreign-key-referenced-table
+* https://sequelize.org/master/class/lib/model.js~Model.html#static-method-truncate 官网，但是，很难理解
+
+比如在 eggjs 工程中，测试的时候有使用 factory-girl，那么，就修改 {app_root}/test/.setup.js 
+
+''提示：''也就是说，在 afterEach 里的内容，应该是：
+
+# 越独立的，应该放在 Promise.all 的后面。
+# 越依赖其他表的，应该放在 Promise.all 的前面。
+
+修改的位置：
+
+```javascript
+MyTableModel.destroy({ truncate: { cascade: true } });
+```
+
+也就是说，把 app.model.TrusteeBankInfo.destroy({ truncate: true, force: true }), 变成 app.model.TrusteeBankInfo.destroy({ truncate: { cascade: true }, force: true }),
+
+具体地：
+
+```javascript
+'use strict';
+
+const { app } = require('egg-mock/bootstrap');
+const factories = require('./factories');
+
+before(() => {
+  // defined app.factory for build test data
+  factories(app);
+});
+
+afterEach(async () => {
+  // clear database after each test case
+  await Promise.all([
+    app.model.TrusteeBankInfo.destroy({ truncate: true, force: true }),
+  ]);
+});
+
+```
+
+变成
+
+```javascript
+'use strict';
+
+const { app } = require('egg-mock/bootstrap');
+const factories = require('./factories');
+
+before(() => {
+  // defined app.factory for build test data
+  factories(app);
+});
+
+afterEach(async () => {
+  // clear database after each test case
+  await Promise.all([
+    app.model.TrusteeBankInfo.destroy({ truncate: { cascade: true }, force: true }),
+  ]);
+});
+
+```

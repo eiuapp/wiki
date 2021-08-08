@@ -1,0 +1,30 @@
+created: 20210416082216311
+creator: zero
+modified: 20210416082734364
+modifier: zero
+tags: sequelize
+title: sequelize migrate init
+tmap.id: 69aa6b34-d95d-4472-9967-212f4cc0837e
+type: text/vnd.tiddlywiki
+
+! sequelize migrate init
+
+!! error: Unable to resolve sequelize package
+```bash
+ubuntu@utuntu:~/anyi/database/test$ npx sequelize-cli db:migrate
+Unable to resolve sequelize package in /home/ubuntu/anyi/database/test
+```
+表示未安装
+https://stackoverflow.com/questions/45971314/unable-to-resolve-sequelize-package
+
+```bash
+ubuntu@utuntu:~/anyi/database/test$ npm install --save sequelize
+✔ Installed 1 packages
+✔ Linked 18 latest versions
+✔ Run 0 scripts
+Recently updated (since 2021-04-09): 1 packages (detail see file /home/ubuntu/anyi/database/test/node_modules/.recently_updates.txt)
+  Today:
+    → sequelize@6.6.2 › wkx@0.5.0 › @types/node@*(14.14.41) (01:32:06)
+✔ All packages installed (18 packages installed from npm registry, used 849ms(network 842ms), speed 430.84kB/s, json 19(188.05kB), tarball 174.72kB)
+ubuntu@utuntu:~/anyi/database/test$
+```

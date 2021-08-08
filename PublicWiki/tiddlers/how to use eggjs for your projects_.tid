@@ -1,0 +1,106 @@
+created: 20210422085139400
+creator: zero
+modified: 20210422085359980
+modifier: zero
+tags: eggjs
+title: how to use eggjs for your projects?
+tmap.id: 3ef393bb-e4c0-4452-994e-102f564e7eda
+type: text/vnd.tiddlywiki
+
+! how to use eggjs for your projects?
+
+!! package.json
+
+```json
+{
+  "name": "project-name",
+  "version": "1.0.0",
+  "description": "project description",
+  "private": true,
+  "dependencies": {
+    "@alicloud/pop-core": "^1.7.9",
+    "await-stream-ready": "^1.0.1",
+    "dayjs": "^1.8.23",
+    "egg": "^2.22.2",
+    "egg-cors": "^2.2.0",
+    "egg-full-email": "^1.2.5",
+    "egg-jwt": "^3.1.6",
+    "egg-mysql": "^3.0.0",
+    "egg-passport": "^2.1.0",
+    "egg-redis": "^2.4.0",
+    "egg-scripts": "^2.11.0",
+    "egg-sequelize": "^5.1.0",
+    "egg-session-redis": "^2.1.0",
+    "egg-socket.io": "^4.1.6",
+    "egg-swagger-doc": "^2.3.2",
+    "egg-validate": "^2.0.2",
+    "eslint": "^5.16.0",
+    "fecha": "^3.0.3",
+    "lodash": "^4.17.11",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^1.6.5",
+    "passport-local": "^1.0.0",
+    "pg": "^7.14.0",
+    "pg-hstore": "^2.3.3",
+    "stream-wormhole": "^1.1.0",
+    "uuid": "^3.3.2",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "@types/js-base64": "^3.0.0",
+    "@types/sequelize": "^4.28.9",
+    "autod": "^3.1.0",
+    "autod-egg": "^1.1.0",
+    "babel-eslint": "^10.0.3",
+    "bcryptjs": "^2.4.3",
+    "egg-bin": "^4.13.1",
+    "egg-ci": "^1.12.0",
+    "egg-mock": "^3.23.1",
+    "egg-sequelize-auto": "^0.1.1",
+    "eslint": "^6.0.1",
+    "eslint-config-egg": "^7.5.1",
+    "husky": "^3.1.0",
+    "js-base64": "^2.6.4",
+    "sequelize-cli": "^5.5.1",
+    "svg-captcha": "^1.4.0",
+    "validator": "^13.1.17",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "NODE_OPTIONS='--max-http-header-size=80000' egg-scripts start --daemon --port=7043 --title=fangyuan-server --sticky --ignore-stderr",
+    "stop": "egg-scripts stop --title=fangyuan-server",
+    "dev": "NODE_OPTIONS='--max-http-header-size=80000' egg-bin dev --sticky --port=7041",
+    "debug": "NODE_OPTIONS='--max-http-header-size=80000' egg-bin debug --sticky --port=7041",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "EGG_SERVER_ENV=unittest egg-bin test",
+    "dbload": "sequelize-auto -o ./app/model.helper -h ip1 -p 5432 -d db1 -u user1 -x password1",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod",
+    "db:init": "npx sequelize migration:generate --name",
+    "db:up": "npx sequelize db:migrate",
+    "db:down": "npx sequelize db:migrate:undo",
+    "db:down-all": "npx sequelize db:migrate:undo:all"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm --version"
+    }
+  },
+  "author": "tianluo",
+  "license": "MIT"
+}
+```

@@ -1,0 +1,21 @@
+created: 20210506055323691
+creator: zero
+modified: 20210506060626416
+modifier: zero
+tags: navicat sql
+title: navicat导出sql数据JSON格式
+tmap.id: babda608-9846-4540-bb94-71e3dfc46285
+type: text/vnd.tiddlywiki
+
+! navicat导出sql数据JSON格式
+
+目标：快速生成sequelize种子数据
+
+* 格式： JSON
+* 日期字段：分割符为-,  格式为：YMD
+
+!! 导出技巧
+
+* 导出的时候，选择所有的表。
+* 当有表的内容更新时，点击，上一步，再点下一步，开始，就完成重新导出。
+* 导出后，点击，打开，快速查看导出文件。

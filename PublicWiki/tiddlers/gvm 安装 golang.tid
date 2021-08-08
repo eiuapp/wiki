@@ -1,0 +1,32 @@
+created: 20210427031320704
+creator: zero
+modified: 20210427034905781
+modifier: zero
+tags: gvm golang
+title: gvm 安装 golang
+tmap.id: 5f2abe34-35bf-4708-9b95-b0f5d46a9f07
+type: text/vnd.tiddlywiki
+
+! gvm 安装 golang
+!! env
+
+os: ubuntu
+
+!! 提示安装 bison gcc make
+
+```bash
+ sudo apt update
+ sudo apt install bison make -y
+ sudo apt install gcc -y
+```
+
+[[apt install gcc 报错]]
+
+!! gvm install go1.14.2
+
+```
+gvm install go1.4 -B
+gvm use go1.4
+export GOROOT_BOOTSTRAP=$GOROOT
+gvm install go1.14.2 -B
+```

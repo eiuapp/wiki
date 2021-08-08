@@ -1,0 +1,41 @@
+created: 20210612070938501
+creator: zero
+modified: 20210612071054439
+modifier: zero
+tags: pycharm python
+title: Pycharm中使用autopep8作为扩展工具
+tmap.id: 0fe7c271-b6d3-4c6d-8c61-2481dc7dd29b
+type: text/vnd.tiddlywiki
+
+! Pycharm中使用autopep8作为扩展工具
+
+* https://blog.csdn.net/weixin_44695969/article/details/104067508?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242
+
+!! 安装autopep8
+
+```
+pip install autopep8
+```
+
+!! Pycharm进行设置
+
+```
+Settings–>Tools–>External Tools 点击添加按钮
+Name：autopep8（可以自定义）
+Tools settings:
+Programs：autopep8（不能修改）
+Parameters：--in-place --aggressive --aggressive $FilePath$
+Working directory：$ProjectFileDir$
+点击Output Files
+点击添加，名称可以任意填写
+Regular expression to match output：$FILE_PATH$\:$LINE$\:$COLUMN$\:.*
+```
+
+!! 实际使用
+
+菜单栏 Tools –>External Tool–>autopep8
+
+Pycharm自动调用了autopep8对当前文件进行PEP8优化。
+————————————————
+版权声明：本文为CSDN博主「tigerlib」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_44695969/article/details/104067508

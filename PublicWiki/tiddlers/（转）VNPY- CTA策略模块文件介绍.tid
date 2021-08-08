@@ -1,0 +1,127 @@
+created: 20210602023321331
+creator: zero
+modified: 20210602023911461
+modifier: zero
+tags: vnpy cta
+title: （转）VNPY- CTA策略模块文件介绍
+tmap.id: 81a18201-b76f-4576-a726-476cd82aef8a
+type: text/vnd.tiddlywiki
+
+! VNPY- CTA策略模块文件介绍
+
+* https://blog.csdn.net/IAlexanderI/article/details/81457853
+---
+!! 数据定义ctaBase.py
+
+本文件中包含了CTA模块中用到的一些基础设置、类和常量等。
+
+其中的类StopOrder对应的委托类型为本地停止单，可以视作一种条件触发单：
+
+* 当前分钟线收盘价格为100，希望在接下来当价格突破102时买入
+* 发出一个102买入的StopOrder，该订单仅存在于本地引擎中，实时监控最新的价格
+* 当引擎收到第一个价格超过102的Tick时，会立即发出市价委托（或者可立即成交的限价委托）买入
+* 回测引擎采用特殊撮合模式来模拟实盘中StopOrder的效果，实现回测中的K线内成交
+
+---
+!! 策略模板ctaTemplate.py
+
+本文件中包含了CTA模块中用来开发策略的模板，目前包括两个类：
+
+* CtaTemplate（普通策略模板）
+* TargetPosTemplate（目标仓位模板）
+
+CtaTemplate是最基础的模板，其中暴露给用户使用的函数可以分为以下类型：
+
+* 构造函数
+** __init__函数：参数包括引擎对象（回测or实盘）和参数配置字典
+* 回调函数
+** onInit：策略初始化时被调用，通常在这里加载历史数据回放（调用onTick或者onBar）来初始化策略状态
+** onStart：策略启动时被调用
+** onStop：策略停止时被调用，通常会撤销掉全部活动委托
+** onTick：收到Tick推送时调用，对于非Tick级策略会在这里合成K线后调用onBar
+** onBar：回测收到新的K线时调用，实盘由onTick来调用，通常在这里写策略主逻辑
+** onOrder：收到委托回报时调用，用户可以缓存委托状态数据便于后续使用
+** onStopOrder：收到本地停止单状态变化时调用
+** onTrade：收到成交时调用
+* 交易函数
+** buy：买入开仓，返回委托号vtOrderID，下同
+** sell：卖出平仓
+** short：卖出开仓
+** cover：买入平仓
+** cancelOrder：撤销委托，传入的参数是需撤的委托号vtOrderID
+* 其他函数
+** getEngineType：获取引擎类型，用于判断当前是回测还是实盘
+** writeCtaLog：发出CTA日志事件，会显示在CTA策略模块的监控界面上
+** putEvent：发出策略更新事件，通知CTA策略模块的监控界面更新策略的状态数据
+** loadTick：从历史行情数据库中加载Tick数据
+** loadBar：从历史行情数据库中加载K线数据
+** insertTick：记录Tick数据到数据库中
+** insertBar：记录K线数据到数据库中（通常只有在策略基于非标准K线时才用）
+
+TargetPosTemplate基于CtaTemplate实现，增加了一个setTargetPos函数，用户只需在交易信号出现后指定目标仓位，具体的挂撤单操作会由策略自动执行。
+
+---
+!! 回测引擎ctaBacktesting.py
+
+本文件中包含的是CTA模块的回测引擎，回测引擎的API和实盘引擎一致，实现回测和实盘只需一套代码，并包含多进程优化功能。简单来说，回测引擎通过回放数据库中的历史数据，并使用和实盘时相同的API来进行回测交易，在设定的历史数据回放完毕之后，将展示详细的回测报告，包括盈亏曲线图，以及胜率、盈亏比、总盈利等等信息。由于回测过程使用了和实盘一致的API，所以用于回测的策略代码，可以直接上实盘，这极大的提高了开发效率。
+
+本文件含有以下类：
+
+* BacktestingEngine（回测引擎类，整个回测过程由本类实现）
+* OptimizationSetting（优化参数类，优化时的参数配置由本类实现）
+* TradingResult（交易结果类，用于保存每一笔成交的详细信息）
+
+BacktestingEngine回测引擎暴露给用户的函数主要分为以下类型：
+
+* 构造函数
+** __init__函数：创建对象时自动调用，用户无需关注
+* 配置函数
+** def setBacktestingMode：设置回测模式：K线模式BAR_MODE和Tick模式TICK_MODE，需要有对应的数据
+** def setDatabase：设置加载历史数据所用的数据库和集合名，参数dbName为数据库名称，symbol为品种代码
+** def setStartDate：用于设置回测的启动日期和初始化策略时所需的数据天数
+** def setEndDate：设置回测的结束日期，若不设置则回测的结束日期会使用当前时间
+** def setSlippage：设置滑点，注意是具体的价格点数，如0.4点
+** def setRate：设置手续费，注意是成交金额的比例，如万0.3（0.3/10000）
+** def setSize：设置合约大小，如股指IF是300
+** def setPriceTick：设置合约的最小价格变动，如股指IF是0.2点
+** def setCapita：设置初始资金，只用于计算Sharpe Ratio，对策略开仓与否无影响
+* 回测函数
+** def initStrategy：初始化策略对象，传入的参数是策略类以及参数配置字典
+** def runBacktesting：运行回测，根据之前的配置加载历史数据回放，并将所有成交记录保存下来
+** def showDailyResult：基于逐日的方式统计成交结果，并显示相关图表
+** def showBacktestingResult：基于FIFO的原则配对买卖交易统计成交结果，并显示相关图表
+* 优化函数
+** def runOptimization：优化策略的参数，传入参数为策略类和优化参数配置
+** def runParallelOptimization：采用多进程的方式并行优化参数，根据CPU核心数量成倍提高优化速度
+
+---
+!! 实盘引擎ctaEngine.py
+
+本文件中包含的是CTA策略模块的实盘策略引擎，由VnTrader加载管理，用户无需直接调用。
+
+!!! 实盘配置CTA_setting.json
+
+本文件是CTA策略模块的实盘配置文件，用户可以通过这个文件来配置需要运行的策略以及具体参数，文件内容类似：
+
+```
+[
+    {
+        "name": "double ema",
+        "className": "EmaDemoStrategy",
+        "vtSymbol": "IF1706"
+    },
+ 
+    {
+        "name": "atr rsi",
+        "className": "AtrRsiStrategy",
+        "vtSymbol": "IC1706"
+    },
+ 
+    {
+        "name": "king keltner",
+        "className": "KkStrategy",
+        "vtSymbol": "IH1706"
+    }
+]
+```
+其中"double ema"为策略实例名，可以修改为任意喜欢的名字，注意不同策略不能重复。"DoubleEmaDemo"是策略类的名字，必须填写正确否则会找不到策略类。"IF1706"是该策略要交易的合约代码，注意对于国内不同的期货交易所，英文字母部分的大小写是不同的。

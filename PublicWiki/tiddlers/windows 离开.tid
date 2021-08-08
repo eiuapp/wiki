@@ -1,0 +1,18 @@
+created: 20210701075730868
+creator: zero
+modified: 20210701075916678
+modifier: zero
+tags: windows10 job
+title: windows 离开
+tmap.id: f4db41e4-57bf-4038-b888-606810adacb0
+type: text/vnd.tiddlywiki
+
+! windows 离开
+
+离开公司时，如果使用的是 windows 则，要清理：
+
+* 软件
+* 系统环境变量
+* id_rsa
+* 图片，文档，视频 等常规文件夹
+* C:\ 文件夹

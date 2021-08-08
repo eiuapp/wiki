@@ -1,0 +1,15 @@
+created: 20210629022733071
+creator: zero
+modified: 20210629023006387
+modifier: zero
+tags: python peewee
+title: Peewee Create Index
+tmap.id: 94e75b03-9d69-4b50-a99c-0e162e3194c6
+type: text/vnd.tiddlywiki
+
+! Peewee Create Index
+
+* https://www.osgeo.cn/peewee/peewee/models.html#multi-column-indexes
+
+如果配置完成后，会发现，数据库中的表，并没有同步改变，那么，删除表，重启程序，就再次自动创建表，索引已经有了。
+

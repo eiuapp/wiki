@@ -1,0 +1,25 @@
+created: 20210617055659256
+creator: zero
+modified: 20210617055811939
+modifier: zero
+tags: mysql
+title: mysql usage
+tmap.id: ba946732-34f5-4012-a140-d6ee180c5272
+type: text/vnd.tiddlywiki
+
+! mysql usage
+!! mysql create db, user
+
+```mysql
+CREATE DATABASE  `cl` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'a'@'%' IDENTIFIED BY 'aa' ;
+
+grant all privileges on cl.* to  'a'@'%'  identified by 'aa';
+
+FLUSH PRIVILEGES;
+```
+ 
+
+
+

@@ -1,0 +1,15 @@
+created: 20210526091052387
+creator: zero
+modified: 20210526091123389
+modifier: zero
+tags: vnpy gtd
+title: vnpy log
+tmap.id: 7cbf6697-58c2-4269-a67a-f63776c2143c
+type: text/vnd.tiddlywiki
+
+! vnpy log
+
+vnpy内集成的log 工具吗?
+
+回测时使用write_log 没有输出日志,把level 为10
+

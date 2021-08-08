@@ -1,0 +1,83 @@
+created: 20210611092023646
+creator: zero
+modified: 20210611092922323
+modifier: zero
+tags: python proxy
+title: Learn how to configure and utilize proxies with Python requests module
+tmap.id: 1a950817-8e0c-4b14-9984-ba7123237577
+type: text/vnd.tiddlywiki
+
+! Learn how to configure and utilize proxies with Python requests module
+
+* https://www.zyte.com/blog/python-requests-proxy/
+
+!! Environment variables
+
+```
+export HTTP_PROXY="http://10.10.10.10:8000"
+export HTTPS_PROXY="http://10.10.10.10:1212"
+```
+
+!! Proxy with session
+
+```
+import requests
+s = requests.Session()
+s.proxies = {
+  “http”: “http://10.10.10.10:8000”,
+  “https”: “http://10.10.10.10:8000”,
+}
+r = s.get(“http://toscrape.com”)
+```
+
+!!! 实操：sammchardy/python-binance 实现 proxy 
+
+因为在 pycharm 中设置 http proxy, 没有生效。
+
+所以，只能在项目中 Proxy with session 的方式，来达到 proxy 的方式。
+
+```python
+class Client(BaseClient):
+    def _init_session(self) -> requests.Session:
+
+        headers = self._get_headers()
+
+        session = requests.session()
+        session.proxies = {
+            "http": "http://127.0.0.1:1081",
+            "https": "http://127.0.0.1:1081"
+        }
+        session.headers.update(headers)
+        return session
+```
+
+!! IP rotating
+
+解决了多个代理服务器的轮询代理问题
+
+!!! IP rotation with requests
+
+```python
+ip_addresses = [“85.237.57.198:44959”, “116.0.2.94:43379”, “186.86.247.169:39168”, “185.132.179.112:1080”, “190.61.44.86:9991”]
+try:
+    proxy_index = random.randint(0, len(ip_addresses) - 1)
+    proxy = {"http": ip_addresses(proxy_index), "https": ip_addresses(proxy_index)}
+    requests.get(url, proxies=proxies)
+except:
+    pass
+```
+
+!!! Using Zyte Proxy Manager (formerly Crawlera) with requests
+
+```python
+import requests
+url = "http://httpbin.org/ip"
+proxy_host = "proxy.crawlera.com"
+proxy_port = "8010"
+proxy_auth = ":"
+proxies = {
+       "https": "https://{}@{}:{}/".format(proxy_auth, proxy_host, proxy_port),
+       "http": "http://{}@{}:{}/".format(proxy_auth, proxy_host, proxy_port)
+}
+r = requests.get(url, proxies=proxies, verify=False)
+```

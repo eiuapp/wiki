@@ -1,0 +1,18 @@
+created: 20210415080431890
+creator: zero
+modified: 20210416080357884
+modifier: zero
+tags: sequelize
+title: sequelize
+tmap.id: 9d39cc77-b4e2-404a-96e5-f98641634a25
+type: text/vnd.tiddlywiki
+
+
+```bash
+ubuntu@utuntu:~/anyi/anyi-server$ sequelize init
+sequelize: command not found
+ubuntu@utuntu:~/anyi/anyi-server$ 
+```
+
+sequelize 未安装
+

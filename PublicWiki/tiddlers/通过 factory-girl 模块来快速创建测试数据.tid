@@ -1,0 +1,94 @@
+created: 20210426024232278
+creator: zero
+modified: 20210428074419693
+modifier: zero
+tags: factory-girl unittest
+title: 通过 factory-girl 模块来快速创建测试数据
+tmap.id: 8734c8c2-21ae-4f26-bbcb-d856ba2ea13f
+type: text/vnd.tiddlywiki
+
+! 通过 factory-girl 模块来快速创建测试数据
+
+!! 外键
+
+product_info.trustee_bank_id 是引用 trustee_bank_info 的 trustee_bank_id 。
+
+也就是说 product_info 的外键之一是 trustee_bank_id 。
+
+那么，就是要使用 factory.assoc 来创建 trustee_bank_id 。
+
+示例如下
+
+```javascript
+'use strict';
+
+const { factory } = require('factory-girl');
+
+module.exports = app => {
+  app.factory = factory;
+  factory.define('trustee_bank_info', app.model.TrusteeBankInfo, {
+    trustee_bank_name: factory.sequence('TrusteeBankInfo.trustee_bank_name', n => `trustee_bank_name_${n}`),
+    entry_date: new Date(),
+  });
+  factory.define('product_info', app.model.ProductInfo, {
+    product_name: factory.sequence('ProductInfo.product_name', n => `product_name_${n}`),
+    product_classname: factory.sequence('ProductInfo.product_classname', n => `product_classname_${n}`),
+    product_code: factory.sequence('ProductInfo.product_code', n => `product_code_${n}`),
+    trustee_bank_id: factory.assoc('trustee_bank_info', 'id'),
+    entry_date: new Date(),
+    enable_status: "disabled",
+  });
+};
+```
+
+!! factory.assoc 的 外键字段名
+
+staff_holding 也是 引用了 trustee_bank_info.trustee_bank_id
+
+那么，有报错，
+
+```
+  1) test/app/controller/staff_holding.test.js
+       GET /staffHoldings
+         should work:
+     SequelizeValidationError: notNull Violation: staff_holding.trustee_bank_id cannot be null
+```
+
+这时，准确的写法却是
+
+trustee_bank_id: factory.assoc("trustee_bank_info", "trustee_bank_id"),
+
+而不是
+
+trustee_bank_id: factory.assoc("trustee_bank_info", "id"),
+
+完整如下：
+
+```javascript
+
+  factory.define("staff_holding", app.model.StaffHolding, {
+    // holding_id: "string",
+    staff_id: factory.assoc("staff_info", "staff_id"),
+    staff_no: factory.sequence(
+      "StaffHolding.staff_no",
+      (n) => "staff_no" + `_${n}`
+    ),
+    trustee_bank_id: factory.assoc("trustee_bank_info", "trustee_bank_id"),
+    product_classname: factory.sequence(
+      "StaffHolding.product_classname",
+      (n) => `product_classname_${n}`
+    ),
+    // product_id: factory.assoc("staff_holding", "product_id"),
+    product_code: factory.sequence(
+      "StaffHolding.product_code",
+      (n) => "product_code" + `_${n}`
+    ),
+    holding_amount: factory.sequence("StaffHolding.holding_amount", (n) =>
+      Math.random().toFixed(4)
+    ),
+    redeem_amount: factory.sequence("StaffHolding.redeem_amount", (n) =>
+      Math.random().toFixed(4)
+    ),
+    update_date: newDate(),
+  });
+```

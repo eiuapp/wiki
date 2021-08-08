@@ -1,0 +1,25 @@
+created: 20210520025654245
+creator: zero
+modified: 20210520030600465
+modifier: zero
+tags: cmder
+title: cmder 配置
+tmap.id: 3832ccaf-0217-4159-be5e-e5cc5d3adaee
+type: text/vnd.tiddlywiki
+
+! cmder 配置
+
+* https://www.jianshu.com/p/979db1a96f6d
+
+!! 设置默认使用cmd、PowerShell还是bash
+
+setting -> Startup 选中 Startup, 然后选择 Specified named task，选您想要的 sh
+
+保存设置就OK
+
+!! 设置启动目录: 为 sh 指定启动时所在目录
+
+设置启动目录：setting -> Startup - > Task，修改{cmd::Cmder}项，
+
+找到 Startup dir 点击后选择，保存设置就OK。
+

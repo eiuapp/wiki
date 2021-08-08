@@ -1,0 +1,88 @@
+created: 20210506094155256
+creator: zero
+modified: 20210507054932426
+modifier: zero
+tags: eggjs
+title: eggjs已有项目修改表结构
+tmap.id: 5527dbae-095c-48b7-933b-d6cd1df1b0ff
+type: text/vnd.tiddlywiki
+
+! eggjs已有项目修改表结构
+
+已有项目eggjs修改了表结构，应该怎么办？
+
+下面以，修改了 staff_month_contribution 表为例子
+
+!! 修改 migrations 
+
+```bash
+# cd {{app_root}}/database/migrations
+# vi 20200416055507-init-staff_month_contribution.js
+```
+
+
+!! 回滚所有表
+
+```bash
+# cd {{app_root}}/database
+npx sequelize db:migrate:undo:all
+NODE_ENV=test npx sequelize db:migrate:undo:all
+```
+
+!! 生成表
+
+```bash
+# cd {{app_root}}/database
+npx sequelize-cli db:migrate
+NODE_ENV=test npx sequelize db:migrate
+```
+
+!! 修改 seeders 
+
+```bash
+# cd {{app_root}}/database/seeders
+# vi 20200416055507-init-staff_month_contribution.js
+```
+
+!! 生成 seeders
+
+```bash
+# cd {{app_root}}/database
+npx sequelize-cli db:seed:all # seed所有
+# npx sequelize-cli db:seed:undo:all   # 回滚所有
+```
+
+!! 修改 model
+
+导出
+
+```bash
+# cd {{app_root}}
+sequelize-auto -o "./app/model.helper" -d mpf_dev_1 -h 192.***.***.137 -p 3307 -u m***r -x C***x -e mysql
+```
+
+!! 修改 controller
+
+- validate
+
+!! 修改 service
+
+- validate
+
+!! 对受影响的业务，进行单元测试
+
+!!! 修改 {{app_root}}/test/factories.js
+
+!!! 修改 {{app_root}}/test/.setup.js
+
+看是否有必要调整次序。
+
+!!! 修改 单元测试 文件
+
+`{{app_root}}/test/app/controller/staff_month_contribution.test.js`
+
+!!! 进行单元测试
+```bash
+# cd {{app_root}}
+npm run test-local test/app/controller/staff_month_contribution.test.js
+```
